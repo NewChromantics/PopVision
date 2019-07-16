@@ -2,11 +2,13 @@
 
 #include "TCoreMl.h"
 
-#if defined(__cplusplus)
-typedef void TinyYOLO;
-#endif
 
-class Coreml::TYolo : public Coreml::TModel
+namespace CoreMl
+{
+	class TYoloNative;
+}
+
+class CoreMl::TYolo : public CoreMl::TModel
 {
 public:
 	TYolo();
@@ -15,7 +17,7 @@ public:
 	virtual void	GetLabels(ArrayBridge<std::string>&& Labels) override;
 	
 	//	find objects in map as rects (with some max scoring... map is probbaly better)
-	virtual void	GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject) override;
-	
-	TinyYOLO*		mTinyYolo = nullptr;
+	virtual void	GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject) override;
+		
+	std::shared_ptr<TYoloNative>	mNative;
 };

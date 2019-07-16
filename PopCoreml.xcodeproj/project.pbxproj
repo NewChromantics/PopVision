@@ -18,8 +18,38 @@
 		BFA22B7322DE6DA300D8615C /* MaskRCNN_Classifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6822DE6DA200D8615C /* MaskRCNN_Classifier.mlmodel */; };
 		BFA22B7422DE6DA300D8615C /* MaskRCNN_MaskRCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6922DE6DA200D8615C /* MaskRCNN_MaskRCNN.mlmodel */; };
 		BFA22B7522DE6DA300D8615C /* MaskRCNN_Mask.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6A22DE6DA300D8615C /* MaskRCNN_Mask.mlmodel */; };
-		BFA22B7822DE6FCB00D8615C /* TYolo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B7722DE6FCB00D8615C /* TYolo.h */; };
 		BFA22B7A22DE702B00D8615C /* TYolo.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B7922DE702B00D8615C /* TYolo.mm */; };
+		BFA22B8622DE730700D8615C /* SoyAvf.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B7D22DE730700D8615C /* SoyAvf.mm */; };
+		BFA22B8922DE730700D8615C /* SoyArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8022DE730700D8615C /* SoyArray.cpp */; };
+		BFA22B8A22DE730700D8615C /* SoyDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8122DE730700D8615C /* SoyDebug.mm */; };
+		BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8322DE730700D8615C /* SoyDebug.cpp */; };
+		BFA22B8D22DE730700D8615C /* SoyScope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8422DE730700D8615C /* SoyScope.cpp */; };
+		BFA22B9222DE736D00D8615C /* SoyVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B9022DE736D00D8615C /* SoyVector.cpp */; };
+		BFA22B9822DE796900D8615C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22B9722DE796900D8615C /* AVFoundation.framework */; };
+		BFA22B9A22DE798100D8615C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22B9922DE798100D8615C /* CoreMedia.framework */; };
+		BFA22B9C22DE798600D8615C /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22B9B22DE798600D8615C /* CoreML.framework */; };
+		BFA22B9E22DE79B500D8615C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22B9D22DE79B500D8615C /* VideoToolbox.framework */; };
+		BFA22BA522DE79E300D8615C /* SoyPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B9F22DE79E200D8615C /* SoyPixels.cpp */; };
+		BFA22BA722DE79E300D8615C /* SoyH264.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BA122DE79E200D8615C /* SoyH264.cpp */; };
+		BFA22BA922DE79E300D8615C /* SoyFourcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BA322DE79E200D8615C /* SoyFourcc.cpp */; };
+		BFA22BB622DE7A0600D8615C /* SoyTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BAB22DE7A0500D8615C /* SoyTypes.mm */; };
+		BFA22BB822DE7A0600D8615C /* SoyMediaFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BAD22DE7A0500D8615C /* SoyMediaFormat.cpp */; };
+		BFA22BBB22DE7A0600D8615C /* SoyTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BB022DE7A0600D8615C /* SoyTypes.cpp */; };
+		BFA22BBD22DE7A0600D8615C /* SoyMedia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BB222DE7A0600D8615C /* SoyMedia.cpp */; };
+		BFA22BC422DE7A3700D8615C /* SoyAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC222DE7A3600D8615C /* SoyAssert.cpp */; };
+		BFA22BC722DE7A6700D8615C /* SoyThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC522DE7A6700D8615C /* SoyThread.cpp */; };
+		BFA22BCC22DE7A7700D8615C /* SoyString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC922DE7A7600D8615C /* SoyString.cpp */; };
+		BFA22BCE22DE7A7700D8615C /* SoyString.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BCB22DE7A7700D8615C /* SoyString.mm */; };
+		BFA22BD222DE7A9800D8615C /* SoyWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD022DE7A9800D8615C /* SoyWave.cpp */; };
+		BFA22BD522DE7AA300D8615C /* memheap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD322DE7AA200D8615C /* memheap.cpp */; };
+		BFA22BDA22DE7AD000D8615C /* SoyTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD722DE7AD000D8615C /* SoyTime.mm */; };
+		BFA22BDC22DE7AD000D8615C /* SoyTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD922DE7AD000D8615C /* SoyTime.cpp */; };
+		BFA22BE122DE7AFF00D8615C /* SoyFilesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BDE22DE7AFE00D8615C /* SoyFilesystem.cpp */; };
+		BFA22BE222DE7AFF00D8615C /* SoyFilesystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BDF22DE7AFF00D8615C /* SoyFilesystem.mm */; };
+		BFA22BE322DE7C5700D8615C /* TCoreMl.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */; };
+		BFA22BE522DE7CEB00D8615C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22BE422DE7CEB00D8615C /* AppKit.framework */; };
+		BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B7722DE6FCB00D8615C /* TYolo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +73,58 @@
 		BFA22B7622DE6DAA00D8615C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFA22B7722DE6FCB00D8615C /* TYolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYolo.h; path = Source/TYolo.h; sourceTree = "<group>"; };
 		BFA22B7922DE702B00D8615C /* TYolo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TYolo.mm; path = Source/TYolo.mm; sourceTree = "<group>"; };
+		BFA22B7C22DE730700D8615C /* SoyAvf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyAvf.h; path = Source/SoyLib/src/SoyAvf.h; sourceTree = "<group>"; };
+		BFA22B7D22DE730700D8615C /* SoyAvf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyAvf.mm; path = Source/SoyLib/src/SoyAvf.mm; sourceTree = "<group>"; };
+		BFA22B7E22DE730700D8615C /* SoyArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyArray.h; path = Source/SoyLib/src/SoyArray.h; sourceTree = "<group>"; };
+		BFA22B7F22DE730700D8615C /* SoyDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyDebug.h; path = Source/SoyLib/src/SoyDebug.h; sourceTree = "<group>"; };
+		BFA22B8022DE730700D8615C /* SoyArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyArray.cpp; path = Source/SoyLib/src/SoyArray.cpp; sourceTree = "<group>"; };
+		BFA22B8122DE730700D8615C /* SoyDebug.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyDebug.mm; path = Source/SoyLib/src/SoyDebug.mm; sourceTree = "<group>"; };
+		BFA22B8222DE730700D8615C /* SoyScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyScope.h; path = Source/SoyLib/src/SoyScope.h; sourceTree = "<group>"; };
+		BFA22B8322DE730700D8615C /* SoyDebug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyDebug.cpp; path = Source/SoyLib/src/SoyDebug.cpp; sourceTree = "<group>"; };
+		BFA22B8422DE730700D8615C /* SoyScope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyScope.cpp; path = Source/SoyLib/src/SoyScope.cpp; sourceTree = "<group>"; };
+		BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SoyLib_Osx.xcconfig; path = Source/SoyLib/SoyLib_Osx.xcconfig; sourceTree = "<group>"; };
+		BFA22B9022DE736D00D8615C /* SoyVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyVector.cpp; path = Source/SoyLib/src/SoyVector.cpp; sourceTree = "<group>"; };
+		BFA22B9122DE736D00D8615C /* SoyVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyVector.h; path = Source/SoyLib/src/SoyVector.h; sourceTree = "<group>"; };
+		BFA22B9422DE73A200D8615C /* Array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Array.hpp; path = Source/SoyLib/src/Array.hpp; sourceTree = "<group>"; };
+		BFA22B9722DE796900D8615C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BFA22B9922DE798100D8615C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BFA22B9B22DE798600D8615C /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		BFA22B9D22DE79B500D8615C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		BFA22B9F22DE79E200D8615C /* SoyPixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyPixels.cpp; path = Source/SoyLib/src/SoyPixels.cpp; sourceTree = "<group>"; };
+		BFA22BA022DE79E200D8615C /* SoyPixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyPixels.h; path = Source/SoyLib/src/SoyPixels.h; sourceTree = "<group>"; };
+		BFA22BA122DE79E200D8615C /* SoyH264.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyH264.cpp; path = Source/SoyLib/src/SoyH264.cpp; sourceTree = "<group>"; };
+		BFA22BA222DE79E200D8615C /* SoyH264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyH264.h; path = Source/SoyLib/src/SoyH264.h; sourceTree = "<group>"; };
+		BFA22BA322DE79E200D8615C /* SoyFourcc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyFourcc.cpp; path = Source/SoyLib/src/SoyFourcc.cpp; sourceTree = "<group>"; };
+		BFA22BA422DE79E300D8615C /* SoyFourcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyFourcc.h; path = Source/SoyLib/src/SoyFourcc.h; sourceTree = "<group>"; };
+		BFA22BAB22DE7A0500D8615C /* SoyTypes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyTypes.mm; path = Source/SoyLib/src/SoyTypes.mm; sourceTree = "<group>"; };
+		BFA22BAC22DE7A0500D8615C /* SoyTypes_CoreFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes_CoreFoundation.h; path = Source/SoyLib/src/SoyTypes_CoreFoundation.h; sourceTree = "<group>"; };
+		BFA22BAD22DE7A0500D8615C /* SoyMediaFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyMediaFormat.cpp; path = Source/SoyLib/src/SoyMediaFormat.cpp; sourceTree = "<group>"; };
+		BFA22BAE22DE7A0600D8615C /* SoyMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyMedia.h; path = Source/SoyLib/src/SoyMedia.h; sourceTree = "<group>"; };
+		BFA22BAF22DE7A0600D8615C /* SoyMediaFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyMediaFormat.h; path = Source/SoyLib/src/SoyMediaFormat.h; sourceTree = "<group>"; };
+		BFA22BB022DE7A0600D8615C /* SoyTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyTypes.cpp; path = Source/SoyLib/src/SoyTypes.cpp; sourceTree = "<group>"; };
+		BFA22BB122DE7A0600D8615C /* SoyTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes.h; path = Source/SoyLib/src/SoyTypes.h; sourceTree = "<group>"; };
+		BFA22BB222DE7A0600D8615C /* SoyMedia.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyMedia.cpp; path = Source/SoyLib/src/SoyMedia.cpp; sourceTree = "<group>"; };
+		BFA22BB322DE7A0600D8615C /* SoyTypes_Ps4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes_Ps4.h; path = Source/SoyLib/src/SoyTypes_Ps4.h; sourceTree = "<group>"; };
+		BFA22BB422DE7A0600D8615C /* SoyTypes_Windows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes_Windows.h; path = Source/SoyLib/src/SoyTypes_Windows.h; sourceTree = "<group>"; };
+		BFA22BB522DE7A0600D8615C /* SoyTypes_Android.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTypes_Android.h; path = Source/SoyLib/src/SoyTypes_Android.h; sourceTree = "<group>"; };
+		BFA22BC122DE7A3600D8615C /* SoyAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyAssert.h; path = Source/SoyLib/src/SoyAssert.h; sourceTree = "<group>"; };
+		BFA22BC222DE7A3600D8615C /* SoyAssert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyAssert.cpp; path = Source/SoyLib/src/SoyAssert.cpp; sourceTree = "<group>"; };
+		BFA22BC522DE7A6700D8615C /* SoyThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyThread.cpp; path = Source/SoyLib/src/SoyThread.cpp; sourceTree = "<group>"; };
+		BFA22BC622DE7A6700D8615C /* SoyThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyThread.h; path = Source/SoyLib/src/SoyThread.h; sourceTree = "<group>"; };
+		BFA22BC922DE7A7600D8615C /* SoyString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyString.cpp; path = Source/SoyLib/src/SoyString.cpp; sourceTree = "<group>"; };
+		BFA22BCA22DE7A7700D8615C /* SoyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyString.h; path = Source/SoyLib/src/SoyString.h; sourceTree = "<group>"; };
+		BFA22BCB22DE7A7700D8615C /* SoyString.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyString.mm; path = Source/SoyLib/src/SoyString.mm; sourceTree = "<group>"; };
+		BFA22BCF22DE7A9800D8615C /* SoyWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyWave.h; path = Source/SoyLib/src/SoyWave.h; sourceTree = "<group>"; };
+		BFA22BD022DE7A9800D8615C /* SoyWave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyWave.cpp; path = Source/SoyLib/src/SoyWave.cpp; sourceTree = "<group>"; };
+		BFA22BD322DE7AA200D8615C /* memheap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = memheap.cpp; path = Source/SoyLib/src/memheap.cpp; sourceTree = "<group>"; };
+		BFA22BD422DE7AA200D8615C /* MemHeap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MemHeap.hpp; path = Source/SoyLib/src/MemHeap.hpp; sourceTree = "<group>"; };
+		BFA22BD722DE7AD000D8615C /* SoyTime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyTime.mm; path = Source/SoyLib/src/SoyTime.mm; sourceTree = "<group>"; };
+		BFA22BD822DE7AD000D8615C /* SoyTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyTime.h; path = Source/SoyLib/src/SoyTime.h; sourceTree = "<group>"; };
+		BFA22BD922DE7AD000D8615C /* SoyTime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyTime.cpp; path = Source/SoyLib/src/SoyTime.cpp; sourceTree = "<group>"; };
+		BFA22BDD22DE7AFE00D8615C /* SoyFilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoyFilesystem.h; path = Source/SoyLib/src/SoyFilesystem.h; sourceTree = "<group>"; };
+		BFA22BDE22DE7AFE00D8615C /* SoyFilesystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyFilesystem.cpp; path = Source/SoyLib/src/SoyFilesystem.cpp; sourceTree = "<group>"; };
+		BFA22BDF22DE7AFF00D8615C /* SoyFilesystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyFilesystem.mm; path = Source/SoyLib/src/SoyFilesystem.mm; sourceTree = "<group>"; };
+		BFA22BE422DE7CEB00D8615C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +132,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA22BE522DE7CEB00D8615C /* AppKit.framework in Frameworks */,
+				BFA22B9E22DE79B500D8615C /* VideoToolbox.framework in Frameworks */,
+				BFA22B9822DE796900D8615C /* AVFoundation.framework in Frameworks */,
+				BFA22B9C22DE798600D8615C /* CoreML.framework in Frameworks */,
+				BFA22B9A22DE798100D8615C /* CoreMedia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,10 +146,12 @@
 		BFA22B4322DE6CFC00D8615C = {
 			isa = PBXGroup;
 			children = (
+				BFA22B7B22DE72DC00D8615C /* SoyLib */,
 				BFA22B5A22DE6D8200D8615C /* PopCoreml */,
 				BFA22B5922DE6D7E00D8615C /* Models */,
 				BFA22B5822DE6D7600D8615C /* Source */,
 				BFA22B4E22DE6CFC00D8615C /* Products */,
+				BFA22B9622DE796900D8615C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +203,72 @@
 			name = PopCoreml;
 			sourceTree = "<group>";
 		};
+		BFA22B7B22DE72DC00D8615C /* SoyLib */ = {
+			isa = PBXGroup;
+			children = (
+				BFA22B9422DE73A200D8615C /* Array.hpp */,
+				BFA22BD322DE7AA200D8615C /* memheap.cpp */,
+				BFA22BD422DE7AA200D8615C /* MemHeap.hpp */,
+				BFA22B8022DE730700D8615C /* SoyArray.cpp */,
+				BFA22B7E22DE730700D8615C /* SoyArray.h */,
+				BFA22BC222DE7A3600D8615C /* SoyAssert.cpp */,
+				BFA22BC122DE7A3600D8615C /* SoyAssert.h */,
+				BFA22B7C22DE730700D8615C /* SoyAvf.h */,
+				BFA22B7D22DE730700D8615C /* SoyAvf.mm */,
+				BFA22B8322DE730700D8615C /* SoyDebug.cpp */,
+				BFA22B7F22DE730700D8615C /* SoyDebug.h */,
+				BFA22B8122DE730700D8615C /* SoyDebug.mm */,
+				BFA22BDE22DE7AFE00D8615C /* SoyFilesystem.cpp */,
+				BFA22BDD22DE7AFE00D8615C /* SoyFilesystem.h */,
+				BFA22BDF22DE7AFF00D8615C /* SoyFilesystem.mm */,
+				BFA22BA322DE79E200D8615C /* SoyFourcc.cpp */,
+				BFA22BA422DE79E300D8615C /* SoyFourcc.h */,
+				BFA22BA122DE79E200D8615C /* SoyH264.cpp */,
+				BFA22BA222DE79E200D8615C /* SoyH264.h */,
+				BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */,
+				BFA22BB222DE7A0600D8615C /* SoyMedia.cpp */,
+				BFA22BAE22DE7A0600D8615C /* SoyMedia.h */,
+				BFA22BAD22DE7A0500D8615C /* SoyMediaFormat.cpp */,
+				BFA22BAF22DE7A0600D8615C /* SoyMediaFormat.h */,
+				BFA22B9F22DE79E200D8615C /* SoyPixels.cpp */,
+				BFA22BA022DE79E200D8615C /* SoyPixels.h */,
+				BFA22B8422DE730700D8615C /* SoyScope.cpp */,
+				BFA22B8222DE730700D8615C /* SoyScope.h */,
+				BFA22BC922DE7A7600D8615C /* SoyString.cpp */,
+				BFA22BCA22DE7A7700D8615C /* SoyString.h */,
+				BFA22BCB22DE7A7700D8615C /* SoyString.mm */,
+				BFA22BC522DE7A6700D8615C /* SoyThread.cpp */,
+				BFA22BC622DE7A6700D8615C /* SoyThread.h */,
+				BFA22BD922DE7AD000D8615C /* SoyTime.cpp */,
+				BFA22BD822DE7AD000D8615C /* SoyTime.h */,
+				BFA22BD722DE7AD000D8615C /* SoyTime.mm */,
+				BFA22BB522DE7A0600D8615C /* SoyTypes_Android.h */,
+				BFA22BAC22DE7A0500D8615C /* SoyTypes_CoreFoundation.h */,
+				BFA22BB322DE7A0600D8615C /* SoyTypes_Ps4.h */,
+				BFA22BB422DE7A0600D8615C /* SoyTypes_Windows.h */,
+				BFA22BB022DE7A0600D8615C /* SoyTypes.cpp */,
+				BFA22BB122DE7A0600D8615C /* SoyTypes.h */,
+				BFA22BAB22DE7A0500D8615C /* SoyTypes.mm */,
+				BFA22B9022DE736D00D8615C /* SoyVector.cpp */,
+				BFA22B9122DE736D00D8615C /* SoyVector.h */,
+				BFA22BD022DE7A9800D8615C /* SoyWave.cpp */,
+				BFA22BCF22DE7A9800D8615C /* SoyWave.h */,
+			);
+			name = SoyLib;
+			sourceTree = "<group>";
+		};
+		BFA22B9622DE796900D8615C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFA22BE422DE7CEB00D8615C /* AppKit.framework */,
+				BFA22B9D22DE79B500D8615C /* VideoToolbox.framework */,
+				BFA22B9B22DE798600D8615C /* CoreML.framework */,
+				BFA22B9922DE798100D8615C /* CoreMedia.framework */,
+				BFA22B9722DE796900D8615C /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -121,7 +276,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFA22B7822DE6FCB00D8615C /* TYolo.h in Headers */,
+				BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */,
+				BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,17 +349,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA22BA522DE79E300D8615C /* SoyPixels.cpp in Sources */,
 				BFA22B7222DE6DA300D8615C /* DeepLabV3.mlmodel in Sources */,
+				BFA22BBB22DE7A0600D8615C /* SoyTypes.cpp in Sources */,
 				BFA22B7A22DE702B00D8615C /* TYolo.mm in Sources */,
+				BFA22B8D22DE730700D8615C /* SoyScope.cpp in Sources */,
 				BFA22B7522DE6DA300D8615C /* MaskRCNN_Mask.mlmodel in Sources */,
+				BFA22BDC22DE7AD000D8615C /* SoyTime.cpp in Sources */,
+				BFA22BDA22DE7AD000D8615C /* SoyTime.mm in Sources */,
+				BFA22BCE22DE7A7700D8615C /* SoyString.mm in Sources */,
 				BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */,
 				BFA22B7022DE6DA300D8615C /* MobileNet.mlmodel in Sources */,
+				BFA22BBD22DE7A0600D8615C /* SoyMedia.cpp in Sources */,
+				BFA22BA722DE79E300D8615C /* SoyH264.cpp in Sources */,
+				BFA22BD522DE7AA300D8615C /* memheap.cpp in Sources */,
+				BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */,
+				BFA22B8A22DE730700D8615C /* SoyDebug.mm in Sources */,
+				BFA22B8622DE730700D8615C /* SoyAvf.mm in Sources */,
+				BFA22BB622DE7A0600D8615C /* SoyTypes.mm in Sources */,
+				BFA22BA922DE79E300D8615C /* SoyFourcc.cpp in Sources */,
 				BFA22B6F22DE6DA300D8615C /* hourglass.mlmodel in Sources */,
+				BFA22BCC22DE7A7700D8615C /* SoyString.cpp in Sources */,
+				BFA22BE122DE7AFF00D8615C /* SoyFilesystem.cpp in Sources */,
 				BFA22B7422DE6DA300D8615C /* MaskRCNN_MaskRCNN.mlmodel in Sources */,
 				BFA22B7322DE6DA300D8615C /* MaskRCNN_Classifier.mlmodel in Sources */,
 				BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */,
+				BFA22BC722DE7A6700D8615C /* SoyThread.cpp in Sources */,
+				BFA22BE222DE7AFF00D8615C /* SoyFilesystem.mm in Sources */,
 				BFA22B6E22DE6DA300D8615C /* MobileOpenPose.mlmodel in Sources */,
+				BFA22BC422DE7A3700D8615C /* SoyAssert.cpp in Sources */,
+				BFA22BD222DE7A9800D8615C /* SoyWave.cpp in Sources */,
 				BFA22B7122DE6DA300D8615C /* SsdMobilenet.mlmodel in Sources */,
+				BFA22B9222DE736D00D8615C /* SoyVector.cpp in Sources */,
+				BFA22B8922DE730700D8615C /* SoyArray.cpp in Sources */,
+				BFA22BE322DE7C5700D8615C /* TCoreMl.mm in Sources */,
+				BFA22BB822DE7A0600D8615C /* SoyMediaFormat.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +392,7 @@
 /* Begin XCBuildConfiguration section */
 		BFA22B5322DE6CFC00D8615C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -338,7 +519,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = PopCoreml/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -362,7 +543,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = PopCoreml/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

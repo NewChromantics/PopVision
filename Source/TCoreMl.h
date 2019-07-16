@@ -4,6 +4,8 @@ class SoyPixels;
 class SoyPixelsImpl;
 class TPixelBuffer;
 
+#include "Array.hpp"
+#include "SoyVector.h"
 
 namespace CoreMl
 {
@@ -11,7 +13,7 @@ namespace CoreMl
 	
 	class TModel;		//	generic interface
 	
-	class TTinyYolo;
+	class TYolo;
 	class THourglass;
 	class TCpm;
 	class TOpenPose;
@@ -31,14 +33,15 @@ public:
 };
 
 
-class Coreml::TModel
+class CoreMl::TModel
 {
 public:
 	//	get all the labels this model outputs
-	virtual void	GetLabels(ArrayBridge<std::string>&& Labels);
+	virtual void	GetLabels(ArrayBridge<std::string>&& Labels)=0;
 	
 	//	find objects in map as rects (with some max scoring... map is probbaly better)
 	virtual void	GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject);
+	virtual void	GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject);
 	
 	//	draw found labels on a map
 	//	maybe callback says which component/value should go for label

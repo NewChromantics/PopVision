@@ -3,12 +3,20 @@
 
 #import "TinyYOLO.h"
 
-Coreml::TYolo::TYolo()
+
+
+class CoreMl::TYoloNative
 {
-	mTinyYolo = [[TinyYOLO alloc] init];
+public:
+	TinyYOLO*	mTinyYolo = [[TinyYOLO alloc] init];
+};
+
+CoreMl::TYolo::TYolo()
+{
+	mNative.reset( new TYoloNative );
 }
 
-void Coreml::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
+void CoreMl::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -18,22 +26,16 @@ void Coreml::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
 	};
 	Labels.PushBackArray( ClassLabels );
 }
-	
-void Coreml::TYolo::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject)
+
+
+
+void CoreMl::TYolo::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
-	auto PixelBuffer = Avf::PixelsToPixelBuffer(Pixels);
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc]init];
-	auto ReleasePixelBuffer = [&]()
-	{
-		CVPixelBufferRelease(PixelBuffer);
-		[pool drain];
-	};
-	Soy::TScopeCall ReleasePixels( nullptr, ReleasePixelBuffer );
-	
+	auto* mTinyYolo = mNative->mTinyYolo;
 	NSError* Error = nullptr;
 	
 	Soy::TScopeTimerPrint Timer(__func__,0);
-	auto Output = [mTinyYolo predictionFromImage:PixelBuffer error:&Error];
+	auto Output = [mTinyYolo predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )
 		throw Soy::AssertException( Error );
@@ -50,7 +52,7 @@ void Coreml::TYolo::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(co
 	
 	//	from https://github.com/hollance/YOLO-CoreML-MPSNNGraph/blob/a1241f3cf1fd155039c45ad4f681bb5f22897654/Common/Helpers.swift
 	BufferArray<std::string,20> ClassLabels;
-	GetLabels( GetArrayBrdige(ClassLabels) );
+	GetLabels( GetArrayBridge(ClassLabels) );
 	
 	
 	//	from hollance/YOLO-CoreML-MPSNNGraph
@@ -94,10 +96,11 @@ void Coreml::TYolo::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(co
 		throw Soy::AssertException("Unhandled grid data type");
 	}
 	
+	auto PixelsSize = Avf::GetSize(Pixels);
 	auto gridHeight = 13;
 	auto gridWidth = 13;
-	auto blockWidth = Pixels.GetWidth() / gridWidth;
-	auto blockHeight = Pixels.GetHeight() / gridHeight;
+	auto blockWidth = PixelsSize.x / gridWidth;
+	auto blockHeight = PixelsSize.y / gridHeight;
 	auto boxesPerCell = 5;
 	auto numClasses = 20;
 	
@@ -188,10 +191,10 @@ void Coreml::TYolo::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(co
 		auto w = RectWidth;
 		auto h = RectHeight;
 		//	normalise output
-		x /= Pixels.GetWidth();
-		y /= Pixels.GetHeight();
-		w /= Pixels.GetWidth();
-		h /= Pixels.GetHeight();
+		x /= PixelsSize.x;
+		y /= PixelsSize.y;
+		w /= PixelsSize.x;
+		h /= PixelsSize.y;
 		
 		TObject Object;
 		Object.mLabel = Label;
@@ -200,3 +203,4 @@ void Coreml::TYolo::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(co
 		EnumObject( Object );
 	}
 }
+
