@@ -26,6 +26,8 @@ namespace CoreMl
 	class TMaskRcnn;
 	class TDeepLab;
 	
+	class TAppleVisionFace;
+	
 #if defined(__OBJC__)
 	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);
 	void		ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<float>&& Values);

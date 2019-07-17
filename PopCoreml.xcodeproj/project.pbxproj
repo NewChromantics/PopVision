@@ -62,6 +62,9 @@
 		BFA22C0022DF17BB00D8615C /* TMaskRcnn.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */; };
 		BFA22C0322DF17F400D8615C /* TDeepLab.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0122DF17F400D8615C /* TDeepLab.mm */; };
 		BFA22C0422DF17F400D8615C /* TDeepLab.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22C0222DF17F400D8615C /* TDeepLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22C0722DF311C00D8615C /* TAppleVisionFace.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */; };
+		BFA22C0822DF311C00D8615C /* TAppleVisionFace.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22C0A22DF367E00D8615C /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22C0922DF367E00D8615C /* Vision.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +151,9 @@
 		BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TMaskRcnn.mm; path = Source/TMaskRcnn.mm; sourceTree = "<group>"; };
 		BFA22C0122DF17F400D8615C /* TDeepLab.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TDeepLab.mm; path = Source/TDeepLab.mm; sourceTree = "<group>"; };
 		BFA22C0222DF17F400D8615C /* TDeepLab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDeepLab.h; path = Source/TDeepLab.h; sourceTree = "<group>"; };
+		BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TAppleVisionFace.mm; path = Source/TAppleVisionFace.mm; sourceTree = "<group>"; };
+		BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAppleVisionFace.h; path = Source/TAppleVisionFace.h; sourceTree = "<group>"; };
+		BFA22C0922DF367E00D8615C /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA22C0A22DF367E00D8615C /* Vision.framework in Frameworks */,
 				BFA22BE522DE7CEB00D8615C /* AppKit.framework in Frameworks */,
 				BFA22B9E22DE79B500D8615C /* VideoToolbox.framework in Frameworks */,
 				BFA22B9822DE796900D8615C /* AVFoundation.framework in Frameworks */,
@@ -190,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */,
+				BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */,
+				BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */,
 				BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */,
 				BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */,
 				BFA22BEF22DF14FB00D8615C /* TCpm.h */,
@@ -294,6 +303,7 @@
 		BFA22B9622DE796900D8615C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFA22C0922DF367E00D8615C /* Vision.framework */,
 				BFA22BE422DE7CEB00D8615C /* AppKit.framework */,
 				BFA22B9D22DE79B500D8615C /* VideoToolbox.framework */,
 				BFA22B9B22DE798600D8615C /* CoreML.framework */,
@@ -318,6 +328,7 @@
 				BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */,
 				BFA22BF922DF14FB00D8615C /* TSsdMobileNet.h in Headers */,
 				BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */,
+				BFA22C0822DF311C00D8615C /* TAppleVisionFace.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +430,7 @@
 				BFA22BF522DF14FB00D8615C /* TOpenPose.mm in Sources */,
 				BFA22BC722DE7A6700D8615C /* SoyThread.cpp in Sources */,
 				BFA22BE222DE7AFF00D8615C /* SoyFilesystem.mm in Sources */,
+				BFA22C0722DF311C00D8615C /* TAppleVisionFace.mm in Sources */,
 				BFA22B6E22DE6DA300D8615C /* MobileOpenPose.mlmodel in Sources */,
 				BFA22C0322DF17F400D8615C /* TDeepLab.mm in Sources */,
 				BFA22BC422DE7A3700D8615C /* SoyAssert.cpp in Sources */,
@@ -572,6 +584,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.NewChromantics.PopCoreml;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -596,6 +609,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.NewChromantics.PopCoreml;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
