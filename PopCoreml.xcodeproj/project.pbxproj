@@ -50,6 +50,18 @@
 		BFA22BE522DE7CEB00D8615C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22BE422DE7CEB00D8615C /* AppKit.framework */; };
 		BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B7722DE6FCB00D8615C /* TYolo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BF522DF14FB00D8615C /* TOpenPose.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BED22DF14FB00D8615C /* TOpenPose.mm */; };
+		BFA22BF622DF14FB00D8615C /* TSsdMobileNet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */; };
+		BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BEF22DF14FB00D8615C /* TCpm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BF822DF14FB00D8615C /* TCpm.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BF022DF14FB00D8615C /* TCpm.mm */; };
+		BFA22BF922DF14FB00D8615C /* TSsdMobileNet.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BF122DF14FB00D8615C /* TSsdMobileNet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BFA22DF14FB00D8615C /* TOpenPose.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BF222DF14FB00D8615C /* TOpenPose.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BFB22DF14FB00D8615C /* THourglass.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BF322DF14FB00D8615C /* THourglass.mm */; };
+		BFA22BFC22DF14FB00D8615C /* THourglass.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BF422DF14FB00D8615C /* THourglass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BFF22DF17BB00D8615C /* TMaskRcnn.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22C0022DF17BB00D8615C /* TMaskRcnn.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */; };
+		BFA22C0322DF17F400D8615C /* TDeepLab.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0122DF17F400D8615C /* TDeepLab.mm */; };
+		BFA22C0422DF17F400D8615C /* TDeepLab.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22C0222DF17F400D8615C /* TDeepLab.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +70,6 @@
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
 		BFA22B5D22DE6D9B00D8615C /* TSsdMobileNetAnchors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSsdMobileNetAnchors.h; path = Source/TSsdMobileNetAnchors.h; sourceTree = "<group>"; };
 		BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TCoreMl.mm; path = Source/TCoreMl.mm; sourceTree = "<group>"; };
-		BFA22B5F22DE6D9B00D8615C /* TCoreMlModels.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TCoreMlModels.mm; path = Source/TCoreMlModels.mm; sourceTree = "<group>"; };
 		BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = MaskRCNN_anchors.bin; path = Models/MaskRCNN_anchors.bin; sourceTree = "<group>"; };
 		BFA22B6122DE6DA200D8615C /* cpm.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = cpm.mlmodel; path = Models/cpm.mlmodel; sourceTree = "<group>"; };
 		BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TinyYOLO.mlmodel; path = Models/TinyYOLO.mlmodel; sourceTree = "<group>"; };
@@ -125,6 +136,18 @@
 		BFA22BDE22DE7AFE00D8615C /* SoyFilesystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoyFilesystem.cpp; path = Source/SoyLib/src/SoyFilesystem.cpp; sourceTree = "<group>"; };
 		BFA22BDF22DE7AFF00D8615C /* SoyFilesystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SoyFilesystem.mm; path = Source/SoyLib/src/SoyFilesystem.mm; sourceTree = "<group>"; };
 		BFA22BE422DE7CEB00D8615C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BFA22BED22DF14FB00D8615C /* TOpenPose.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TOpenPose.mm; path = Source/TOpenPose.mm; sourceTree = "<group>"; };
+		BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TSsdMobileNet.mm; path = Source/TSsdMobileNet.mm; sourceTree = "<group>"; };
+		BFA22BEF22DF14FB00D8615C /* TCpm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCpm.h; path = Source/TCpm.h; sourceTree = "<group>"; };
+		BFA22BF022DF14FB00D8615C /* TCpm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TCpm.mm; path = Source/TCpm.mm; sourceTree = "<group>"; };
+		BFA22BF122DF14FB00D8615C /* TSsdMobileNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSsdMobileNet.h; path = Source/TSsdMobileNet.h; sourceTree = "<group>"; };
+		BFA22BF222DF14FB00D8615C /* TOpenPose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOpenPose.h; path = Source/TOpenPose.h; sourceTree = "<group>"; };
+		BFA22BF322DF14FB00D8615C /* THourglass.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = THourglass.mm; path = Source/THourglass.mm; sourceTree = "<group>"; };
+		BFA22BF422DF14FB00D8615C /* THourglass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THourglass.h; path = Source/THourglass.h; sourceTree = "<group>"; };
+		BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMaskRcnn.h; path = Source/TMaskRcnn.h; sourceTree = "<group>"; };
+		BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TMaskRcnn.mm; path = Source/TMaskRcnn.mm; sourceTree = "<group>"; };
+		BFA22C0122DF17F400D8615C /* TDeepLab.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TDeepLab.mm; path = Source/TDeepLab.mm; sourceTree = "<group>"; };
+		BFA22C0222DF17F400D8615C /* TDeepLab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDeepLab.h; path = Source/TDeepLab.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,12 +190,23 @@
 			isa = PBXGroup;
 			children = (
 				BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */,
-				BFA22B7922DE702B00D8615C /* TYolo.mm */,
-				BFA22B7722DE6FCB00D8615C /* TYolo.h */,
 				BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */,
 				BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */,
-				BFA22B5F22DE6D9B00D8615C /* TCoreMlModels.mm */,
+				BFA22BEF22DF14FB00D8615C /* TCpm.h */,
+				BFA22BF022DF14FB00D8615C /* TCpm.mm */,
+				BFA22C0222DF17F400D8615C /* TDeepLab.h */,
+				BFA22C0122DF17F400D8615C /* TDeepLab.mm */,
+				BFA22BF422DF14FB00D8615C /* THourglass.h */,
+				BFA22BF322DF14FB00D8615C /* THourglass.mm */,
+				BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */,
+				BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */,
+				BFA22BF222DF14FB00D8615C /* TOpenPose.h */,
+				BFA22BED22DF14FB00D8615C /* TOpenPose.mm */,
+				BFA22BF122DF14FB00D8615C /* TSsdMobileNet.h */,
+				BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */,
 				BFA22B5D22DE6D9B00D8615C /* TSsdMobileNetAnchors.h */,
+				BFA22B7722DE6FCB00D8615C /* TYolo.h */,
+				BFA22B7922DE702B00D8615C /* TYolo.mm */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -276,7 +310,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA22BFC22DF14FB00D8615C /* THourglass.h in Headers */,
+				BFA22C0422DF17F400D8615C /* TDeepLab.h in Headers */,
+				BFA22BFF22DF17BB00D8615C /* TMaskRcnn.h in Headers */,
 				BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */,
+				BFA22BFA22DF14FB00D8615C /* TOpenPose.h in Headers */,
+				BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */,
+				BFA22BF922DF14FB00D8615C /* TSsdMobileNet.h in Headers */,
 				BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,9 +394,11 @@
 				BFA22BBB22DE7A0600D8615C /* SoyTypes.cpp in Sources */,
 				BFA22B7A22DE702B00D8615C /* TYolo.mm in Sources */,
 				BFA22B8D22DE730700D8615C /* SoyScope.cpp in Sources */,
+				BFA22BF622DF14FB00D8615C /* TSsdMobileNet.mm in Sources */,
 				BFA22B7522DE6DA300D8615C /* MaskRCNN_Mask.mlmodel in Sources */,
 				BFA22BDC22DE7AD000D8615C /* SoyTime.cpp in Sources */,
 				BFA22BDA22DE7AD000D8615C /* SoyTime.mm in Sources */,
+				BFA22BF822DF14FB00D8615C /* TCpm.mm in Sources */,
 				BFA22BCE22DE7A7700D8615C /* SoyString.mm in Sources */,
 				BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */,
 				BFA22B7022DE6DA300D8615C /* MobileNet.mlmodel in Sources */,
@@ -374,16 +416,20 @@
 				BFA22B7422DE6DA300D8615C /* MaskRCNN_MaskRCNN.mlmodel in Sources */,
 				BFA22B7322DE6DA300D8615C /* MaskRCNN_Classifier.mlmodel in Sources */,
 				BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */,
+				BFA22BF522DF14FB00D8615C /* TOpenPose.mm in Sources */,
 				BFA22BC722DE7A6700D8615C /* SoyThread.cpp in Sources */,
 				BFA22BE222DE7AFF00D8615C /* SoyFilesystem.mm in Sources */,
 				BFA22B6E22DE6DA300D8615C /* MobileOpenPose.mlmodel in Sources */,
+				BFA22C0322DF17F400D8615C /* TDeepLab.mm in Sources */,
 				BFA22BC422DE7A3700D8615C /* SoyAssert.cpp in Sources */,
 				BFA22BD222DE7A9800D8615C /* SoyWave.cpp in Sources */,
 				BFA22B7122DE6DA300D8615C /* SsdMobilenet.mlmodel in Sources */,
 				BFA22B9222DE736D00D8615C /* SoyVector.cpp in Sources */,
 				BFA22B8922DE730700D8615C /* SoyArray.cpp in Sources */,
 				BFA22BE322DE7C5700D8615C /* TCoreMl.mm in Sources */,
+				BFA22C0022DF17BB00D8615C /* TMaskRcnn.mm in Sources */,
 				BFA22BB822DE7A0600D8615C /* SoyMediaFormat.cpp in Sources */,
+				BFA22BFB22DF14FB00D8615C /* THourglass.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

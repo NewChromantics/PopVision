@@ -7,6 +7,11 @@ class TPixelBuffer;
 #include "Array.hpp"
 #include "SoyVector.h"
 
+//	forward declaration
+#if defined(__OBJC__)
+@class MLMultiArray;
+#endif
+
 namespace CoreMl
 {
 	class TObject;
@@ -17,9 +22,15 @@ namespace CoreMl
 	class THourglass;
 	class TCpm;
 	class TOpenPose;
-	class SsdMobileNet;
+	class TSsdMobileNet;
 	class TMaskRcnn;
 	class TDeepLab;
+	
+#if defined(__OBJC__)
+	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);
+	void		ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<float>&& Values);
+	void		ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<double>&& Values);
+#endif
 }
 
 
@@ -46,6 +57,7 @@ public:
 	//	draw found labels on a map
 	//	maybe callback says which component/value should go for label
 	virtual void	GetLabelMap(const SoyPixelsImpl& Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel);
+	virtual void	GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel);
 };
 
 
