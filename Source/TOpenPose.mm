@@ -58,14 +58,20 @@ void CoreMl::TOpenPose::GetObjects(CVPixelBufferRef Pixels,std::function<void(co
 	GetLabels( GetArrayBridge(KeypointLabels) );
 
 	auto BackgroundLabelIndex = 18;
-	auto GetKeypointName = [&](size_t Index)
+	auto GetKeypointName = [&](size_t Index) -> const std::string&
 	{
-		if ( Index < sizeofarray(KeypointLabels) )
-		return KeypointLabels[Index];
+		//	pad labels
+		if ( Index >= KeypointLabels.GetSize() )
+		{
+			for ( auto i=KeypointLabels.GetSize();	i<=Index;	i++ )
+			{
+				std::stringstream KeypointName;
+				KeypointName << "Label_" << Index;
+				KeypointLabels.PushBack( KeypointName.str() );
+			}
+		}
 		
-		std::stringstream KeypointName;
-		KeypointName << "Label_" << Index;
-		return KeypointName.str();
+		return KeypointLabels[Index];
 	};
 	
 	auto* ModelOutput = Output.net_output;
@@ -243,8 +249,8 @@ void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyP
 	auto BackgroundLabelIndex = 18;
 	auto GetKeypointName = [&](size_t Index)
 	{
-		if ( Index < sizeofarray(KeypointLabels) )
-		return KeypointLabels[Index];
+		if ( Index < KeypointLabels.GetSize() )
+			return KeypointLabels[Index];
 		
 		std::stringstream KeypointName;
 		KeypointName << "Label_" << Index;

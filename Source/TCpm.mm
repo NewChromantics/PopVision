@@ -50,8 +50,19 @@ void CoreMl::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const T
 	//	https://github.com/tucan9389/PoseEstimation-CoreML/blob/master/PoseEstimation-CoreML/JointViewController.swift#L230
 	BufferArray<std::string,20> KeypointLabels;
 	GetLabels( GetArrayBridge(KeypointLabels) );
-	auto GetKeypointName = [&](size_t Index)
+	auto GetKeypointName = [&](size_t Index) -> const std::string&
 	{
+		//	pad labels
+		if ( Index >= KeypointLabels.GetSize() )
+		{
+			for ( auto i=KeypointLabels.GetSize();	i<=Index;	i++ )
+			{
+				std::stringstream KeypointName;
+				KeypointName << "Label_" << Index;
+				KeypointLabels.PushBack( KeypointName.str() );
+			}
+		}
+		
 		return KeypointLabels[Index];
 	};
 	

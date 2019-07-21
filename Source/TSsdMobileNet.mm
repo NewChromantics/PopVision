@@ -59,14 +59,20 @@ void CoreMl::TSsdMobileNet::GetObjects(CVPixelBufferRef Pixels,std::function<voi
 	GetLabels( GetArrayBridge(KeypointLabels) );
 	
 	auto BackgroundClassIndex = 0;
-	auto GetKeypointName = [&](size_t Index)
+	auto GetKeypointName = [&](size_t Index) -> const std::string&
 	{
-		if ( Index < sizeofarray(KeypointLabels) )
-		return KeypointLabels[Index];
+		//	pad labels
+		if ( Index >= KeypointLabels.GetSize() )
+		{
+			for ( auto i=KeypointLabels.GetSize();	i<=Index;	i++ )
+			{
+				std::stringstream KeypointName;
+				KeypointName << "Label_" << Index;
+				KeypointLabels.PushBack( KeypointName.str() );
+			}
+		}
 		
-		std::stringstream KeypointName;
-		KeypointName << "Label_" << Index;
-		return KeypointName.str();
+		return KeypointLabels[Index];
 	};
 	
 	

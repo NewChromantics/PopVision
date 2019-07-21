@@ -150,7 +150,7 @@ void CoreMl::ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<in
 	::ExtractFloatsFromMultiArray( MultiArray, Dimensions, Values );
 }
 
-void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject)
+void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject)
 {
 	if ( !ModelOutput )
 		throw Soy::AssertException("No output from model");
@@ -175,14 +175,11 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(si
 	};
 	
 	
-	static bool EnumAllResults = true;
-	auto MinConfidence = 0.01f;
+	auto MinConfidence = 0.001f;
 	
 	for ( auto k=0;	k<KeypointCount;	k++)
 	{
-		auto KeypointLabel = GetKeypointName(k);
-		TObject BestObject;
-		BestObject.mScore = -1;
+		auto& KeypointLabel = GetKeypointName(k);
 		
 		auto EnumKeypoint = [&](const std::string& Label,float Score,const Soy::Rectf& Rect,size_t GridX,size_t GridY)
 		{
@@ -193,14 +190,7 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(si
 			Object.mGridPos.x = GridX;
 			Object.mGridPos.y = GridY;
 			
-			if ( EnumAllResults )
-			{
-				EnumObject( Object );
-				return;
-			}
-			if ( Score < BestObject.mScore )
-			return;
-			BestObject = Object;
+			EnumObject( Object );
 		};
 		
 		for ( auto x=0;	x<HeatmapWidth;	x++)
@@ -209,7 +199,7 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(si
 			{
 				auto Confidence = GetValue( k, x, y );
 				if ( Confidence < MinConfidence )
-				continue;
+					continue;
 				
 				auto xf = x / static_cast<float>(HeatmapWidth);
 				auto yf = y / static_cast<float>(HeatmapHeight);
@@ -219,12 +209,7 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(si
 				EnumKeypoint( KeypointLabel, Confidence, Rect, x, y );
 			}
 		}
-		
-		//	if only outputting best, do it
-		if ( !EnumAllResults && BestObject.mScore > 0 )
-		{
-			EnumObject( BestObject );
-		}
+	
 		
 	}
 	

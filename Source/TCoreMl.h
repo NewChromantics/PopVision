@@ -29,7 +29,7 @@ namespace CoreMl
 	class TAppleVisionFace;
 	
 #if defined(__OBJC__)
-	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<std::string(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);
+	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);
 	void		ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<float>&& Values);
 	void		ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<double>&& Values);
 #endif
