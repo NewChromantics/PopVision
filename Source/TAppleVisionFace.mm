@@ -138,7 +138,8 @@ void CoreMl::TAppleVisionFace::GetObjects(CVPixelBufferRef Pixels,std::function<
 			//	this is a point inside the bounding box
 			auto Point = Landmarks.normalizedPoints[l];
 			Point.x = Soy::Lerp( Bounds.Left(), Bounds.Right(), Point.x );
-			Point.y = Soy::Lerp( Bounds.Top(), Bounds.Bottom(), Point.y );
+			//	gr: point is upside down inside box
+			Point.y = Soy::Lerp( Bounds.Bottom(), Bounds.Top(), Point.y );
 			
 			TObject Landmark;
 			//	gr: center this?
