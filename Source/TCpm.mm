@@ -70,3 +70,40 @@ void CoreMl::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const T
 
 }
 
+
+
+
+void CoreMl::TCpm::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+{
+	auto* mCpm = mNative->mCpm;
+	NSError* Error = nullptr;
+	
+	Soy::TScopeTimerPrint Timer(__func__,0);
+	auto Output = [mCpm predictionFromImage__0:Pixels error:&Error];
+	Timer.Stop();
+	if ( Error )
+		throw Soy::AssertException( Error );
+	
+	//	https://github.com/tucan9389/PoseEstimation-CoreML/blob/master/PoseEstimation-CoreML/JointViewController.swift#L230
+	BufferArray<std::string,20> KeypointLabels;
+	GetLabels( GetArrayBridge(KeypointLabels) );
+	auto GetKeypointName = [&](size_t Index) -> const std::string&
+	{
+		//	pad labels
+		if ( Index >= KeypointLabels.GetSize() )
+		{
+			for ( auto i=KeypointLabels.GetSize();	i<=Index;	i++ )
+			{
+				std::stringstream KeypointName;
+				KeypointName << "Label_" << Index;
+				KeypointLabels.PushBack( KeypointName.str() );
+			}
+		}
+		
+		return KeypointLabels[Index];
+	};
+	
+	RunPoseModel_GetLabelMap( Output.Convolutional_Pose_Machine__stage_5_out__0, GetKeypointName, EnumLabelMap );
+}
+
+

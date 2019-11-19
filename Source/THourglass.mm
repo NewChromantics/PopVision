@@ -62,4 +62,40 @@ void CoreMl::THourglass::GetObjects(CVPixelBufferRef Pixels,std::function<void(c
 	
 	RunPoseModel( Output.hourglass_out_3__0, GetKeypointName, EnumObject );
 }
+
+
+
+void CoreMl::THourglass::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+{
+	auto* mHourglass = mNative->mHourglass;
+	NSError* Error = nullptr;
 	
+	Soy::TScopeTimerPrint Timer(__func__,0);
+	auto Output = [mHourglass predictionFromImage__0:Pixels error:&Error];
+	Timer.Stop();
+	if ( Error )
+		throw Soy::AssertException( Error );
+	
+	//	https://github.com/tucan9389/PoseEstimation-CoreML/blob/master/PoseEstimation-CoreML/JointViewController.swift#L230
+	BufferArray<std::string,20> KeypointLabels;
+	GetLabels( GetArrayBridge(KeypointLabels) );
+	auto GetKeypointName = [&](size_t Index) -> const std::string&
+	{
+		//	pad labels
+		if ( Index >= KeypointLabels.GetSize() )
+		{
+			for ( auto i=KeypointLabels.GetSize();	i<=Index;	i++ )
+			{
+				std::stringstream KeypointName;
+				KeypointName << "Label_" << Index;
+				KeypointLabels.PushBack( KeypointName.str() );
+			}
+		}
+		
+		return KeypointLabels[Index];
+	};
+	
+	RunPoseModel_GetLabelMap( Output.hourglass_out_3__0, GetKeypointName, EnumLabelMap );
+}
+
+
