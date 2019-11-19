@@ -14,6 +14,61 @@
 		BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1A2384039700A70EBF /* posenet257.mlmodel */; };
 		BF151F212384046500A70EBF /* TPosenet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1F2384046400A70EBF /* TPosenet.mm */; };
 		BF151F222384046500A70EBF /* TPosenet.h in Headers */ = {isa = PBXBuildFile; fileRef = BF151F202384046500A70EBF /* TPosenet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF151F3123845BE600A70EBF /* PopCoreml_Ios.h in Headers */ = {isa = PBXBuildFile; fileRef = BF151F2F23845BE600A70EBF /* PopCoreml_Ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF151F3523845C0D00A70EBF /* posenet257.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1A2384039700A70EBF /* posenet257.mlmodel */; };
+		BF151F3623845C0D00A70EBF /* posenet337.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F182384039600A70EBF /* posenet337.mlmodel */; };
+		BF151F3723845C0D00A70EBF /* posenet513_v1_075.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F172384039400A70EBF /* posenet513_v1_075.mlmodel */; };
+		BF151F3823845C0D00A70EBF /* posenet513.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F192384039700A70EBF /* posenet513.mlmodel */; };
+		BF151F3923845C0D00A70EBF /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
+		BF151F3A23845C0D00A70EBF /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6722DE6DA200D8615C /* DeepLabV3.mlmodel */; };
+		BF151F3B23845C0D00A70EBF /* hourglass.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6422DE6DA200D8615C /* hourglass.mlmodel */; };
+		BF151F3C23845C0D00A70EBF /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
+		BF151F3D23845C0D00A70EBF /* MaskRCNN_Classifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6822DE6DA200D8615C /* MaskRCNN_Classifier.mlmodel */; };
+		BF151F3E23845C0D00A70EBF /* MaskRCNN_Mask.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6A22DE6DA300D8615C /* MaskRCNN_Mask.mlmodel */; };
+		BF151F3F23845C0D00A70EBF /* MaskRCNN_MaskRCNN.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6922DE6DA200D8615C /* MaskRCNN_MaskRCNN.mlmodel */; };
+		BF151F4023845C0D00A70EBF /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F152382D30F00A70EBF /* Resnet50.mlmodel */; };
+		BF151F4123845C0D00A70EBF /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6522DE6DA200D8615C /* MobileNet.mlmodel */; };
+		BF151F4223845C0D00A70EBF /* MobileOpenPose.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6322DE6DA200D8615C /* MobileOpenPose.mlmodel */; };
+		BF151F4323845C0D00A70EBF /* SsdMobilenet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6622DE6DA200D8615C /* SsdMobilenet.mlmodel */; };
+		BF151F4423845C0D00A70EBF /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
+		BF151F4523845C2600A70EBF /* memheap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD322DE7AA200D8615C /* memheap.cpp */; };
+		BF151F4623845C2600A70EBF /* SoyArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8022DE730700D8615C /* SoyArray.cpp */; };
+		BF151F4723845C2600A70EBF /* SoyAssert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC222DE7A3600D8615C /* SoyAssert.cpp */; };
+		BF151F4823845C2600A70EBF /* SoyAvf.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B7D22DE730700D8615C /* SoyAvf.mm */; };
+		BF151F4923845C2600A70EBF /* SoyDebug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8322DE730700D8615C /* SoyDebug.cpp */; };
+		BF151F4A23845C2600A70EBF /* SoyDebug.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8122DE730700D8615C /* SoyDebug.mm */; };
+		BF151F4B23845C2600A70EBF /* SoyFilesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BDE22DE7AFE00D8615C /* SoyFilesystem.cpp */; };
+		BF151F4C23845C2600A70EBF /* SoyFilesystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BDF22DE7AFF00D8615C /* SoyFilesystem.mm */; };
+		BF151F4D23845C2600A70EBF /* SoyFourcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BA322DE79E200D8615C /* SoyFourcc.cpp */; };
+		BF151F4E23845C2600A70EBF /* SoyH264.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BA122DE79E200D8615C /* SoyH264.cpp */; };
+		BF151F4F23845C2600A70EBF /* SoyMedia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BB222DE7A0600D8615C /* SoyMedia.cpp */; };
+		BF151F5023845C2600A70EBF /* SoyMediaFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BAD22DE7A0500D8615C /* SoyMediaFormat.cpp */; };
+		BF151F5123845C2600A70EBF /* SoyPixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B9F22DE79E200D8615C /* SoyPixels.cpp */; };
+		BF151F5223845C2600A70EBF /* SoyScope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B8422DE730700D8615C /* SoyScope.cpp */; };
+		BF151F5323845C2600A70EBF /* SoyString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC922DE7A7600D8615C /* SoyString.cpp */; };
+		BF151F5423845C2600A70EBF /* SoyString.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BCB22DE7A7700D8615C /* SoyString.mm */; };
+		BF151F5523845C2600A70EBF /* SoyThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BC522DE7A6700D8615C /* SoyThread.cpp */; };
+		BF151F5623845C2600A70EBF /* SoyTime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD922DE7AD000D8615C /* SoyTime.cpp */; };
+		BF151F5723845C2600A70EBF /* SoyTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD722DE7AD000D8615C /* SoyTime.mm */; };
+		BF151F5823845C2600A70EBF /* SoyTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BB022DE7A0600D8615C /* SoyTypes.cpp */; };
+		BF151F5923845C2600A70EBF /* SoyTypes.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BAB22DE7A0500D8615C /* SoyTypes.mm */; };
+		BF151F5A23845C2600A70EBF /* SoyVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B9022DE736D00D8615C /* SoyVector.cpp */; };
+		BF151F5B23845C2600A70EBF /* SoyWave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BD022DE7A9800D8615C /* SoyWave.cpp */; };
+		BF151F5C23845C3700A70EBF /* TAppleVisionFace.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */; };
+		BF151F5D23845C3700A70EBF /* TCoreMl.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */; };
+		BF151F5E23845C3700A70EBF /* TCpm.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BF022DF14FB00D8615C /* TCpm.mm */; };
+		BF151F5F23845C3700A70EBF /* TDeepLab.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0122DF17F400D8615C /* TDeepLab.mm */; };
+		BF151F6023845C3700A70EBF /* TPosenet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1F2384046400A70EBF /* TPosenet.mm */; };
+		BF151F6123845C3700A70EBF /* THourglass.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BF322DF14FB00D8615C /* THourglass.mm */; };
+		BF151F6223845C3700A70EBF /* TMaskRcnn.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */; };
+		BF151F6323845C3700A70EBF /* TOpenPose.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BED22DF14FB00D8615C /* TOpenPose.mm */; };
+		BF151F6423845C3700A70EBF /* TSsdMobileNet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */; };
+		BF151F6523845C3700A70EBF /* TYolo.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B7922DE702B00D8615C /* TYolo.mm */; };
+		BF151F6823845E4700A70EBF /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6723845E4700A70EBF /* Vision.framework */; };
+		BF151F6A23845E5100A70EBF /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6923845E5100A70EBF /* CoreML.framework */; };
+		BF151F6C23845E7A00A70EBF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6B23845E7A00A70EBF /* AVFoundation.framework */; };
+		BF151F6E23845E9400A70EBF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6D23845E9400A70EBF /* CoreMedia.framework */; };
+		BF151F7023845EBB00A70EBF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */; };
 		BFA22B6B22DE6DA300D8615C /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
 		BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
 		BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
@@ -84,6 +139,15 @@
 		BF151F1A2384039700A70EBF /* posenet257.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet257.mlmodel; path = Models/posenet257.mlmodel; sourceTree = "<group>"; };
 		BF151F1F2384046400A70EBF /* TPosenet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TPosenet.mm; path = Source/TPosenet.mm; sourceTree = "<group>"; };
 		BF151F202384046500A70EBF /* TPosenet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPosenet.h; path = Source/TPosenet.h; sourceTree = "<group>"; };
+		BF151F2D23845BE600A70EBF /* PopCoreml_Ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF151F2F23845BE600A70EBF /* PopCoreml_Ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopCoreml_Ios.h; sourceTree = "<group>"; };
+		BF151F3023845BE600A70EBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF151F6623845C7000A70EBF /* SoyLib_Ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SoyLib_Ios.xcconfig; path = Source/SoyLib/SoyLib_Ios.xcconfig; sourceTree = "<group>"; };
+		BF151F6723845E4700A70EBF /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Vision.framework; sourceTree = DEVELOPER_DIR; };
+		BF151F6923845E5100A70EBF /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreML.framework; sourceTree = DEVELOPER_DIR; };
+		BF151F6B23845E7A00A70EBF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		BF151F6D23845E9400A70EBF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -173,6 +237,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BF151F2A23845BE600A70EBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF151F7023845EBB00A70EBF /* VideoToolbox.framework in Frameworks */,
+				BF151F6E23845E9400A70EBF /* CoreMedia.framework in Frameworks */,
+				BF151F6A23845E5100A70EBF /* CoreML.framework in Frameworks */,
+				BF151F6C23845E7A00A70EBF /* AVFoundation.framework in Frameworks */,
+				BF151F6823845E4700A70EBF /* Vision.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFA22B4A22DE6CFC00D8615C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,6 +265,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF151F2E23845BE600A70EBF /* PopCoreml_Ios */ = {
+			isa = PBXGroup;
+			children = (
+				BF151F2F23845BE600A70EBF /* PopCoreml_Ios.h */,
+				BF151F3023845BE600A70EBF /* Info.plist */,
+			);
+			path = PopCoreml_Ios;
+			sourceTree = "<group>";
+		};
 		BFA22B4322DE6CFC00D8615C = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +281,7 @@
 				BFA22B5A22DE6D8200D8615C /* PopCoreml */,
 				BFA22B5922DE6D7E00D8615C /* Models */,
 				BFA22B5822DE6D7600D8615C /* Source */,
+				BF151F2E23845BE600A70EBF /* PopCoreml_Ios */,
 				BFA22B4E22DE6CFC00D8615C /* Products */,
 				BFA22B9622DE796900D8615C /* Frameworks */,
 			);
@@ -205,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */,
+				BF151F2D23845BE600A70EBF /* PopCoreml_Ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,6 +381,7 @@
 				BFA22BA122DE79E200D8615C /* SoyH264.cpp */,
 				BFA22BA222DE79E200D8615C /* SoyH264.h */,
 				BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */,
+				BF151F6623845C7000A70EBF /* SoyLib_Ios.xcconfig */,
 				BFA22BB222DE7A0600D8615C /* SoyMedia.cpp */,
 				BFA22BAE22DE7A0600D8615C /* SoyMedia.h */,
 				BFA22BAD22DE7A0500D8615C /* SoyMediaFormat.cpp */,
@@ -328,7 +416,12 @@
 		BFA22B9622DE796900D8615C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */,
+				BF151F6D23845E9400A70EBF /* CoreMedia.framework */,
+				BF151F6B23845E7A00A70EBF /* AVFoundation.framework */,
+				BF151F6923845E5100A70EBF /* CoreML.framework */,
 				BFA22C0922DF367E00D8615C /* Vision.framework */,
+				BF151F6723845E4700A70EBF /* Vision.framework */,
 				BFA22BE422DE7CEB00D8615C /* AppKit.framework */,
 				BFA22B9D22DE79B500D8615C /* VideoToolbox.framework */,
 				BFA22B9B22DE798600D8615C /* CoreML.framework */,
@@ -341,6 +434,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		BF151F2823845BE600A70EBF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF151F3123845BE600A70EBF /* PopCoreml_Ios.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFA22B4822DE6CFC00D8615C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,6 +462,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BF151F2C23845BE600A70EBF /* PopCoreml_Ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF151F3223845BE600A70EBF /* Build configuration list for PBXNativeTarget "PopCoreml_Ios" */;
+			buildPhases = (
+				BF151F2823845BE600A70EBF /* Headers */,
+				BF151F2923845BE600A70EBF /* Sources */,
+				BF151F2A23845BE600A70EBF /* Frameworks */,
+				BF151F2B23845BE600A70EBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PopCoreml_Ios;
+			productName = PopCoreml_Ios;
+			productReference = BF151F2D23845BE600A70EBF /* PopCoreml_Ios.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		BFA22B4C22DE6CFC00D8615C /* PopCoreml */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFA22B5522DE6CFC00D8615C /* Build configuration list for PBXNativeTarget "PopCoreml" */;
@@ -388,6 +507,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = NewChromantics;
 				TargetAttributes = {
+					BF151F2C23845BE600A70EBF = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					BFA22B4C22DE6CFC00D8615C = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -406,11 +528,20 @@
 			projectRoot = "";
 			targets = (
 				BFA22B4C22DE6CFC00D8615C /* PopCoreml */,
+				BF151F2C23845BE600A70EBF /* PopCoreml_Ios */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BF151F2B23845BE600A70EBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF151F3C23845C0D00A70EBF /* MaskRCNN_anchors.bin in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFA22B4B22DE6CFC00D8615C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +553,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BF151F2923845BE600A70EBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF151F4E23845C2600A70EBF /* SoyH264.cpp in Sources */,
+				BF151F3523845C0D00A70EBF /* posenet257.mlmodel in Sources */,
+				BF151F6423845C3700A70EBF /* TSsdMobileNet.mm in Sources */,
+				BF151F5A23845C2600A70EBF /* SoyVector.cpp in Sources */,
+				BF151F4023845C0D00A70EBF /* Resnet50.mlmodel in Sources */,
+				BF151F3823845C0D00A70EBF /* posenet513.mlmodel in Sources */,
+				BF151F5323845C2600A70EBF /* SoyString.cpp in Sources */,
+				BF151F6523845C3700A70EBF /* TYolo.mm in Sources */,
+				BF151F6023845C3700A70EBF /* TPosenet.mm in Sources */,
+				BF151F5B23845C2600A70EBF /* SoyWave.cpp in Sources */,
+				BF151F3F23845C0D00A70EBF /* MaskRCNN_MaskRCNN.mlmodel in Sources */,
+				BF151F5D23845C3700A70EBF /* TCoreMl.mm in Sources */,
+				BF151F5623845C2600A70EBF /* SoyTime.cpp in Sources */,
+				BF151F3723845C0D00A70EBF /* posenet513_v1_075.mlmodel in Sources */,
+				BF151F4A23845C2600A70EBF /* SoyDebug.mm in Sources */,
+				BF151F3A23845C0D00A70EBF /* DeepLabV3.mlmodel in Sources */,
+				BF151F4C23845C2600A70EBF /* SoyFilesystem.mm in Sources */,
+				BF151F4423845C0D00A70EBF /* TinyYOLO.mlmodel in Sources */,
+				BF151F5E23845C3700A70EBF /* TCpm.mm in Sources */,
+				BF151F5023845C2600A70EBF /* SoyMediaFormat.cpp in Sources */,
+				BF151F4723845C2600A70EBF /* SoyAssert.cpp in Sources */,
+				BF151F4223845C0D00A70EBF /* MobileOpenPose.mlmodel in Sources */,
+				BF151F4F23845C2600A70EBF /* SoyMedia.cpp in Sources */,
+				BF151F5423845C2600A70EBF /* SoyString.mm in Sources */,
+				BF151F5123845C2600A70EBF /* SoyPixels.cpp in Sources */,
+				BF151F6323845C3700A70EBF /* TOpenPose.mm in Sources */,
+				BF151F5723845C2600A70EBF /* SoyTime.mm in Sources */,
+				BF151F5523845C2600A70EBF /* SoyThread.cpp in Sources */,
+				BF151F5223845C2600A70EBF /* SoyScope.cpp in Sources */,
+				BF151F4D23845C2600A70EBF /* SoyFourcc.cpp in Sources */,
+				BF151F4B23845C2600A70EBF /* SoyFilesystem.cpp in Sources */,
+				BF151F3E23845C0D00A70EBF /* MaskRCNN_Mask.mlmodel in Sources */,
+				BF151F6123845C3700A70EBF /* THourglass.mm in Sources */,
+				BF151F5823845C2600A70EBF /* SoyTypes.cpp in Sources */,
+				BF151F4523845C2600A70EBF /* memheap.cpp in Sources */,
+				BF151F6223845C3700A70EBF /* TMaskRcnn.mm in Sources */,
+				BF151F3D23845C0D00A70EBF /* MaskRCNN_Classifier.mlmodel in Sources */,
+				BF151F4123845C0D00A70EBF /* MobileNet.mlmodel in Sources */,
+				BF151F3923845C0D00A70EBF /* cpm.mlmodel in Sources */,
+				BF151F4823845C2600A70EBF /* SoyAvf.mm in Sources */,
+				BF151F5F23845C3700A70EBF /* TDeepLab.mm in Sources */,
+				BF151F4923845C2600A70EBF /* SoyDebug.cpp in Sources */,
+				BF151F5C23845C3700A70EBF /* TAppleVisionFace.mm in Sources */,
+				BF151F4323845C0D00A70EBF /* SsdMobilenet.mlmodel in Sources */,
+				BF151F3B23845C0D00A70EBF /* hourglass.mlmodel in Sources */,
+				BF151F3623845C0D00A70EBF /* posenet337.mlmodel in Sources */,
+				BF151F4623845C2600A70EBF /* SoyArray.cpp in Sources */,
+				BF151F5923845C2600A70EBF /* SoyTypes.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFA22B4922DE6CFC00D8615C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,9 +666,63 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		BF151F3323845BE600A70EBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF151F6623845C7000A70EBF /* SoyLib_Ios.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = X52DR36JY2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PopCoreml_Ios/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NewChromantics.PopCoreml-Ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BF151F3423845BE600A70EBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF151F6623845C7000A70EBF /* SoyLib_Ios.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = X52DR36JY2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = PopCoreml_Ios/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.NewChromantics.PopCoreml-Ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		BFA22B5322DE6CFC00D8615C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -545,7 +785,6 @@
 		};
 		BFA22B5422DE6CFC00D8615C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -601,6 +840,7 @@
 		};
 		BFA22B5622DE6CFC00D8615C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -627,6 +867,7 @@
 		};
 		BFA22B5722DE6CFC00D8615C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -654,6 +895,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BF151F3223845BE600A70EBF /* Build configuration list for PBXNativeTarget "PopCoreml_Ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF151F3323845BE600A70EBF /* Debug */,
+				BF151F3423845BE600A70EBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BFA22B4722DE6CFC00D8615C /* Build configuration list for PBXProject "PopCoreml" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
