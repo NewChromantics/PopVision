@@ -245,4 +245,54 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::str
 }
 
 
+void CoreMl::RunPoseModel_GetLabelMap(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+{
+	if ( !ModelOutput )
+		throw Soy::AssertException("No output from model");
+	
+	BufferArray<int,10> Dim;
+	Array<float> Values;
+	ExtractFloatsFromMultiArray( ModelOutput, GetArrayBridge(Dim), GetArrayBridge(Values) );
+	
+	//	parse Hourglass data
+	//	https://github.com/tucan9389/PoseEstimation-CoreML/blob/master/PoseEstimation-CoreML/JointViewController.swift#L135
+	auto KeypointCount = Dim[0];
+	auto HeatmapWidth = Dim[2];
+	auto HeatmapHeight = Dim[1];
+	auto GetValue = [&](int Keypoint,int HeatmapX,int HeatmapY)
+	{
+		auto Index = Keypoint * (HeatmapWidth*HeatmapHeight);
+		//Index += HeatmapX*(HeatmapHeight);
+		//Index += HeatmapY;
+		Index += HeatmapY*(HeatmapWidth);
+		Index += HeatmapX;
+		return Values[Index];
+	};
+	
+	
+	//	note: rotated y/x
+	vec2x<size_t> MetaSize( HeatmapHeight, HeatmapWidth );
+	Array<float> MapScores;
+
+	for ( auto k=0;	k<KeypointCount;	k++)
+	{
+		auto& Label = GetKeypointName(k);
+		
+		//	order is rotated, and the data are doubles, so gotta rotate & convert anyway
+		MapScores.SetSize( HeatmapWidth * HeatmapHeight );
+		
+		for ( auto x=0;	x<HeatmapWidth;	x++)
+		{
+			for ( auto y=0;	y<HeatmapHeight;	y++)
+			{
+				auto Confidence = GetValue( k, x, y );
+				auto DestinationIndex = y + (x * HeatmapWidth);
+				MapScores[DestinationIndex] = Confidence;
+			}
+		}
+		
+		EnumLabelMap( MetaSize, Label, GetArrayBridge( MapScores ) );
+	}
+}
+
 
