@@ -545,6 +545,7 @@
 		};
 		BFA22B5422DE6CFC00D8615C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BFA22B8E22DE733200D8615C /* SoyLib_Osx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
