@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF151F162382D31000A70EBF /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F152382D30F00A70EBF /* Resnet50.mlmodel */; };
+		BF151F1B2384039800A70EBF /* posenet513_v1_075.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F172384039400A70EBF /* posenet513_v1_075.mlmodel */; };
+		BF151F1C2384039800A70EBF /* posenet337.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F182384039600A70EBF /* posenet337.mlmodel */; };
+		BF151F1D2384039800A70EBF /* posenet513.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F192384039700A70EBF /* posenet513.mlmodel */; };
+		BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1A2384039700A70EBF /* posenet257.mlmodel */; };
+		BF151F212384046500A70EBF /* TPosenet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF151F1F2384046400A70EBF /* TPosenet.mm */; };
+		BF151F222384046500A70EBF /* TPosenet.h in Headers */ = {isa = PBXBuildFile; fileRef = BF151F202384046500A70EBF /* TPosenet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFA22B6B22DE6DA300D8615C /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
 		BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
 		BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
@@ -68,6 +75,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF151F112382D2A900A70EBF /* TResnet50.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TResnet50.h; path = Source/TResnet50.h; sourceTree = "<group>"; };
+		BF151F122382D2A900A70EBF /* TResnet50.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TResnet50.mm; path = Source/TResnet50.mm; sourceTree = "<group>"; };
+		BF151F152382D30F00A70EBF /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Resnet50.mlmodel; path = Models/Resnet50.mlmodel; sourceTree = "<group>"; };
+		BF151F172384039400A70EBF /* posenet513_v1_075.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet513_v1_075.mlmodel; path = Models/posenet513_v1_075.mlmodel; sourceTree = "<group>"; };
+		BF151F182384039600A70EBF /* posenet337.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet337.mlmodel; path = Models/posenet337.mlmodel; sourceTree = "<group>"; };
+		BF151F192384039700A70EBF /* posenet513.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet513.mlmodel; path = Models/posenet513.mlmodel; sourceTree = "<group>"; };
+		BF151F1A2384039700A70EBF /* posenet257.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet257.mlmodel; path = Models/posenet257.mlmodel; sourceTree = "<group>"; };
+		BF151F1F2384046400A70EBF /* TPosenet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TPosenet.mm; path = Source/TPosenet.mm; sourceTree = "<group>"; };
+		BF151F202384046500A70EBF /* TPosenet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPosenet.h; path = Source/TPosenet.h; sourceTree = "<group>"; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -205,10 +221,14 @@
 				BFA22BF022DF14FB00D8615C /* TCpm.mm */,
 				BFA22C0222DF17F400D8615C /* TDeepLab.h */,
 				BFA22C0122DF17F400D8615C /* TDeepLab.mm */,
+				BF151F202384046500A70EBF /* TPosenet.h */,
+				BF151F1F2384046400A70EBF /* TPosenet.mm */,
 				BFA22BF422DF14FB00D8615C /* THourglass.h */,
 				BFA22BF322DF14FB00D8615C /* THourglass.mm */,
 				BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */,
 				BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */,
+				BF151F112382D2A900A70EBF /* TResnet50.h */,
+				BF151F122382D2A900A70EBF /* TResnet50.mm */,
 				BFA22BF222DF14FB00D8615C /* TOpenPose.h */,
 				BFA22BED22DF14FB00D8615C /* TOpenPose.mm */,
 				BFA22BF122DF14FB00D8615C /* TSsdMobileNet.h */,
@@ -223,6 +243,10 @@
 		BFA22B5922DE6D7E00D8615C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BF151F1A2384039700A70EBF /* posenet257.mlmodel */,
+				BF151F182384039600A70EBF /* posenet337.mlmodel */,
+				BF151F172384039400A70EBF /* posenet513_v1_075.mlmodel */,
+				BF151F192384039700A70EBF /* posenet513.mlmodel */,
 				BFA22B6122DE6DA200D8615C /* cpm.mlmodel */,
 				BFA22B6722DE6DA200D8615C /* DeepLabV3.mlmodel */,
 				BFA22B6422DE6DA200D8615C /* hourglass.mlmodel */,
@@ -230,6 +254,7 @@
 				BFA22B6822DE6DA200D8615C /* MaskRCNN_Classifier.mlmodel */,
 				BFA22B6A22DE6DA300D8615C /* MaskRCNN_Mask.mlmodel */,
 				BFA22B6922DE6DA200D8615C /* MaskRCNN_MaskRCNN.mlmodel */,
+				BF151F152382D30F00A70EBF /* Resnet50.mlmodel */,
 				BFA22B6522DE6DA200D8615C /* MobileNet.mlmodel */,
 				BFA22B6322DE6DA200D8615C /* MobileOpenPose.mlmodel */,
 				BFA22B6622DE6DA200D8615C /* SsdMobilenet.mlmodel */,
@@ -326,6 +351,7 @@
 				BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */,
 				BFA22BFA22DF14FB00D8615C /* TOpenPose.h in Headers */,
 				BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */,
+				BF151F222384046500A70EBF /* TPosenet.h in Headers */,
 				BFA22BF922DF14FB00D8615C /* TSsdMobileNet.h in Headers */,
 				BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */,
 				BFA22C0822DF311C00D8615C /* TAppleVisionFace.h in Headers */,
@@ -416,11 +442,13 @@
 				BFA22BBD22DE7A0600D8615C /* SoyMedia.cpp in Sources */,
 				BFA22BA722DE79E300D8615C /* SoyH264.cpp in Sources */,
 				BFA22BD522DE7AA300D8615C /* memheap.cpp in Sources */,
+				BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */,
 				BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */,
 				BFA22B8A22DE730700D8615C /* SoyDebug.mm in Sources */,
 				BFA22B8622DE730700D8615C /* SoyAvf.mm in Sources */,
 				BFA22BB622DE7A0600D8615C /* SoyTypes.mm in Sources */,
 				BFA22BA922DE79E300D8615C /* SoyFourcc.cpp in Sources */,
+				BF151F1D2384039800A70EBF /* posenet513.mlmodel in Sources */,
 				BFA22B6F22DE6DA300D8615C /* hourglass.mlmodel in Sources */,
 				BFA22BCC22DE7A7700D8615C /* SoyString.cpp in Sources */,
 				BFA22BE122DE7AFF00D8615C /* SoyFilesystem.cpp in Sources */,
@@ -434,8 +462,12 @@
 				BFA22B6E22DE6DA300D8615C /* MobileOpenPose.mlmodel in Sources */,
 				BFA22C0322DF17F400D8615C /* TDeepLab.mm in Sources */,
 				BFA22BC422DE7A3700D8615C /* SoyAssert.cpp in Sources */,
+				BF151F162382D31000A70EBF /* Resnet50.mlmodel in Sources */,
+				BF151F212384046500A70EBF /* TPosenet.mm in Sources */,
+				BF151F1C2384039800A70EBF /* posenet337.mlmodel in Sources */,
 				BFA22BD222DE7A9800D8615C /* SoyWave.cpp in Sources */,
 				BFA22B7122DE6DA300D8615C /* SsdMobilenet.mlmodel in Sources */,
+				BF151F1B2384039800A70EBF /* posenet513_v1_075.mlmodel in Sources */,
 				BFA22B9222DE736D00D8615C /* SoyVector.cpp in Sources */,
 				BFA22B8922DE730700D8615C /* SoyArray.cpp in Sources */,
 				BFA22BE322DE7C5700D8615C /* TCoreMl.mm in Sources */,
