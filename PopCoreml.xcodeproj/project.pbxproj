@@ -148,7 +148,7 @@
 		BF151F6B23845E7A00A70EBF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		BF151F6D23845E9400A70EBF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
-		BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
 		BFA22B5D22DE6D9B00D8615C /* TSsdMobileNetAnchors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSsdMobileNetAnchors.h; path = Source/TSsdMobileNetAnchors.h; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 		BFA22B4E22DE6CFC00D8615C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */,
+				BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */,
 				BF151F2D23845BE600A70EBF /* PopCoreml_Ios.framework */,
 			);
 			name = Products;
@@ -480,9 +480,9 @@
 			productReference = BF151F2D23845BE600A70EBF /* PopCoreml_Ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BFA22B4C22DE6CFC00D8615C /* PopCoreml */ = {
+		BFA22B4C22DE6CFC00D8615C /* PopCoreml_Osx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BFA22B5522DE6CFC00D8615C /* Build configuration list for PBXNativeTarget "PopCoreml" */;
+			buildConfigurationList = BFA22B5522DE6CFC00D8615C /* Build configuration list for PBXNativeTarget "PopCoreml_Osx" */;
 			buildPhases = (
 				BFA22B4822DE6CFC00D8615C /* Headers */,
 				BFA22B4922DE6CFC00D8615C /* Sources */,
@@ -493,9 +493,9 @@
 			);
 			dependencies = (
 			);
-			name = PopCoreml;
+			name = PopCoreml_Osx;
 			productName = PopCoreml;
-			productReference = BFA22B4D22DE6CFC00D8615C /* PopCoreml.framework */;
+			productReference = BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -527,7 +527,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BFA22B4C22DE6CFC00D8615C /* PopCoreml */,
+				BFA22B4C22DE6CFC00D8615C /* PopCoreml_Osx */,
 				BF151F2C23845BE600A70EBF /* PopCoreml_Ios */,
 			);
 		};
@@ -913,7 +913,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BFA22B5522DE6CFC00D8615C /* Build configuration list for PBXNativeTarget "PopCoreml" */ = {
+		BFA22B5522DE6CFC00D8615C /* Build configuration list for PBXNativeTarget "PopCoreml_Osx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BFA22B5622DE6CFC00D8615C /* Debug */,

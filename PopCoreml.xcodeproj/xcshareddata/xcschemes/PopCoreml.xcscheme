@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BFA22B4C22DE6CFC00D8615C"
-               BuildableName = "PopCoreml.framework"
-               BlueprintName = "PopCoreml"
+               BuildableName = "PopCoreml_Osx.framework"
+               BlueprintName = "PopCoreml_Osx"
                ReferencedContainer = "container:PopCoreml.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BFA22B4C22DE6CFC00D8615C"
-            BuildableName = "PopCoreml.framework"
-            BlueprintName = "PopCoreml"
+            BuildableName = "PopCoreml_Osx.framework"
+            BlueprintName = "PopCoreml_Osx"
             ReferencedContainer = "container:PopCoreml.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BFA22B4C22DE6CFC00D8615C"
-            BuildableName = "PopCoreml.framework"
-            BlueprintName = "PopCoreml"
+            BuildableName = "PopCoreml_Osx.framework"
+            BlueprintName = "PopCoreml_Osx"
             ReferencedContainer = "container:PopCoreml.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
