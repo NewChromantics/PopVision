@@ -45,7 +45,7 @@ void CoreMl::TSsdMobileNet::GetObjects(CVPixelBufferRef Pixels,std::function<voi
 	auto* mSsdMobileNet = mNative->mSsdMobileNet;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mSsdMobileNet predictionFromPreprocessor__sub__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( !Output )

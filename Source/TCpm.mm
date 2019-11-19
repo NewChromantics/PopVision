@@ -41,7 +41,7 @@ void CoreMl::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const T
 	auto* mCpm = mNative->mCpm;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mCpm predictionFromImage__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )
@@ -78,7 +78,7 @@ void CoreMl::TCpm::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<
 	auto* mCpm = mNative->mCpm;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mCpm predictionFromImage__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

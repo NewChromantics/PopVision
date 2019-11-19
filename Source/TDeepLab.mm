@@ -42,7 +42,7 @@ void CoreMl::TDeepLab::GetObjects(CVPixelBufferRef Pixels,std::function<void(con
 	auto& mDeepLabv3 = mNative->mDeepLabv3;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mDeepLabv3 predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

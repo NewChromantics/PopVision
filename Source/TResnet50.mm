@@ -43,7 +43,7 @@ void CoreMl::TResnet50::GetObjects(CVPixelBufferRef Pixels,std::function<void(co
 	auto* mResnet = mNative->mResnet50;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mResnet predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( !Output )

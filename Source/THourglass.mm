@@ -35,7 +35,7 @@ void CoreMl::THourglass::GetObjects(CVPixelBufferRef Pixels,std::function<void(c
 	auto* mHourglass = mNative->mHourglass;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mHourglass predictionFromImage__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )
@@ -70,7 +70,7 @@ void CoreMl::THourglass::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(
 	auto* mHourglass = mNative->mHourglass;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mHourglass predictionFromImage__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

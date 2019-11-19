@@ -54,7 +54,7 @@ void CoreMl::TAppleVisionFace::GetLabels(ArrayBridge<std::string>&& Labels)
 
 void CoreMl::TAppleVisionFace::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 
 	//	todo: see what we can allocate once
 	TAppleVisionFaceNative FaceRequest;

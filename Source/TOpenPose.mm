@@ -43,7 +43,7 @@ void CoreMl::TOpenPose::GetObjects(CVPixelBufferRef Pixels,std::function<void(co
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mOpenPose predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )
@@ -232,7 +232,7 @@ void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyP
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mOpenPose predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )
@@ -352,7 +352,7 @@ void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(v
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mOpenPose predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

@@ -46,7 +46,7 @@ void CoreMl::TPosenet::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(ve
 	auto* mPosenet = mNative->mPosenet;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mPosenet predictionFromImage__0:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

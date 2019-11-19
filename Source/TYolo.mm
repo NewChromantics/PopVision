@@ -34,7 +34,7 @@ void CoreMl::TYolo::GetObjects(CVPixelBufferRef Pixels,std::function<void(const 
 	auto* mTinyYolo = mNative->mTinyYolo;
 	NSError* Error = nullptr;
 	
-	Soy::TScopeTimerPrint Timer(__func__,0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 	auto Output = [mTinyYolo predictionFromImage:Pixels error:&Error];
 	Timer.Stop();
 	if ( Error )

@@ -247,6 +247,8 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::str
 
 void CoreMl::RunPoseModel_GetLabelMap(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
+	Soy::TScopeTimerPrint Timer(__func__,5);
+
 	if ( !ModelOutput )
 		throw Soy::AssertException("No output from model");
 	
