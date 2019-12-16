@@ -12,12 +12,15 @@ class TPixelBuffer;
 @class MLMultiArray;
 #endif
 
+
 namespace CoreMl
 {
+	//	deprecate objects in favour of grids + meta
 	class TObject;
 	
 	class TModel;		//	generic interface
 	
+	//	CoreML models
 	class TYolo;
 	class THourglass;
 	class TCpm;
@@ -28,7 +31,11 @@ namespace CoreMl
 	class TResnet50;
 	class TPosenet;
 	
+	//	Apple vision framework
 	class TAppleVisionFace;
+	
+	//	WindowsMl Windows Skills
+	class TWinSkillSkeleton;
 	
 #if defined(__OBJC__)
 	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);

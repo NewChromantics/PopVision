@@ -148,6 +148,8 @@
 		BF151F6B23845E7A00A70EBF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		BF151F6D23845E9400A70EBF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TWinSkillSkeleton.h; path = Source/TWinSkillSkeleton.h; sourceTree = "<group>"; };
+		BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TWinSkillSkeleton.cpp; path = Source/TWinSkillSkeleton.cpp; sourceTree = "<group>"; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -313,6 +315,8 @@
 				BFA22BF422DF14FB00D8615C /* THourglass.h */,
 				BFA22BF322DF14FB00D8615C /* THourglass.mm */,
 				BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */,
+				BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */,
+				BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */,
 				BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */,
 				BF151F112382D2A900A70EBF /* TResnet50.h */,
 				BF151F122382D2A900A70EBF /* TResnet50.mm */,
