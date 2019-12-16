@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\KinectAzure.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\memheap.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyArray.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyAssert.cpp" />
@@ -90,6 +91,7 @@
     <ClCompile Include="..\Source\TWinSkillSkeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Source\KinectAzure.h" />
     <ClInclude Include="..\Source\PopCoreml.h" />
     <ClInclude Include="..\Source\SoyLib\src\Array.hpp" />
     <ClInclude Include="..\Source\SoyLib\src\BufferArray.hpp" />
@@ -113,6 +115,7 @@
     <ClInclude Include="..\Source\SoyLib\src\SoyTypes_Windows.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyWave.h" />
     <ClInclude Include="..\Source\SoyLib\src\string.hpp" />
+    <ClInclude Include="..\Source\TCoreMl.h" />
     <ClInclude Include="..\Source\TWinSkillSkeleton.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

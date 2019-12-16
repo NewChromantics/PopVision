@@ -69,6 +69,9 @@
     <ClCompile Include="..\Source\TWinSkillSkeleton.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\KinectAzure.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\SoyLib\src\Array.hpp">
@@ -141,6 +144,12 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\TWinSkillSkeleton.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\KinectAzure.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\TCoreMl.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
