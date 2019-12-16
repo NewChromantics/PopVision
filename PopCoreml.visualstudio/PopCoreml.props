@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>$(ProjectDir)..\Source\SoyLib\src;$(ProjectDir)..\Source\Broadway\Decoder\inc;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>SET PathDll=$(TargetPath)
+SET PathPdb=%PathDll:dll=pdb%
+SET PathLib=%PathDll:dll=lib%
+SET PathHeader=$(ProjectDir)..\source\PopH264.h
+SET PathHeader2=$(ProjectDir)..\source\PopH264DecoderInstance.h
+copy /y %PathDll% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
+copy /y %PathPdb% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
+copy /y %PathLib% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
+copy /y %PathHeader% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
+copy /y %PathHeader2% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

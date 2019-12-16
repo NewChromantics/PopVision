@@ -12,6 +12,9 @@ class TPixelBuffer;
 @class MLMultiArray;
 #endif
 
+#if defined(TARGET_WINDOWS)
+typedef void* CVPixelBufferRef;
+#endif
 
 namespace CoreMl
 {

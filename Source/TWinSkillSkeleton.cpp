@@ -5,10 +5,11 @@
 #include <winrt/windows.media.h>
 #include <winrt/windows.system.threading.h>
 
-#include "CameraHelper_cppwinrt.h"
-#include "WindowsVersionHelper.h"
-#include "winrt/Microsoft.AI.Skills.SkillInterfacePreview.h"
-#include "winrt/Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.h"
+//#include "CameraHelper_cppwinrt.h"
+//#include "WindowsVersionHelper.h"
+#include <winrt/base.h>
+#include <winrt/Microsoft.AI.Skills.SkillInterfacePreview.h>
+#include <winrt/Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.h>
 
 
 using namespace winrt;
