@@ -118,6 +118,14 @@
     <ClInclude Include="..\Source\TCoreMl.h" />
     <ClInclude Include="..\Source\TWinSkillSkeleton.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="AppWinrtCPP_PostBuild.ps1" />
+    <None Include="AppWinrtCPP_PreBuild.ps1" />
+    <None Include="AppWRLCPP_PreBuild.ps1" />
+    <None Include="genSxSManifest.ps1" />
+    <None Include="packages.config" />
+    <None Include="Skills_PostBuild.ps1" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{64811728-CD20-4F2C-899B-E3BF3D4B032E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

@@ -153,4 +153,24 @@
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="AppWinrtCPP_PostBuild.ps1">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="AppWinrtCPP_PreBuild.ps1">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="AppWRLCPP_PreBuild.ps1">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="genSxSManifest.ps1">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="packages.config">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="Skills_PostBuild.ps1">
+      <Filter>Source</Filter>
+    </None>
+  </ItemGroup>
 </Project>
