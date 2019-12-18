@@ -8,8 +8,23 @@
 //#include "CameraHelper_cppwinrt.h"
 //#include "WindowsVersionHelper.h"
 #include <winrt/base.h>
-#include <winrt/Microsoft.AI.Skills.SkillInterfacePreview.h>
-#include <winrt/Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.h>
+#include <winrt/Windows.Foundation.h>
+#include <winrt/windows.foundation.collections.h>
+#include <winrt/windows.media.h>
+#include <winrt/windows.system.threading.h>
+
+
+//https://docs.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/consume-apis
+#include "CameraHelper_cppwinrt.h"
+//#include "WindowsVersionHelper.h"
+#include "winrt\Microsoft.AI.Skills.SkillInterfacePreview.h"
+#include "winrt\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.h"
+
+using namespace winrt;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Windows::System::Threading;
+using namespace winrt::Windows::Media;
 
 
 using namespace winrt;

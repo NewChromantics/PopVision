@@ -21,7 +21,7 @@ public:
 
 
 
-Coreml::TKinectAzureNative::TKinectAzureNative(size_t DeviceIndex)
+CoreMl::TKinectAzureNative::TKinectAzureNative(size_t DeviceIndex)
 {
 	auto Error = k4a_device_open(DeviceIndex, &mDevice);
 	IsOkay(Error, "k4a_device_open");
