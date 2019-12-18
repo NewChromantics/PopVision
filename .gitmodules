@@ -1,3 +1,6 @@
 [submodule "Source/SoyLib"]
 	path = Source/SoyLib
 	url = https://github.com/SoylentGraham/SoyLib.git
+[submodule "Source/MagicEnum"]
+	path = Source/MagicEnum
+	url = https://github.com/Neargye/magic_enum.git

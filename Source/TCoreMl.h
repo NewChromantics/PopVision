@@ -16,6 +16,14 @@ class TPixelBuffer;
 typedef void* CVPixelBufferRef;
 #endif
 
+
+#if defined(TARGET_DLL)
+#define EXPORT __declspec(dllexport)  
+#else
+#define EXPORT __declspec(dllimport)  
+#endif
+
+
 namespace CoreMl
 {
 	//	deprecate objects in favour of grids + meta
@@ -59,7 +67,7 @@ public:
 };
 
 
-class CoreMl::TModel
+class EXPORT CoreMl::TModel
 {
 public:
 	//	get all the labels this model outputs
@@ -78,6 +86,8 @@ public:
 	virtual void	GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap);
 };
 
+//	factory for dll
+extern "C" EXPORT CoreMl::TModel* PopCoreml_AllocModel(const char* Name);
 
 
 

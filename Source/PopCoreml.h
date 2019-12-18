@@ -1,10 +1,5 @@
-//
-//  PopCoreml.h
-//  PopCoreml
-//
-//  Created by graham on 16/07/2019.
-//  Copyright © 2019 NewChromantics. All rights reserved.
-//
+#pragma once
+
 
 #import <Cocoa/Cocoa.h>
 

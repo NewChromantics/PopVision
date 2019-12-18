@@ -1,4 +1,5 @@
 #include "TWinSkillSkeleton.h"
+#include "MagicEnum/include/magic_enum.hpp"
 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/windows.foundation.collections.h>
@@ -36,6 +37,19 @@ using namespace winrt::Windows::Media;
 using namespace Microsoft::AI::Skills::SkillInterfacePreview;
 using namespace Microsoft::AI::Skills::Vision::SkeletalDetectorPreview;
 
+
+
+class CoreMl::TWinSkillSkeletonNative
+{
+public:
+	TWinSkillSkeletonNative();
+
+	ISkillDescriptor		mDescriptor;
+	SkeletalDetectorBinding	mBinding;
+	SkeletalDetectorSkill	mSkill;
+};
+
+
 // enum to string lookup table for SkillExecutionDeviceKind
 static const std::map<SkillExecutionDeviceKind, std::string> SkillExecutionDeviceKindLookup = {
 	{ SkillExecutionDeviceKind::Undefined, "Undefined" },
@@ -71,21 +85,11 @@ static const std::map<JointLabel, std::string> JointLabelLookup = {
 
 CoreMl::TWinSkill::TWinSkill()
 {
-	// Check if we are running Windows 10.0.18362.x or above as required
-	HRESULT hr = WindowsVersionHelper::EqualOrAboveWindows10Version(18362);
-	IsOkay(hr,"Windows not above win10 18362");
+	auto Version = Platform::GetOsVersion();
+	if (Version < Soy::TVersion(10, 0, 18362))
+		throw "Require windows version >= 10.0.18362";
 }
 
-
-class TWinSkillSkeletonNative
-{
-public:
-	TWinSkillSkeletonNative();
-	
-	ISkillDescriptor		mDescriptor;
-	SkeletalDetectorBinding	mBinding;
-	SkeletalDetectorSkill	mSkill;
-};
 
 
 CoreMl::TWinSkillSkeleton::TWinSkillSkeleton() :
@@ -94,25 +98,27 @@ CoreMl::TWinSkillSkeleton::TWinSkillSkeleton() :
 	mNative.reset( new TWinSkillSkeletonNative() );
 }
 
-CoreMl::TWinSkillSkeletonNative::TWinSkillSkeletonNative()
+CoreMl::TWinSkillSkeletonNative::TWinSkillSkeletonNative() :
+	mSkill	( nullptr ),
+	mBinding	(nullptr)
 {
 	// Create the SkeletalDetector skill descriptor
-	mDescriptor = SkeletalDetectorDescriptor().as<ISkillDescriptor>();
+	auto Descriptor = SkeletalDetectorDescriptor().as<ISkillDescriptor>();
 			
 	//	Create instance of the skill
 	mSkill = mDescriptor.CreateSkillAsync().get().as<SkeletalDetectorSkill>();
-	std::cout << "Running Skill on : " << SkillExecutionDeviceKindLookup.at(skill.Device().ExecutionDeviceKind());
-	std::wcout << L" : " << mSkill.Device().Name().c_str() << std::endl;
+	//Soy::Debug << "Running Skill on : " << SkillExecutionDeviceKindLookup.at(skill.Device().ExecutionDeviceKind());
+	//std::wcout << L" : " << mSkill.Device().Name().c_str() << std::endl;
 	
 	// Create instance of the skill binding
 	mBinding = mSkill.CreateSkillBindingAsync().get().as<SkeletalDetectorBinding>();
 }
 
 
-void Coreml::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
+void CoreMl::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 {
-	magic_enum::strings<JointLabel>();
-	
+	constexpr auto EnumNames = magic_enum::enum_names<JointLabel>();
+/*
 	{ JointLabel::Nose, "Nose" },
 	{ JointLabel::Neck, "Neck" },
 	{ JointLabel::RightShoulder, "RightShoulder" },
@@ -132,14 +138,15 @@ void Coreml::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 	{ JointLabel::RightEar, "RightEar" },
 	{ JointLabel::LeftEar, "LeftEar" },
 	{ JointLabel::NumJoints, "NumJoints" }
+	*/
 }
 
 
-void Coreml::TWinSkillSkeleton::Run()
+void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
 {
 	auto& Binding = mNative->mBinding;
 	auto& Skill = mNative->mSkill;
-	
+	/*
 	// Set the video frame on the skill binding.
 	Binding.SetInputImageAsync(videoFrame).get();
 	
