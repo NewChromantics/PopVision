@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>powershell -ExecutionPolicy Unrestricted -NoLogo -NonInteractive -Command .'$(ProjectDir)\Scripts\AppWinrtCPP_PostBuild.ps1' -TargetDir:'$(TargetDir)' -VCRedistPath:'$(VCInstallDir)' -VCToolsRedistVersion:$(VCToolsRedistVersion) -PlatformTarget:$(PlatformTarget)</Command>
+      <Message>Copies all required binaries to the specified target directory</Message>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>powershell -ExecutionPolicy Unrestricted -NoLogo -NonInteractive -Command .'$(ProjectDir)\Scripts\AppWinrtCPP_PreBuild.ps1' -ProjectDir:'$(ProjectDir)' -PackageDir:'$(ProjectDir)' -WindowsSDK_UnionMetadataPath:'$(WindowsSDK_UnionMetadataPath)'</Command>
+      <Message>Generates headers (.h) files from a set of referenced .winmd files.</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
