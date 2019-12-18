@@ -23,3 +23,5 @@ Unity/**/holobuild/
 *.user
 
 PopCoreml.visualstudio/packages/
+
+PopCoreml.visualstudio/inc/
