@@ -162,20 +162,24 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="PopCoreml.props" />
+    <Import Project="GeneratePackageHeaders.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Master|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="PopCoreml.props" />
     <Import Project="Release.props" />
+    <Import Project="GeneratePackageHeaders.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="PopCoreml.props" />
+    <Import Project="GeneratePackageHeaders.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Master|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="PopCoreml.props" />
     <Import Project="Release.props" />
+    <Import Project="GeneratePackageHeaders.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
@@ -237,7 +241,18 @@
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+
+ <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\Microsoft.VCRTForwarders.140.1.0.0-rc\build\native\Microsoft.VCRTForwarders.140.targets" Condition="Exists('packages\Microsoft.VCRTForwarders.140.1.0.0-rc\build\native\Microsoft.VCRTForwarders.140.targets')" />
+    <Import Project="packages\Microsoft.AI.Skills.SkillInterfacePreview.0.6.0\build\native\Microsoft.AI.Skills.SkillInterfacePreview.targets" Condition="Exists('packages\Microsoft.AI.Skills.SkillInterfacePreview.0.6.0\build\native\Microsoft.AI.Skills.SkillInterfacePreview.targets')" />
+    <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190730.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190730.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="packages\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.0.1.0.4\build\native\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.targets" Condition="Exists('packages\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.0.1.0.4\build\native\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.targets')" />
+    <Import Project="packages\Microsoft.VCRTForwarders.140.1.0.4\build\native\Microsoft.VCRTForwarders.140.targets" Condition="Exists('packages\Microsoft.VCRTForwarders.140.1.0.4\build\native\Microsoft.VCRTForwarders.140.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
 </Project>
