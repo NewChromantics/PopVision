@@ -21,3 +21,5 @@ Unity/**/holobuild/
 *.visualstudio/Master/
 *.visualstudio/Debug/
 *.user
+
+PopCoreml.visualstudio/packages/
