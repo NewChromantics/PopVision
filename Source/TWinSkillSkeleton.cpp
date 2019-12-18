@@ -1,5 +1,6 @@
 #include "TWinSkillSkeleton.h"
 #include "MagicEnum/include/magic_enum.hpp"
+#include "SoyPixels.h"
 
 #include <winrt/Windows.Foundation.h>
 #include <winrt/windows.foundation.collections.h>
@@ -18,25 +19,26 @@
 //https://docs.microsoft.com/en-us/windows/uwp/cpp-and-winrt-apis/consume-apis
 #include "CameraHelper_cppwinrt.h"
 //#include "WindowsVersionHelper.h"
+
+using namespace winrt;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Windows::System::Threading;
+using namespace winrt::Windows::Media;
+
 #include "winrt\Microsoft.AI.Skills.SkillInterfacePreview.h"
 #include "winrt\Microsoft.AI.Skills.Vision.SkeletalDetectorPreview.h"
-
-using namespace winrt;
-using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Windows::System::Threading;
-using namespace winrt::Windows::Media;
-
-
-using namespace winrt;
-using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::Foundation::Collections;
-using namespace winrt::Windows::System::Threading;
-using namespace winrt::Windows::Media;
-
 using namespace Microsoft::AI::Skills::SkillInterfacePreview;
 using namespace Microsoft::AI::Skills::Vision::SkeletalDetectorPreview;
 
+//	pixels to bitmap
+#include "winrt\Windows.Graphics.Imaging.h"
+using namespace winrt::Windows::Graphics::Imaging;
+#include "winrt\Windows.Storage.Streams.h"
+using namespace winrt::Windows::Storage::Streams;
+
+
+#pragma comment(lib, "windowsapp")
 
 
 class CoreMl::TWinSkillSkeletonNative
@@ -142,16 +144,118 @@ void CoreMl::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 }
 
 
+BitmapPixelFormat GetFormat(SoyPixelsFormat::Type Format)
+{
+	switch (Format)
+	{
+	case SoyPixelsFormat::RGBA:			return BitmapPixelFormat::Rgba8;
+	case SoyPixelsFormat::BGRA:			return BitmapPixelFormat::Bgra8;
+	case SoyPixelsFormat::Greyscale:	return BitmapPixelFormat::Gray8;
+
+		//Rgba16 = 12,
+		//Gray16 = 57,
+		//	Nv12 = 103,
+		//	P010 = 104,
+			//Yuy2 = 107,
+
+	default:break;
+	}
+
+	std::stringstream Error;
+	Error << __PRETTY_FUNCTION__ << " unhandled case " << Format;
+	throw Soy::AssertException(Error);
+}
+
+class RawBuffer : public IBuffer
+{
+
+};
+/*
+class NativeBuffer :
+	public Microsoft::WRL::RuntimeClass<Microsoft::WRL::RuntimeClassFlags<Microsoft::WRL::RuntimeClassType::WinRtClassicComMix>,
+	ABI::Windows::Storage::Streams::IBuffer,
+	Windows::Storage::Streams::IBufferByteAccess>
+{
+public:
+	virtual ~NativeBuffer()
+	{
+	}
+
+	STDMETHODIMP RuntimeClassInitialize(byte *buffer, UINT totalSize)
+	{
+		m_length = totalSize;
+		m_buffer = buffer;
+
+		return S_OK;
+	}
+
+	STDMETHODIMP Buffer(byte **value)
+	{
+		*value = m_buffer;
+
+		return S_OK;
+	}
+
+	STDMETHODIMP get_Capacity(UINT32 *value)
+	{
+		*value = m_length;
+
+		return S_OK;
+	}
+
+	STDMETHODIMP get_Length(UINT32 *value)
+	{
+		*value = m_length;
+
+		return S_OK;
+	}
+
+	STDMETHODIMP put_Length(UINT32 value)
+	{
+		m_length = value;
+
+		return S_OK;
+	}
+
+private:
+	UINT32 m_length;
+	byte *m_buffer;
+};
+
+
+Streams::IBuffer ^CreateNativeBuffer(LPVOID lpBuffer, DWORD nNumberOfBytes)
+{
+	Microsoft::WRL::ComPtr<NativeBuffer> nativeBuffer;
+	Microsoft::WRL::Details::MakeAndInitialize<NativeBuffer>(&nativeBuffer, (byte *)lpBuffer, nNumberOfBytes);
+	auto iinspectable = (IInspectable *)reinterpret_cast<IInspectable *>(nativeBuffer.Get());
+	Streams::IBuffer ^buffer = reinterpret_cast<Streams::IBuffer ^>(iinspectable);
+
+	return buffer;
+}*/
+
 void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
 {
-	auto& Binding = mNative->mBinding;
-	auto& Skill = mNative->mSkill;
-	/*
+	auto& mBinding = mNative->mBinding;
+	auto& mSkill = mNative->mSkill;
+
+	BitmapPixelFormat Format = GetFormat(Pixels.GetFormat());
+	auto& PixelsArray = Pixels.GetPixelsArray();
+	auto* PixelsPointer = PixelsArray.GetArray();
+	array_view<const uint8_t> PixelArrayView(PixelsPointer, PixelsPointer + PixelsArray.GetDataSize());
+
+	DataWriter Writer;
+	Writer.WriteBytes(PixelArrayView);
+	auto PixelBuffer = Writer.DetachBuffer();
+
+	//SoftwareBitmap Bitmap(Format, Pixels.GetWidth(), Pixels.GetHeight());
+	auto Bitmap = SoftwareBitmap::CreateCopyFromBuffer(PixelBuffer, Format, Pixels.GetWidth(), Pixels.GetHeight());
+	auto Frame = VideoFrame::CreateWithSoftwareBitmap(Bitmap);
+
 	// Set the video frame on the skill binding.
-	Binding.SetInputImageAsync(videoFrame).get();
+	mBinding.SetInputImageAsync(Frame).get();
 	
 	// Detect bodies in video frame using the skill
-	Skill.EvaluateAsync(mBinding).get();
+	mSkill.EvaluateAsync(mBinding).get();
 	
 	auto detectedBodies = mBinding.Bodies();
 		
@@ -163,7 +267,8 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 		auto limbs = body.Limbs();
 		for (auto&& limb : limbs)
 		{
-			std::cout << JointLabelLookup.at(limb.Joint1.Label) << "-" << JointLabelLookup.at(limb.Joint2.Label) << "|";
+			std::Debug << "Got limb" << std::endl;
+			//	std::cout << JointLabelLookup.at(limb.Joint1.Label) << "-" << JointLabelLookup.at(limb.Joint2.Label) << "|";
 		}
 	}
 	
