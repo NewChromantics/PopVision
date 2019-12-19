@@ -86,8 +86,9 @@ public:
 	virtual void	GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap);
 };
 
-//	factory for dll
-extern "C" EXPORT CoreMl::TModel* PopCoreml_AllocModel(const char* Name);
+//	C++ factory for dll
+//	todo: make this a proper CAPI for unity etc, and some nice dumb interface (instance ID etc)
+extern "C" EXPORT CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name);
 
 
 

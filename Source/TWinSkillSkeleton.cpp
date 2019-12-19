@@ -235,6 +235,7 @@ Streams::IBuffer ^CreateNativeBuffer(LPVOID lpBuffer, DWORD nNumberOfBytes)
 
 void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
 {
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__, 0);
 	auto& mBinding = mNative->mBinding;
 	auto& mSkill = mNative->mSkill;
 
@@ -261,14 +262,32 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 		
 	auto bodyCount = mBinding.Bodies().Size();
 	
-	for ( auto i=0;	i<detectedBodies.Size();	i++)
+	auto EnumJoint = [&](auto BodyIndex, Joint Joint)
 	{
-		auto body = detectedBodies.GetAt(i);
-		auto limbs = body.Limbs();
-		for (auto&& limb : limbs)
+		TObject Object;
+		//	todo: include body index in label
+		Object.mLabel = magic_enum::enum_name(Joint.Label);
+		//	uv to pixel
+		Object.mGridPos.x = Joint.X * Pixels.GetWidth();
+		Object.mGridPos.y = Joint.Y * Pixels.GetHeight();
+		auto Texelx = 0.5f / static_cast<float>(Pixels.GetWidth());
+		auto Texely = 0.5f / static_cast<float>(Pixels.GetWidth());
+		Object.mRect.x = Joint.X - Texelx;
+		Object.mRect.y = Joint.Y - Texely;
+		Object.mRect.w = 2.0f * Texelx;
+		Object.mRect.h = 2.0f * Texely;
+		EnumObject(Object);
+	};
+
+	for ( auto b=0;	b<detectedBodies.Size();	b++)
+	{
+		auto Body = detectedBodies.GetAt(b);
+		auto Limbs = Body.Limbs();
+		for (auto&& Limb : Limbs)
 		{
-			std::Debug << "Got limb" << std::endl;
-			//	std::cout << JointLabelLookup.at(limb.Joint1.Label) << "-" << JointLabelLookup.at(limb.Joint2.Label) << "|";
+			//	enum each joint
+			EnumJoint(b,Limb.Joint1);
+			EnumJoint(b, Limb.Joint2);
 		}
 	}
 	
