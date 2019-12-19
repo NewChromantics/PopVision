@@ -105,7 +105,8 @@ CoreMl::TWinSkillSkeletonNative::TWinSkillSkeletonNative() :
 	mBinding	(nullptr)
 {
 	// Create the SkeletalDetector skill descriptor
-	auto Descriptor = SkeletalDetectorDescriptor().as<ISkillDescriptor>();
+	auto SkeltalDescriptor = SkeletalDetectorDescriptor();
+	auto Descriptor = SkeltalDescriptor.as<ISkillDescriptor>();
 			
 	//	Create instance of the skill
 	mSkill = mDescriptor.CreateSkillAsync().get().as<SkeletalDetectorSkill>();

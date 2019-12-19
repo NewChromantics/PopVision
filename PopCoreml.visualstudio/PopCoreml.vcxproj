@@ -110,6 +110,9 @@
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PopCoreml.manifest</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <ClCompile>
@@ -146,7 +149,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Manifest Include="app.manifest" />
+    <CustomBuild Include="PopCoreml.manifest" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Source\TCoreMl.mm" />
