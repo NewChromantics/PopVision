@@ -2,22 +2,31 @@
 #include "HeapArray.hpp"
 #include "TWinSkillSkeleton.h"
 
+
 namespace CoreMl
 {
 	std::shared_ptr<CoreMl::TModel> AllocModel(const std::string& Name);
-
-	Array<std::shared_ptr<CoreMl::TModel>>	gInstances;
+	const Soy::TVersion	Version(1, 1, 0);
 }
 
-extern "C" CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name)
+__export int32_t PopCoreml_GetVersion()
 {
+	return CoreMl::Version.GetMillion();
+}
+
+
+__export CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name)
+{
+	return nullptr;
+	/*
 	auto Instance = CoreMl::AllocModel(Name);
 	if (!Instance)
 		return nullptr;
 
-	CoreMl::gInstances.PushBack(Instance);
+	Cporem::gInstances.PushBack(Instance);
 	CoreMl::TModel* pModel = Instance.get();
 	return pModel;
+	*/
 }
 
 std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)

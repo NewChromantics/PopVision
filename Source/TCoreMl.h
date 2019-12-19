@@ -7,6 +7,14 @@ class TPixelBuffer;
 #include "Array.hpp"
 #include "SoyVector.h"
 
+#if defined(_MSC_VER) && !defined(TARGET_PS4)
+#define __export			extern "C" __declspec(dllexport)
+#define __exportclass		__declspec(dllexport)
+#else
+#define __export			extern "C"
+#define __exportclass
+#endif
+
 //	forward declaration
 #if defined(__OBJC__)
 @class MLMultiArray;
@@ -16,13 +24,13 @@ class TPixelBuffer;
 typedef void* CVPixelBufferRef;
 #endif
 
-
+/*
 #if defined(TARGET_DLL)
 #define EXPORT __declspec(dllexport)  
 #else
 #define EXPORT __declspec(dllimport)  
 #endif
-
+*/
 
 namespace CoreMl
 {
@@ -67,7 +75,7 @@ public:
 };
 
 
-class EXPORT CoreMl::TModel
+class __exportclass CoreMl::TModel
 {
 public:
 	//	get all the labels this model outputs
@@ -88,7 +96,8 @@ public:
 
 //	C++ factory for dll
 //	todo: make this a proper CAPI for unity etc, and some nice dumb interface (instance ID etc)
-extern "C" EXPORT CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name);
+__export CoreMl::TModel*	PopCoreml_AllocModel(const std::string& Name);
+__export int32_t			PopCoreml_GetVersion();
 
 
 
