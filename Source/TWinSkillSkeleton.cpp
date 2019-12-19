@@ -263,10 +263,11 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 		
 	auto bodyCount = mBinding.Bodies().Size();
 	
-	auto EnumJoint = [&](auto BodyIndex, Joint Joint)
+	auto EnumJoint = [&](auto BodyIndex, Joint Joint,float Score)
 	{
 		TObject Object;
 		//	todo: include body index in label
+		Object.mScore = Score;
 		Object.mLabel = magic_enum::enum_name(Joint.Label);
 		//	uv to pixel
 		Object.mGridPos.x = Joint.X * Pixels.GetWidth();
@@ -286,9 +287,10 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 		auto Limbs = Body.Limbs();
 		for (auto&& Limb : Limbs)
 		{
+			float Score = 1.0f;
 			//	enum each joint
-			EnumJoint(b,Limb.Joint1);
-			EnumJoint(b, Limb.Joint2);
+			EnumJoint(b, Limb.Joint1, Score);
+			EnumJoint(b, Limb.Joint2, Score);
 		}
 	}
 	
