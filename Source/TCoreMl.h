@@ -4,16 +4,10 @@ class SoyPixels;
 class SoyPixelsImpl;
 class TPixelBuffer;
 
+#include "PopCoreMl.h"
 #include "Array.hpp"
 #include "SoyVector.h"
 
-#if defined(_MSC_VER) && !defined(TARGET_PS4)
-#define __export			extern "C" __declspec(dllexport)
-#define __exportclass		__declspec(dllexport)
-#else
-#define __export			extern "C"
-#define __exportclass
-#endif
 
 //	forward declaration
 #if defined(__OBJC__)
@@ -23,14 +17,6 @@ class TPixelBuffer;
 #if defined(TARGET_WINDOWS)
 typedef void* CVPixelBufferRef;
 #endif
-
-/*
-#if defined(TARGET_DLL)
-#define EXPORT __declspec(dllexport)  
-#else
-#define EXPORT __declspec(dllimport)  
-#endif
-*/
 
 namespace CoreMl
 {

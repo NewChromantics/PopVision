@@ -6,27 +6,19 @@
 namespace CoreMl
 {
 	std::shared_ptr<CoreMl::TModel> AllocModel(const std::string& Name);
-	const Soy::TVersion	Version(1, 1, 0);
-}
-
-__export int32_t PopCoreml_GetVersion()
-{
-	return CoreMl::Version.GetMillion();
+	Array<std::shared_ptr<TModel>> gInstances;
 }
 
 
 __export CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name)
 {
-	return nullptr;
-	/*
 	auto Instance = CoreMl::AllocModel(Name);
 	if (!Instance)
 		return nullptr;
 
-	Cporem::gInstances.PushBack(Instance);
+	CoreMl::gInstances.PushBack(Instance);
 	CoreMl::TModel* pModel = Instance.get();
 	return pModel;
-	*/
 }
 
 std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)
