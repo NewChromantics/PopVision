@@ -190,6 +190,7 @@
     <ClInclude Include="..\Source\PopCoreml.h" />
     <ClInclude Include="..\Source\SoyLib\src\HeapArray.hpp" />
     <ClInclude Include="..\Source\SoyLib\src\MemHeap.hpp" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h" />
     <ClInclude Include="..\Source\TCoreMl.h" />
     <ClInclude Include="..\Source\TWinSkillSkeleton.h" />
     <ClInclude Include="..\Source\WindowsVersionHelper.h" />

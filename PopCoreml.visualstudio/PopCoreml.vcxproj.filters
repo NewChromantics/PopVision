@@ -80,5 +80,8 @@
     <ClInclude Include="..\Source\SoyLib\src\MemHeap.hpp">
       <Filter>SoyLib</Filter>
     </ClInclude>
+    <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h">
+      <Filter>SoyLib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
