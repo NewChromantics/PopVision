@@ -54,6 +54,9 @@
     <ClCompile Include="..\Source\SoyLib\src\SoyString.cpp">
       <Filter>SoyLib</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\PopCoreMl.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\CameraHelper_cppwinrt.h">
