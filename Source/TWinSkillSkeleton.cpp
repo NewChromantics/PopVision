@@ -117,9 +117,29 @@ CoreMl::TWinSkillSkeletonNative::TWinSkillSkeletonNative() :
 	mBinding = mSkill.CreateSkillBindingAsync().get().as<SkeletalDetectorBinding>();
 }
 
+namespace CoreMl
+{
+	static constexpr std::string_view	GetJointLabel(JointLabel Label);
+};
+constexpr std::string_view CoreMl::GetJointLabel(JointLabel Label)
+{
+	//	make labels match other models
+	if (Label == Microsoft::AI::Skills::Vision::SkeletalDetectorPreview::JointLabel::Neck )
+		return "Head";
+
+	return magic_enum::enum_name(Label);
+}
+
 
 void CoreMl::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 {
+	constexpr auto Enums = magic_enum::enum_entries<JointLabel>();
+	for (auto&& Joint : Enums)
+	{
+		auto&& Label = GetJointLabel(Joint.first);
+		//	gr: find a way to cache this and return already allocated strings (enum callback!)
+		Labels.PushBack( std::string(Label) );
+	}
 	constexpr auto EnumNames = magic_enum::enum_names<JointLabel>();
 /*
 	{ JointLabel::Nose, "Nose" },
@@ -236,9 +256,11 @@ Streams::IBuffer ^CreateNativeBuffer(LPVOID lpBuffer, DWORD nNumberOfBytes)
 
 void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
 {
-	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__, 0);
+	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__, 2);
 	auto& mBinding = mNative->mBinding;
 	auto& mSkill = mNative->mSkill;
+
+	Soy::TScopeTimerPrint BitmapTimer("TWinSkillSkeleton GetBitmap", 1);
 
 	BitmapPixelFormat Format = GetFormat(Pixels.GetFormat());
 	auto& PixelsArray = Pixels.GetPixelsArray();
@@ -255,10 +277,13 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 
 	// Set the video frame on the skill binding.
 	mBinding.SetInputImageAsync(Frame).get();
-	
+	BitmapTimer.Stop();
+
 	// Detect bodies in video frame using the skill
+	Soy::TScopeTimerPrint EvaluateTimer("TWinSkillSkeleton Evaluate", 1);
 	mSkill.EvaluateAsync(mBinding).get();
-	
+	EvaluateTimer.Stop();
+
 	auto detectedBodies = mBinding.Bodies();
 		
 	auto bodyCount = mBinding.Bodies().Size();
@@ -268,7 +293,8 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 		TObject Object;
 		//	todo: include body index in label
 		Object.mScore = Score;
-		Object.mLabel = magic_enum::enum_name(Joint.Label);
+		//	rename neck to head to match other models
+		Object.mLabel = GetJointLabel(Joint.Label);
 		//	uv to pixel
 		Object.mGridPos.x = Joint.X * Pixels.GetWidth();
 		Object.mGridPos.y = Joint.Y * Pixels.GetHeight();
@@ -283,6 +309,7 @@ void CoreMl::TWinSkillSkeleton::GetObjects(const SoyPixelsImpl& Pixels, std::fun
 
 	for ( auto b=0;	b<detectedBodies.Size();	b++)
 	{
+		Soy::TScopeTimerPrint EnumBodyTimer("TWinSkillSkeleton EnumBodies", 1);
 		auto Body = detectedBodies.GetAt(b);
 		auto Limbs = Body.Limbs();
 		for (auto&& Limb : Limbs)
