@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TAppleVisionFace : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "AppleVisionFace";
+public:
 	TAppleVisionFace();
 	
 	//	get all the labels this model outputs

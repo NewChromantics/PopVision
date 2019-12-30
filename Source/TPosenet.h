@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TPosenet : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "Posenet";
+public:
 	TPosenet();
 	
 	//	get all the labels this model outputs

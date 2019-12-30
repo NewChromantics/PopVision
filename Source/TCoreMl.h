@@ -4,7 +4,7 @@ class SoyPixels;
 class SoyPixelsImpl;
 class TPixelBuffer;
 
-#include "PopCoreMl.h"
+#include "PopCoreml.h"
 #include "Array.hpp"
 #include "SoyVector.h"
 

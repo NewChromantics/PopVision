@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TDeepLab : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "DeepLab";
+public:
 	TDeepLab();
 	
 	//	get all the labels this model outputs

@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TYolo : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "Yolo";
+public:
 	TYolo();
 	
 	//	get all the labels this model outputs

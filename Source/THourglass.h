@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::THourglass : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "Hourglass";
+public:
 	THourglass();
 	
 	//	get all the labels this model outputs

@@ -31,12 +31,6 @@ void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(c
 	}
 }
 
-	
-void CoreMl::TModel::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
-{
-	throw Soy::AssertException("GetObjects not implemented in this model");
-}
-
 
 void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
 {
@@ -85,16 +79,6 @@ void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::function<void(
 		//	may need to try/catch/ReleasePixelBuffer
 		GetLabelMap( PixelBuffer, EnumLabelMap );
 	}
-}
-
-void CoreMl::TModel::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
-{
-	throw Soy::AssertException("GetLabelMap not implemented in this model");
-}
-
-void CoreMl::TModel::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
-{
-	throw Soy::AssertException("GetLabelMap not implemented in this model");
 }
 
 

@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TCpm : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "Cpm";
+public:
 	TCpm();
 	
 	//	get all the labels this model outputs

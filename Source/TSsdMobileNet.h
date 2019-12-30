@@ -12,6 +12,8 @@ namespace CoreMl
 class CoreMl::TSsdMobileNet : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "SsdMobileNet";
+public:
 	TSsdMobileNet();
 	
 	//	get all the labels this model outputs

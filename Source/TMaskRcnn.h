@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TMaskRcnn : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "MaskRcnn";
+public:
 	TMaskRcnn();
 	
 	//	get all the labels this model outputs

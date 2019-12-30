@@ -11,6 +11,8 @@ namespace CoreMl
 class CoreMl::TOpenPose : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "OpenPose";
+public:
 	TOpenPose();
 	
 	//	get all the labels this model outputs

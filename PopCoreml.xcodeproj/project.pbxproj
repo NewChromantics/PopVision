@@ -69,6 +69,10 @@
 		BF151F6C23845E7A00A70EBF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6B23845E7A00A70EBF /* AVFoundation.framework */; };
 		BF151F6E23845E9400A70EBF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6D23845E9400A70EBF /* CoreMedia.framework */; };
 		BF151F7023845EBB00A70EBF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */; };
+		BF48756C23B9738200EB30B5 /* PopCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */; };
+		BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */; };
+		BF48756F23B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
+		BF48757023B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
 		BFA22B6B22DE6DA300D8615C /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
 		BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
 		BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
@@ -150,6 +154,9 @@
 		BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/VideoToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TWinSkillSkeleton.h; path = Source/TWinSkillSkeleton.h; sourceTree = "<group>"; };
 		BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TWinSkillSkeleton.cpp; path = Source/TWinSkillSkeleton.cpp; sourceTree = "<group>"; };
+		BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopCoreMl.cpp; path = Source/PopCoreMl.cpp; sourceTree = "<group>"; };
+		BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TCoreMl.cpp; path = Source/TCoreMl.cpp; sourceTree = "<group>"; };
+		BF48757123B973FA00EB30B5 /* HeapArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HeapArray.hpp; path = Source/SoyLib/src/HeapArray.hpp; sourceTree = "<group>"; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -301,30 +308,32 @@
 		BFA22B5822DE6D7600D8615C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */,
 				BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */,
 				BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */,
 				BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */,
+				BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */,
 				BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */,
 				BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */,
 				BFA22BEF22DF14FB00D8615C /* TCpm.h */,
 				BFA22BF022DF14FB00D8615C /* TCpm.mm */,
 				BFA22C0222DF17F400D8615C /* TDeepLab.h */,
 				BFA22C0122DF17F400D8615C /* TDeepLab.mm */,
-				BF151F202384046500A70EBF /* TPosenet.h */,
-				BF151F1F2384046400A70EBF /* TPosenet.mm */,
 				BFA22BF422DF14FB00D8615C /* THourglass.h */,
 				BFA22BF322DF14FB00D8615C /* THourglass.mm */,
 				BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */,
-				BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */,
-				BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */,
 				BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */,
-				BF151F112382D2A900A70EBF /* TResnet50.h */,
-				BF151F122382D2A900A70EBF /* TResnet50.mm */,
 				BFA22BF222DF14FB00D8615C /* TOpenPose.h */,
 				BFA22BED22DF14FB00D8615C /* TOpenPose.mm */,
+				BF151F202384046500A70EBF /* TPosenet.h */,
+				BF151F1F2384046400A70EBF /* TPosenet.mm */,
+				BF151F112382D2A900A70EBF /* TResnet50.h */,
+				BF151F122382D2A900A70EBF /* TResnet50.mm */,
 				BFA22BF122DF14FB00D8615C /* TSsdMobileNet.h */,
 				BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */,
 				BFA22B5D22DE6D9B00D8615C /* TSsdMobileNetAnchors.h */,
+				BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */,
+				BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */,
 				BFA22B7722DE6FCB00D8615C /* TYolo.h */,
 				BFA22B7922DE702B00D8615C /* TYolo.mm */,
 			);
@@ -370,6 +379,7 @@
 				BFA22BD422DE7AA200D8615C /* MemHeap.hpp */,
 				BFA22B8022DE730700D8615C /* SoyArray.cpp */,
 				BFA22B7E22DE730700D8615C /* SoyArray.h */,
+				BF48757123B973FA00EB30B5 /* HeapArray.hpp */,
 				BFA22BC222DE7A3600D8615C /* SoyAssert.cpp */,
 				BFA22BC122DE7A3600D8615C /* SoyAssert.h */,
 				BFA22B7C22DE730700D8615C /* SoyAvf.h */,
@@ -579,11 +589,13 @@
 				BF151F3A23845C0D00A70EBF /* DeepLabV3.mlmodel in Sources */,
 				BF151F4C23845C2600A70EBF /* SoyFilesystem.mm in Sources */,
 				BF151F4423845C0D00A70EBF /* TinyYOLO.mlmodel in Sources */,
+				BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
 				BF151F5E23845C3700A70EBF /* TCpm.mm in Sources */,
 				BF151F5023845C2600A70EBF /* SoyMediaFormat.cpp in Sources */,
 				BF151F4723845C2600A70EBF /* SoyAssert.cpp in Sources */,
 				BF151F4223845C0D00A70EBF /* MobileOpenPose.mlmodel in Sources */,
 				BF151F4F23845C2600A70EBF /* SoyMedia.cpp in Sources */,
+				BF48757023B973AB00EB30B5 /* TCoreMl.cpp in Sources */,
 				BF151F5423845C2600A70EBF /* SoyString.mm in Sources */,
 				BF151F5123845C2600A70EBF /* SoyPixels.cpp in Sources */,
 				BF151F6323845C3700A70EBF /* TOpenPose.mm in Sources */,
@@ -634,11 +646,13 @@
 				BFA22BD522DE7AA300D8615C /* memheap.cpp in Sources */,
 				BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */,
 				BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */,
+				BF48756C23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
 				BFA22B8A22DE730700D8615C /* SoyDebug.mm in Sources */,
 				BFA22B8622DE730700D8615C /* SoyAvf.mm in Sources */,
 				BFA22BB622DE7A0600D8615C /* SoyTypes.mm in Sources */,
 				BFA22BA922DE79E300D8615C /* SoyFourcc.cpp in Sources */,
 				BF151F1D2384039800A70EBF /* posenet513.mlmodel in Sources */,
+				BF48756F23B973AB00EB30B5 /* TCoreMl.cpp in Sources */,
 				BFA22B6F22DE6DA300D8615C /* hourglass.mlmodel in Sources */,
 				BFA22BCC22DE7A7700D8615C /* SoyString.cpp in Sources */,
 				BFA22BE122DE7AFF00D8615C /* SoyFilesystem.cpp in Sources */,

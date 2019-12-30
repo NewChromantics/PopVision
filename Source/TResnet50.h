@@ -12,6 +12,8 @@ namespace CoreMl
 class CoreMl::TResnet50 : public CoreMl::TModel
 {
 public:
+	constexpr static auto ModelName = "Resnet50";
+public:
 	TResnet50();
 	
 	//	get all the labels this model outputs
