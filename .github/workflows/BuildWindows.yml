@@ -25,9 +25,10 @@ jobs:
 # set <--- list env vars
 # VS is installed here: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
 # -t:restore updates restores nuget packages; https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore#restore-using-msbuild
+
       run: |
           set
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform% -t:restore
+          nuget restore %BuildSolution%
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
       shell: cmd
       
