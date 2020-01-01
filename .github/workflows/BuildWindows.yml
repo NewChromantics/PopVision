@@ -23,9 +23,10 @@ jobs:
     - name: compile
 # https://github.community/t5/GitHub-Actions/How-to-build-project-targeting-Net35-with-GitHub-Actions/td-p/36191
 # set <--- list env vars
+# VS is installed here: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\
       run: |
           set
-          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
       shell: cmd
       
     - name: List artifacts
