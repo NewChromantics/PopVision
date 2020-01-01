@@ -14,7 +14,7 @@ on:
 
 jobs:
   buildwindows:
-    runs-on: windows-2016
+    runs-on: windows-2019
     
     steps:
     - uses: actions/checkout@v1
@@ -25,7 +25,7 @@ jobs:
 # set <--- list env vars
       run: |
           set
-          "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
       shell: cmd
       
     - name: List artifacts
