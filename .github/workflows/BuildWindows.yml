@@ -28,7 +28,8 @@ jobs:
 
       run: |
           set
-          nuget restore %BuildSolution%
+          "C:\Program Files\nuget\nuget" restore %BuildSolution%
+          "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform% -t:restore
           "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe" %BuildSolution% /property:Configuration=%BuildConfiguration% /property:Platform=%BuildPlatform%
       shell: cmd
       
