@@ -5,7 +5,7 @@ env:
   BuildPlatform: x64
   BuildConfiguration: Release_NoKinect
 # would be nice to extract this from visual studio
-  BuildDirectory: PopCoreml.visualstudio\x64\Release
+  BuildDirectory: PopCoreml.visualstudio\x64\Release_NoKinect
 
 on: 
   push:
