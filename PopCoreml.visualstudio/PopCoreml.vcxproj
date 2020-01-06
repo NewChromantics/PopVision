@@ -141,16 +141,20 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="GeneratePackageHeaders.props" />
     <Import Project="KinectAzure.props" />
+    <Import Project="PopCoreml.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_NoKinect|ARM'" Label="PropertySheets">
     <Import Project="GeneratePackageHeaders.props" />
+    <Import Project="PopCoreml.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Import Project="GeneratePackageHeaders.props" />
     <Import Project="KinectAzure.props" />
+    <Import Project="PopCoreml.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_NoKinect|ARM64'" Label="PropertySheets">
     <Import Project="GeneratePackageHeaders.props" />
+    <Import Project="PopCoreml.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="GeneratePackageHeaders.props" />
@@ -189,9 +193,6 @@
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Manifest>
-      <AdditionalManifestFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PopCoreml.manifest</AdditionalManifestFiles>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug_NoKinect'">
     <ClCompile>
@@ -209,9 +210,6 @@
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug_NoKinect|ARM64'">%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug_NoKinect|x64'">%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Manifest>
-      <AdditionalManifestFiles Condition="'$(Configuration)|$(Platform)'=='Debug_NoKinect|x64'">PopCoreml.manifest</AdditionalManifestFiles>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <ClCompile>
@@ -245,9 +243,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Manifest>
-      <AdditionalManifestFiles>app.manifest</AdditionalManifestFiles>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release_NoKinect'">
     <ClCompile>
@@ -270,9 +265,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Manifest>
-      <AdditionalManifestFiles>app.manifest</AdditionalManifestFiles>
-    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="PopCoreml.manifest" />
