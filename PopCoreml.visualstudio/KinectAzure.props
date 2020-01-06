@@ -3,17 +3,14 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(ProjectDir)..\Source\SoyLib\src;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files\Azure Kinect Body Tracking SDK\sdk\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\Azure Kinect Body Tracking SDK\sdk\windows-desktop\amd64\release\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
-    <ClCompile>
-      <StringPooling>true</StringPooling>
-    </ClCompile>
+    <ClCompile />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
-    <ClCompile>
-      <MinimalRebuild>false</MinimalRebuild>
-    </ClCompile>
+    <ClCompile />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile />
@@ -21,13 +18,11 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <FloatingPointExceptions>true</FloatingPointExceptions>
-      <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>TARGET_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_KINECTAZURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
+      <AdditionalDependencies>k4abt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>SET PathDll=$(TargetPath)

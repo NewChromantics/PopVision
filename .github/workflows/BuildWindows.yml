@@ -3,7 +3,7 @@ name: Build Windows
 env:
   BuildSolution: PopCoreml.visualstudio\PopCoreml.sln
   BuildPlatform: x64
-  BuildConfiguration: Release
+  BuildConfiguration: Release_NoKinect
 # would be nice to extract this from visual studio
   BuildDirectory: PopCoreml.visualstudio\x64\Release
 
