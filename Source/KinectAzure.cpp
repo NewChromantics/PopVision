@@ -146,7 +146,9 @@ void Kinect::InitDebugHandler()
 	};
 
 	void* Context = nullptr;
-	auto Result = k4a_set_debug_message_handler(OnDebug, Context, K4A_LOG_LEVEL_TRACE);
+	//auto DebugLevel = K4A_LOG_LEVEL_TRACE;
+	auto DebugLevel = K4A_LOG_LEVEL_WARNING;
+	auto Result = k4a_set_debug_message_handler(OnDebug, Context, DebugLevel);
 	IsOkay(Result, "k4a_set_debug_message_handler");
 
 	//	set these env vars for extra logging
@@ -213,7 +215,7 @@ void CoreMl::TKinectAzureDevice::Shutdown()
 CoreMl::TKinectAzure::TKinectAzure()
 {
 	Kinect::LoadDll();
-	//Kinect::InitDebugHandler();
+	Kinect::InitDebugHandler();
 
 	auto DeviceCount = k4a_device_get_installed_count();
 	std::Debug << "KinectDevice count: " << DeviceCount << std::endl;
@@ -359,6 +361,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objec
 	std::lock_guard<std::mutex> Lock(mLastFrameLock);
 	mLastFrame = Objects;
 }
+
 
 void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 {

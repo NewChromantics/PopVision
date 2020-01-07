@@ -26,6 +26,9 @@
     <None Include="..\Source\KinectAzure\onnxruntime.dll">
       <Filter>KinectAzure</Filter>
     </None>
+    <None Include="..\Source\KinectAzure\depthengine_2_0.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

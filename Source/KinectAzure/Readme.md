@@ -6,7 +6,8 @@ These are from the KinectAzure Body Tracking SDK `(which version?)`
 
 Also required (too big for git)
 - `cublas64_100.dll` 65mb
-- `cudart64_100.dll` 400kb
+- `cudart64_100.dll` 1mb
 - `cudnn64_7.dll` 341mb
 - `dnn_model_2_0.onnx` 163mb
 - `onnxruntime.dll` 23mb
+- `depthengine_2_0.dll` 1mb
