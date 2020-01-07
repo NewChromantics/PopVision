@@ -5,7 +5,7 @@
 
 namespace CoreMl
 {
-	class TKinectAzureNative;
+	class TKinectAzureSkeletonReader;
 	class TKinectAzure;
 }
 
@@ -20,13 +20,6 @@ public:
 
 	virtual void	GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject) override;
 
-	std::shared_ptr<TKinectAzureNative>	mNative;
-
-private:
-	void			RequestFrame(bool MustBeAdded);
-
-private:
-	//	gr: does this need to be threadsafe/atomic?
-	int				mRequestCount = 0;
+	std::shared_ptr<TKinectAzureSkeletonReader>	mNative;
 };
 

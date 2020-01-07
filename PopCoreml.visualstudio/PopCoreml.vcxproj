@@ -406,6 +406,7 @@
     <ClCompile Include="..\Source\SoyLib\src\SoyPixels.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyRuntimeLibrary.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyString.cpp" />
+    <ClCompile Include="..\Source\SoyLib\src\SoyThread.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyTime.cpp" />
     <ClCompile Include="..\Source\SoyLib\src\SoyTypes.cpp" />
     <ClCompile Include="..\Source\TCoreMl.cpp" />
@@ -420,6 +421,7 @@
     <ClInclude Include="..\Source\SoyLib\src\SoyDebug.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyFilesystem.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyRuntimeLibrary.h" />
+    <ClInclude Include="..\Source\SoyLib\src\SoyThread.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h" />
     <CopyFileToFolders Include="..\Source\TCoreMl.h" />
     <ClInclude Include="..\Source\TWinSkillSkeleton.h" />

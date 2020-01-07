@@ -87,6 +87,9 @@
     <ClCompile Include="..\Source\SoyLib\src\SoyFilesystem.cpp">
       <Filter>SoyLib</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\SoyLib\src\SoyThread.cpp">
+      <Filter>SoyLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\CameraHelper_cppwinrt.h">
@@ -123,6 +126,9 @@
       <Filter>SoyLib</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\SoyLib\src\SoyFilesystem.h">
+      <Filter>SoyLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SoyLib\src\SoyThread.h">
       <Filter>SoyLib</Filter>
     </ClInclude>
   </ItemGroup>

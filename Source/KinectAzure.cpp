@@ -5,6 +5,7 @@
 #include "HeapArray.hpp"
 #include "MagicEnum/include/magic_enum.hpp"
 #include "SoyRuntimeLibrary.h"
+#include "SoyThread.h"
 
 #if !defined(ENABLE_KINECTAZURE)
 #error Expected ENABLE_KINECTAZURE to be defined
@@ -18,16 +19,17 @@ namespace Kinect
 	void		LoadDll();
 
 	float		GetScore(k4abt_joint_confidence_level_t Confidence);
-	
+	void		GetLabels(ArrayBridge<std::string>& Labels);
+
 	//	remap enum to allow constexpr for magic_enum
 	namespace JointLabel
 	{
 		enum TYPE
 		{
-			EyeLeft = K4ABT_JOINT_EYE_LEFT,
-			EarLeft = K4ABT_JOINT_EAR_LEFT,
-			EyeRight = K4ABT_JOINT_EYE_RIGHT,
-			EarRight = K4ABT_JOINT_EAR_RIGHT,
+			LeftEye = K4ABT_JOINT_EYE_LEFT,
+			LeftEar = K4ABT_JOINT_EAR_LEFT,
+			RightEye = K4ABT_JOINT_EYE_RIGHT,
+			RightEar = K4ABT_JOINT_EAR_RIGHT,
 			Head = K4ABT_JOINT_HEAD,
 			Neck = K4ABT_JOINT_NECK,
 			Nose = K4ABT_JOINT_NOSE,
@@ -35,29 +37,29 @@ namespace Kinect
 			Navel = K4ABT_JOINT_SPINE_NAVEL,
 			Pelvis = K4ABT_JOINT_PELVIS,
 
-			ClavicleLeft = K4ABT_JOINT_CLAVICLE_LEFT,
-			ShoulderLeft = K4ABT_JOINT_SHOULDER_LEFT,
-			ElbowLeft = K4ABT_JOINT_ELBOW_LEFT,
-			WristLeft = K4ABT_JOINT_WRIST_LEFT,
-			HandLeft = K4ABT_JOINT_HAND_LEFT,
-			FingerLeft = K4ABT_JOINT_HANDTIP_LEFT,
-			ThumbLeft = K4ABT_JOINT_THUMB_LEFT,
-			HipLeft = K4ABT_JOINT_HIP_LEFT,
-			KneeLeft = K4ABT_JOINT_KNEE_LEFT,
-			AnkleLeft = K4ABT_JOINT_ANKLE_LEFT,
-			FootLeft = K4ABT_JOINT_FOOT_LEFT,
+			LeftClavicle = K4ABT_JOINT_CLAVICLE_LEFT,
+			LeftShoulder = K4ABT_JOINT_SHOULDER_LEFT,
+			LeftElbow = K4ABT_JOINT_ELBOW_LEFT,
+			LeftWrist = K4ABT_JOINT_WRIST_LEFT,
+			LeftHand = K4ABT_JOINT_HAND_LEFT,
+			LeftFinger = K4ABT_JOINT_HANDTIP_LEFT,
+			LeftThumb = K4ABT_JOINT_THUMB_LEFT,
+			LeftHip = K4ABT_JOINT_HIP_LEFT,
+			LeftKnee = K4ABT_JOINT_KNEE_LEFT,
+			LeftAnkle = K4ABT_JOINT_ANKLE_LEFT,
+			LeftFoot = K4ABT_JOINT_FOOT_LEFT,
 
-			ClavicleRight = K4ABT_JOINT_CLAVICLE_RIGHT,
-			ShoulderRight = K4ABT_JOINT_SHOULDER_RIGHT,
-			ElbowRight = K4ABT_JOINT_ELBOW_RIGHT,
-			WristRight = K4ABT_JOINT_WRIST_RIGHT,
-			HandRight = K4ABT_JOINT_HAND_RIGHT,
-			FingerRight = K4ABT_JOINT_HANDTIP_RIGHT,
-			ThumbRight = K4ABT_JOINT_THUMB_RIGHT,
-			HipRight = K4ABT_JOINT_HIP_RIGHT,
-			KneeRight = K4ABT_JOINT_KNEE_RIGHT,
-			AnkleRight = K4ABT_JOINT_ANKLE_RIGHT,
-			FootRight = K4ABT_JOINT_FOOT_RIGHT,
+			RightClavicle = K4ABT_JOINT_CLAVICLE_RIGHT,
+			RightShoulder = K4ABT_JOINT_SHOULDER_RIGHT,
+			RightElbow = K4ABT_JOINT_ELBOW_RIGHT,
+			RightWrist = K4ABT_JOINT_WRIST_RIGHT,
+			RightHand = K4ABT_JOINT_HAND_RIGHT,
+			RightFinger = K4ABT_JOINT_HANDTIP_RIGHT,
+			RightThumb = K4ABT_JOINT_THUMB_RIGHT,
+			RightHip = K4ABT_JOINT_HIP_RIGHT,
+			RightKnee = K4ABT_JOINT_KNEE_RIGHT,
+			RightAnkle = K4ABT_JOINT_ANKLE_RIGHT,
+			RightFoot = K4ABT_JOINT_FOOT_RIGHT,
 
 
 			//Count = K4ABT_JOINT_COUNT
@@ -65,11 +67,26 @@ namespace Kinect
 	}
 }
 
-class CoreMl::TKinectAzureNative
+namespace CoreMl
+{
+	class TWorldObjectList;
+	class TKinectAzureDevice;
+	class TKinectAzureSkeletonReader;
+}
+
+class CoreMl::TWorldObjectList
 {
 public:
-	TKinectAzureNative(size_t DeviceIndex);
-	~TKinectAzureNative();
+	Array<TWorldObject>	mObjects;
+};
+
+
+//	a device just holds low-level handle
+class CoreMl::TKinectAzureDevice
+{
+public:
+	TKinectAzureDevice(size_t DeviceIndex);
+	~TKinectAzureDevice();
 
 private:
 	void				Shutdown();
@@ -77,8 +94,30 @@ private:
 public:
 	k4a_device_t		mDevice = nullptr;
 	k4abt_tracker_t		mTracker = nullptr;
-	k4a_capture_t		mCapture = nullptr;
 };
+
+
+//	reader is a thread reading skeletons from a device
+class CoreMl::TKinectAzureSkeletonReader : public SoyThread
+{
+public:
+	TKinectAzureSkeletonReader(size_t DeviceIndex);
+
+	TWorldObjectList	PopFrame();
+
+private:
+	void				Iteration(int32_t TimeoutMs);
+	virtual void		Thread() override;
+	void				PushFrame(const TWorldObjectList& Objects);
+	void				PushFrame(const k4abt_frame_t Frame);
+
+public:
+	TKinectAzureDevice	mDevice;
+
+	std::mutex			mLastFrameLock;
+	TWorldObjectList	mLastFrame;
+};
+
 
 
 void Kinect::LoadDll()
@@ -117,7 +156,7 @@ void Kinect::InitDebugHandler()
 }
 
 
-CoreMl::TKinectAzureNative::TKinectAzureNative(size_t DeviceIndex)
+CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 {
 	//	this fails the second time if we didn't close properly (app still has exclusive access)
 	//	so make sure we shutdown if we fail
@@ -131,17 +170,13 @@ CoreMl::TKinectAzureNative::TKinectAzureNative(size_t DeviceIndex)
 		DeviceConfig.color_resolution = K4A_COLOR_RESOLUTION_OFF;
 		Error = k4a_device_start_cameras(mDevice, &DeviceConfig);
 		Kinect::IsOkay(Error, "k4a_device_start_cameras");
-
-		int32_t Timeout = 1000;	//	K4A_WAIT_INFINITE
-		auto WaitError = k4a_device_get_capture(mDevice, &mCapture, Timeout);
-		Kinect::IsOkay(WaitError, "k4a_device_get_capture");
-
+		
 		k4a_calibration_t Calibration;
 		Error = k4a_device_get_calibration(mDevice, DeviceConfig.depth_mode, DeviceConfig.color_resolution, &Calibration);
-		Kinect::IsOkay(WaitError, "k4a_device_get_calibration");
+		Kinect::IsOkay(Error, "k4a_device_get_calibration");
 
 		//	gr: as this takes a while to load, stop the cameras, then restart when needed
-		k4a_device_stop_cameras(mDevice);
+		//k4a_device_stop_cameras(mDevice);
 		
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
 		Error = k4abt_tracker_create(&Calibration, TrackerConfig, &mTracker);
@@ -154,7 +189,7 @@ CoreMl::TKinectAzureNative::TKinectAzureNative(size_t DeviceIndex)
 	}
 }
 
-CoreMl::TKinectAzureNative::~TKinectAzureNative()
+CoreMl::TKinectAzureDevice::~TKinectAzureDevice()
 {
 	try
 	{
@@ -166,12 +201,11 @@ CoreMl::TKinectAzureNative::~TKinectAzureNative()
 	}
 };
 
-void CoreMl::TKinectAzureNative::Shutdown()
+void CoreMl::TKinectAzureDevice::Shutdown()
 {
-	k4a_capture_release(mCapture);
+	k4a_device_stop_cameras(mDevice);
 	k4abt_tracker_shutdown(mTracker);
 	k4abt_tracker_destroy(mTracker);
-	k4a_device_stop_cameras(mDevice);
 	k4a_device_close(mDevice);
 }
 
@@ -179,16 +213,13 @@ void CoreMl::TKinectAzureNative::Shutdown()
 CoreMl::TKinectAzure::TKinectAzure()
 {
 	Kinect::LoadDll();
-	Kinect::InitDebugHandler();
+	//Kinect::InitDebugHandler();
 
 	auto DeviceCount = k4a_device_get_installed_count();
 	std::Debug << "KinectDevice count: " << DeviceCount << std::endl;
 
 	auto DeviceIndex = 0;
-	mNative.reset( new TKinectAzureNative(DeviceIndex) );
-
-	//	do an initial request, assuming user is probably going to want one
-	RequestFrame(true);
+	mNative.reset( new TKinectAzureSkeletonReader(DeviceIndex) );
 }
 
 
@@ -206,80 +237,29 @@ float Kinect::GetScore(k4abt_joint_confidence_level_t Confidence)
 
 void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
 {
-	auto& mTracker = mNative->mTracker;
+	auto Frame = mNative->PopFrame();
 
-	//	this func should probably be on a "wait for capture" thread, so lets timeout a bit, 
-	//	rather than fail if nothing is ready
-	//	pop skeletons
-	int32_t TimeoutMs = 50;
-	k4abt_frame_t Frame;
-	auto WaitResult = k4abt_tracker_pop_result(mTracker, &Frame, TimeoutMs);
-	//	gr: if this fails, should we figure out if we have any requests queued up?
+	for (auto i = 0; i < Frame.mObjects.GetSize(); i++)
 	{
-		std::stringstream Error;
-		Error << "k4abt_tracker_pop_result (RequestCount=" << mRequestCount << ")";
-		Kinect::IsOkay(WaitResult, Error.str().c_str());
+		auto& Object = Frame.mObjects[i];
+		EnumObject(Object);
 	}
-	mRequestCount--;
-
-	//	enum results
-	Array<std::string> JointLabels;
-	GetLabels(GetArrayBridge(JointLabels));
-
-	auto SkeletonCount = k4abt_frame_get_num_bodies(Frame);
-	std::Debug << "Found " << SkeletonCount << " skeletons" << std::endl;
-	//	use k4abt_frame_get_body_index_map to get a label map/mask
-	for (auto s = 0; s < SkeletonCount; s++)
-	{
-		k4abt_skeleton_t Skeleton;
-		auto Error = k4abt_frame_get_body_skeleton(Frame, s, &Skeleton);
-		Kinect::IsOkay(Error, "k4abt_frame_get_body_skeleton");
-
-		//	enum the joints
-		for (auto j = 0; j < K4ABT_JOINT_COUNT; j++)
-		{
-			auto& Joint = Skeleton.joints[j];
-			TWorldObject Object;
-			Object.mScore =Kinect::GetScore(Joint.confidence_level);
-			Object.mLabel = JointLabels[j];
-
-			const auto MilliToMeters = 0.001f;
-			Object.mWorldPosition.x = Joint.position.xyz.x * MilliToMeters;
-			Object.mWorldPosition.y = Joint.position.xyz.y * MilliToMeters;
-			Object.mWorldPosition.z = Joint.position.xyz.z * MilliToMeters;
-
-			EnumObject(Object);
-		}
-	}
-
-	RequestFrame(true);
 }
 
-void CoreMl::TKinectAzure::RequestFrame(bool MustBeAdded)
-{
-	auto& mTracker = mNative->mTracker;
-	auto& mCapture = mNative->mCapture;
-
-	//	queues up a "find the skeleton" request 
-	//	gr: to avoid problems, lets not use infinite, but fail if it takes longer than a sec
-	//		ie. there have been too many or OOM, we should fail and caller could restart
-	auto Timeout = MustBeAdded ? 1000 : 0;
-	auto WaitError = k4abt_tracker_enqueue_capture(mTracker, mCapture, Timeout);
-
-	//	gr: don't throw if not MustBeAdded?
-	Kinect::IsOkay(WaitError, "k4abt_tracker_enqueue_capture");
-
-	mRequestCount++;
-}
 
 
 
 void CoreMl::TKinectAzure::GetLabels(ArrayBridge<std::string>&& Labels)
 {
+	Kinect::GetLabels(Labels);
+}
+
+void Kinect::GetLabels(ArrayBridge<std::string>& Labels)
+{
 	auto Names = magic_enum::enum_names<Kinect::JointLabel::TYPE>();
 	for (auto&& Name : Names)
 	{
-		Labels.PushBack( std::string(Name) );
+		Labels.PushBack(std::string(Name));
 	}
 }
 
@@ -304,3 +284,125 @@ void Kinect::IsOkay(k4a_wait_result_t Error, const char* Context)
 	ErrorString << "K4A wait error " << magic_enum::enum_name(Error) << " in " << Context;
 	throw Soy::AssertException(ErrorString);
 }
+
+
+CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceIndex) :
+	SoyThread	("TKinectAzureSkeletonReader"),
+	mDevice		(DeviceIndex)
+{
+	Start();
+}
+
+
+
+void CoreMl::TKinectAzureSkeletonReader::Thread()
+{
+	//	gr: have a timeout, so we can abort if the thread is stopped
+	try
+	{
+		int32_t Timeout = 1000;
+		Iteration(Timeout);
+	}
+	catch (std::exception& e)
+	{
+		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << std::endl;
+	}
+}
+
+
+void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
+{
+	auto& mTracker = mDevice.mTracker;
+	auto& Device = mDevice.mDevice;
+
+	k4a_capture_t Capture = nullptr;
+
+	//	get capture of one frame (if we don't refresh this, the skeleton doesn't move)
+	auto WaitError = k4a_device_get_capture(Device, &Capture, TimeoutMs);
+	Kinect::IsOkay(WaitError, "k4a_device_get_capture");
+
+	auto FreeCapture = [&]()
+	{
+		k4a_capture_release(Capture);
+	};
+
+	try
+	{
+		//	gr: apparently this enqueue should never timeout?
+		//	https://github.com/microsoft/Azure-Kinect-Samples/blob/master/body-tracking-samples/simple_cpp_sample/main.cpp#L69
+		//	request skeleton
+		auto WaitError = k4abt_tracker_enqueue_capture(mTracker, Capture, TimeoutMs);
+		Kinect::IsOkay(WaitError, "k4abt_tracker_enqueue_capture");
+
+		//	pop [skeleton] frame
+		//	gr: should this be infinite?
+		k4abt_frame_t Frame = nullptr;
+		auto WaitResult = k4abt_tracker_pop_result(mTracker, &Frame, TimeoutMs);
+		Kinect::IsOkay(WaitResult, "k4abt_tracker_pop_result");
+
+		//	extract skeletons
+		PushFrame(Frame);
+
+		//	cleanup
+		k4abt_frame_release(Frame);
+		FreeCapture();
+	}
+	catch (...)
+	{
+		FreeCapture();
+		throw;
+	}
+}
+
+void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objects)
+{
+	std::lock_guard<std::mutex> Lock(mLastFrameLock);
+	mLastFrame = Objects;
+}
+
+void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
+{
+	Array<std::string> JointLabels;
+	Kinect::GetLabels(GetArrayBridge(JointLabels));
+
+	TWorldObjectList Objects;
+
+	//	extract skeletons
+	auto SkeletonCount = k4abt_frame_get_num_bodies(Frame);
+	//std::Debug << "Found " << SkeletonCount << " skeletons" << std::endl;
+
+	//	use k4abt_frame_get_body_index_map to get a label map/mask
+	for (auto s = 0; s < SkeletonCount; s++)
+	{
+		k4abt_skeleton_t Skeleton;
+		auto Error = k4abt_frame_get_body_skeleton(Frame, s, &Skeleton);
+		Kinect::IsOkay(Error, "k4abt_frame_get_body_skeleton");
+
+		//	enum the joints
+		for (auto j = 0; j < K4ABT_JOINT_COUNT; j++)
+		{
+			auto& Joint = Skeleton.joints[j];
+			TWorldObject Object;
+			Object.mScore = Kinect::GetScore(Joint.confidence_level);
+			Object.mLabel = JointLabels[j];
+
+			const auto MilliToMeters = 0.001f;
+			Object.mWorldPosition.x = Joint.position.xyz.x * MilliToMeters;
+			Object.mWorldPosition.y = Joint.position.xyz.y * MilliToMeters;
+			Object.mWorldPosition.z = Joint.position.xyz.z * MilliToMeters;
+
+			Objects.mObjects.PushBack(Object);
+		}
+	}
+
+	PushFrame(Objects);
+}
+
+CoreMl::TWorldObjectList CoreMl::TKinectAzureSkeletonReader::PopFrame()
+{
+	std::lock_guard<std::mutex> Lock(mLastFrameLock);
+	auto Copy = mLastFrame;
+	mLastFrame.mObjects.Clear(false);
+	return Copy;
+}
+
