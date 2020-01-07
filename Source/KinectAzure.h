@@ -18,7 +18,7 @@ public:
 	
 	virtual void	GetLabels(ArrayBridge<std::string>&& Labels) override;
 
-	virtual void	GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject) override;
+	virtual void	GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject) override;
 
 	std::shared_ptr<TKinectAzureNative>	mNative;
 

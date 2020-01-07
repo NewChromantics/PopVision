@@ -16,6 +16,53 @@ namespace Kinect
 	void		IsOkay(k4a_wait_result_t Error, const char* Context);
 	void		InitDebugHandler();
 	void		LoadDll();
+
+	float		GetScore(k4abt_joint_confidence_level_t Confidence);
+	
+	//	remap enum to allow constexpr for magic_enum
+	namespace JointLabel
+	{
+		enum TYPE
+		{
+			EyeLeft = K4ABT_JOINT_EYE_LEFT,
+			EarLeft = K4ABT_JOINT_EAR_LEFT,
+			EyeRight = K4ABT_JOINT_EYE_RIGHT,
+			EarRight = K4ABT_JOINT_EAR_RIGHT,
+			Head = K4ABT_JOINT_HEAD,
+			Neck = K4ABT_JOINT_NECK,
+			Nose = K4ABT_JOINT_NOSE,
+			Chest = K4ABT_JOINT_SPINE_CHEST,
+			Navel = K4ABT_JOINT_SPINE_NAVEL,
+			Pelvis = K4ABT_JOINT_PELVIS,
+
+			ClavicleLeft = K4ABT_JOINT_CLAVICLE_LEFT,
+			ShoulderLeft = K4ABT_JOINT_SHOULDER_LEFT,
+			ElbowLeft = K4ABT_JOINT_ELBOW_LEFT,
+			WristLeft = K4ABT_JOINT_WRIST_LEFT,
+			HandLeft = K4ABT_JOINT_HAND_LEFT,
+			FingerLeft = K4ABT_JOINT_HANDTIP_LEFT,
+			ThumbLeft = K4ABT_JOINT_THUMB_LEFT,
+			HipLeft = K4ABT_JOINT_HIP_LEFT,
+			KneeLeft = K4ABT_JOINT_KNEE_LEFT,
+			AnkleLeft = K4ABT_JOINT_ANKLE_LEFT,
+			FootLeft = K4ABT_JOINT_FOOT_LEFT,
+
+			ClavicleRight = K4ABT_JOINT_CLAVICLE_RIGHT,
+			ShoulderRight = K4ABT_JOINT_SHOULDER_RIGHT,
+			ElbowRight = K4ABT_JOINT_ELBOW_RIGHT,
+			WristRight = K4ABT_JOINT_WRIST_RIGHT,
+			HandRight = K4ABT_JOINT_HAND_RIGHT,
+			FingerRight = K4ABT_JOINT_HANDTIP_RIGHT,
+			ThumbRight = K4ABT_JOINT_THUMB_RIGHT,
+			HipRight = K4ABT_JOINT_HIP_RIGHT,
+			KneeRight = K4ABT_JOINT_KNEE_RIGHT,
+			AnkleRight = K4ABT_JOINT_ANKLE_RIGHT,
+			FootRight = K4ABT_JOINT_FOOT_RIGHT,
+
+
+			//Count = K4ABT_JOINT_COUNT
+		};
+	}
 }
 
 class CoreMl::TKinectAzureNative
@@ -145,7 +192,19 @@ CoreMl::TKinectAzure::TKinectAzure()
 }
 
 
-void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
+float Kinect::GetScore(k4abt_joint_confidence_level_t Confidence)
+{
+	switch (Confidence)
+	{
+	case K4ABT_JOINT_CONFIDENCE_NONE:	return 0;
+	case K4ABT_JOINT_CONFIDENCE_LOW:	return 0.33f;
+	case K4ABT_JOINT_CONFIDENCE_MEDIUM:	return 0.66f;
+	case K4ABT_JOINT_CONFIDENCE_HIGH:	return 1;
+	default:	return -1;
+	}
+}
+
+void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
 {
 	auto& mTracker = mNative->mTracker;
 
@@ -180,15 +239,14 @@ void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function
 		for (auto j = 0; j < K4ABT_JOINT_COUNT; j++)
 		{
 			auto& Joint = Skeleton.joints[j];
-			TObject Object;
-			Object.mScore = Joint.confidence_level;
+			TWorldObject Object;
+			Object.mScore =Kinect::GetScore(Joint.confidence_level);
 			Object.mLabel = JointLabels[j];
 
-			//	todo: support 3d! (and this isn't in screen space!)
 			const auto MilliToMeters = 0.001f;
-			Object.mGridPos.x = Joint.position.xyz.x * MilliToMeters;
-			Object.mGridPos.y = Joint.position.xyz.y * MilliToMeters;
-			Object.mScore = Joint.confidence_level;
+			Object.mWorldPosition.x = Joint.position.xyz.x * MilliToMeters;
+			Object.mWorldPosition.y = Joint.position.xyz.y * MilliToMeters;
+			Object.mWorldPosition.z = Joint.position.xyz.z * MilliToMeters;
 
 			EnumObject(Object);
 		}
@@ -214,54 +272,6 @@ void CoreMl::TKinectAzure::RequestFrame(bool MustBeAdded)
 	mRequestCount++;
 }
 
-
-//	remap enum to allow constexpr for magic_enum
-namespace Kinect
-{
-	namespace JointLabel
-	{
-		enum TYPE
-		{
-			EyeLeft = K4ABT_JOINT_EYE_LEFT,
-			EarLeft = K4ABT_JOINT_EAR_LEFT,
-			EyeRight = K4ABT_JOINT_EYE_RIGHT,
-			EarRight = K4ABT_JOINT_EAR_RIGHT,
-			Head = K4ABT_JOINT_HEAD,
-			Neck = K4ABT_JOINT_NECK,
-			Nose = K4ABT_JOINT_NOSE,
-			Chest = K4ABT_JOINT_SPINE_CHEST,
-			Navel = K4ABT_JOINT_SPINE_NAVEL,
-			Pelvis = K4ABT_JOINT_PELVIS,
-			
-			ClavicleLeft = K4ABT_JOINT_CLAVICLE_LEFT,
-			ShoulderLeft = K4ABT_JOINT_SHOULDER_LEFT,
-			ElbowLeft = K4ABT_JOINT_ELBOW_LEFT,
-			WristLeft = K4ABT_JOINT_WRIST_LEFT,
-			HandLeft = K4ABT_JOINT_HAND_LEFT,
-			FingerLeft = K4ABT_JOINT_HANDTIP_LEFT,
-			ThumbLeft = K4ABT_JOINT_THUMB_LEFT,
-			HipLeft = K4ABT_JOINT_HIP_LEFT,
-			KneeLeft = K4ABT_JOINT_KNEE_LEFT,
-			AnkleLeft = K4ABT_JOINT_ANKLE_LEFT,
-			FootLeft = K4ABT_JOINT_FOOT_LEFT,
-
-			ClavicleRight = K4ABT_JOINT_CLAVICLE_RIGHT,
-			ShoulderRight = K4ABT_JOINT_SHOULDER_RIGHT,
-			ElbowRight = K4ABT_JOINT_ELBOW_RIGHT,
-			WristRight = K4ABT_JOINT_WRIST_RIGHT,
-			HandRight = K4ABT_JOINT_HAND_RIGHT,
-			FingerRight = K4ABT_JOINT_HANDTIP_RIGHT,
-			ThumbRight = K4ABT_JOINT_THUMB_RIGHT,
-			HipRight = K4ABT_JOINT_HIP_RIGHT,
-			KneeRight = K4ABT_JOINT_KNEE_RIGHT,
-			AnkleRight = K4ABT_JOINT_ANKLE_RIGHT,
-			FootRight = K4ABT_JOINT_FOOT_RIGHT,
-			
-			
-			//Count = K4ABT_JOINT_COUNT
-		};
-	}
-}
 
 
 void CoreMl::TKinectAzure::GetLabels(ArrayBridge<std::string>&& Labels)

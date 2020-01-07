@@ -60,7 +60,5 @@ jobs:
         path: ${{env.BuildDirectory}}\PopCoreml.lib
     - uses: actions/upload-artifact@v1
       with:
-        name: PopCoreml.h
-        path: Source/PopCoreml.h
-        
-#PopH264.visualstudio\Debug\PopH264.dll
+        name: Headers
+        path: ${{env.BuildDirectory}}\*.h

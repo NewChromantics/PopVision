@@ -109,3 +109,10 @@ void CoreMl::TModel::GetLabelMap(CVPixelBufferRef Pixels, std::function<void(vec
 {
 	throw Soy::AssertException("CVPixelBufferRef version should not be being called on this platform");
 }
+
+void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
+{
+	throw Soy::AssertException("Get[world]Objects Not Implemented");
+}
+
+

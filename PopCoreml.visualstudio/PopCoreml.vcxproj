@@ -414,14 +414,14 @@
   <ItemGroup>
     <ClInclude Include="..\Source\CameraHelper_cppwinrt.h" />
     <ClInclude Include="..\Source\KinectAzure.h" />
-    <ClInclude Include="..\Source\PopCoreml.h" />
+    <CopyFileToFolders Include="..\Source\PopCoreml.h" />
     <ClInclude Include="..\Source\SoyLib\src\HeapArray.hpp" />
     <ClInclude Include="..\Source\SoyLib\src\MemHeap.hpp" />
     <ClInclude Include="..\Source\SoyLib\src\SoyDebug.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyFilesystem.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyRuntimeLibrary.h" />
     <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h" />
-    <ClInclude Include="..\Source\TCoreMl.h" />
+    <CopyFileToFolders Include="..\Source\TCoreMl.h" />
     <ClInclude Include="..\Source\TWinSkillSkeleton.h" />
     <ClInclude Include="..\Source\WindowsVersionHelper.h" />
   </ItemGroup>
