@@ -7,36 +7,14 @@
     <LibraryPath>C:\Program Files\Azure Kinect Body Tracking SDK\sdk\windows-desktop\amd64\release\lib;C:\Program Files\Azure Kinect SDK v1.3.0\sdk\windows-desktop\amd64\release\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
-    <ClCompile />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ClCompile />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ClCompile />
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
     <ClCompile>
-      <FloatingPointExceptions>true</FloatingPointExceptions>
       <PreprocessorDefinitions>ENABLE_KINECTAZURE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
       <AdditionalDependencies>k4abt.lib;k4a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>k4a.dll;k4abt.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
-    <PostBuildEvent>
-      <Command>SET PathDll=$(TargetPath)
-SET PathPdb=%PathDll:dll=pdb%
-SET PathLib=%PathDll:dll=lib%
-SET PathHeader=$(ProjectDir)..\source\PopH264.h
-SET PathHeader2=$(ProjectDir)..\source\PopH264DecoderInstance.h
-copy /y %PathDll% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
-copy /y %PathPdb% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
-copy /y %PathLib% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
-copy /y %PathHeader% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
-copy /y %PathHeader2% $(ProjectDir)..\Unity\PopH264\Assets\PopH264
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>

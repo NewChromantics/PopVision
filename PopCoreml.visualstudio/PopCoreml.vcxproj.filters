@@ -5,6 +5,27 @@
     <None Include="..\Source\TCoreMl.mm">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\Source\KinectAzure\cublas64_100.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\cudart64_100.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\cudnn64_7.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\dnn_model_2_0.onnx">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\k4a.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\k4abt.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
+    <None Include="..\Source\KinectAzure\onnxruntime.dll">
+      <Filter>KinectAzure</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -12,6 +33,9 @@
     </Filter>
     <Filter Include="SoyLib">
       <UniqueIdentifier>{1354ffc0-9cb7-4fd4-ba3b-74de706d8f3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KinectAzure">
+      <UniqueIdentifier>{ca6037c0-b17c-497e-a45d-772bc0737761}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
