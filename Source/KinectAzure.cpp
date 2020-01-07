@@ -4,6 +4,7 @@
 #include "SoyDebug.h"
 #include "HeapArray.hpp"
 #include "MagicEnum/include/magic_enum.hpp"
+#include "SoyRuntimeLibrary.h"
 
 #if !defined(ENABLE_KINECTAZURE)
 #error Expected ENABLE_KINECTAZURE to be defined
@@ -14,6 +15,7 @@ namespace Kinect
 	void		IsOkay(k4a_result_t Error, const char* Context);
 	void		IsOkay(k4a_wait_result_t Error, const char* Context);
 	void		InitDebugHandler();
+	void		LoadDll();
 }
 
 class CoreMl::TKinectAzureNative
@@ -32,8 +34,26 @@ public:
 };
 
 
+void Kinect::LoadDll()
+{
+	static bool DllLoaded = false;
+
+	//	load the lazy-load libraries
+	if (DllLoaded)
+		return;
+
+	//	we should just try, because if the parent process has loaded it, this
+	//	will just load
+	Soy::TRuntimeLibrary DllK4a("k4a.dll");
+	Soy::TRuntimeLibrary DllK4abt("k4abt.dll");
+
+	DllLoaded = true;
+}
+
 void Kinect::InitDebugHandler()
 {
+	LoadDll();
+
 	auto OnDebug = [](void* Context, k4a_log_level_t Level, const char* Filename, const int Line, const char* Message)
 	{
 		std::Debug << "Kinect[" << magic_enum::enum_name(Level) << "] " << Filename << "(" << Line << "): " << Message << std::endl;
@@ -111,6 +131,7 @@ void CoreMl::TKinectAzureNative::Shutdown()
 
 CoreMl::TKinectAzure::TKinectAzure()
 {
+	Kinect::LoadDll();
 	Kinect::InitDebugHandler();
 
 	auto DeviceCount = k4a_device_get_installed_count();
