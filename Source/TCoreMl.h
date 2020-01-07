@@ -20,8 +20,12 @@ typedef void* CVPixelBufferRef;
 
 namespace CoreMl
 {
-	//	deprecate objects in favour of grids + meta
+	//	deprecate objects for more context specific;
+	//		pixelmaps (per label?)
+	//		world-space labels
+	//		rect labels
 	class TObject;
+	class TWorldObject;
 	
 	class TModel;		//	generic interface
 	
@@ -53,13 +57,27 @@ namespace CoreMl
 }
 
 
+//	need to redo this for different spaces/combinations
+//	maybe different funcs for different objects
+//	grid is for low-res scores
+//	rects are for rects
+//	world pos for 3D sensors
 class CoreMl::TObject
 {
 public:
 	float			mScore = 0;
 	std::string		mLabel;
+
 	Soy::Rectf		mRect = Soy::Rectf(0,0,0,0);
 	vec2x<size_t>	mGridPos;
+};
+
+class CoreMl::TWorldObject
+{
+public:
+	float			mScore = 0;
+	std::string		mLabel;
+	vec3f			mWorldPosition;	//	expected to be in metres
 };
 
 
@@ -72,6 +90,9 @@ public:
 	//	find objects in map as rects (with some max scoring... map is probbaly better)
 	virtual void	GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject);
 	virtual void	GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject);
+
+	//	world space objects/labels (eg. kinect skeleton)
+	virtual void	GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject);
 	
 	//	draw found labels on a map
 	//	maybe callback says which component/value should go for label
