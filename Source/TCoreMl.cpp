@@ -9,6 +9,10 @@
 #include "TWinSkillSkeleton.h"
 #endif
 
+#if defined(ENABLE_KINECTAZURE)
+#include "KinectAzure.h"
+#endif
+
 #if defined(TARGET_OSX)
 #include "TYolo.h"
 #include "THourglass.h"
@@ -44,6 +48,10 @@ std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)
 {
 #if defined(TARGET_WINDOWS)
 	if (Name == TWinSkillSkeleton::ModelName)		return std::make_shared<TWinSkillSkeleton>();
+#endif
+
+#if defined(ENABLE_KINECTAZURE)
+	if (Name == TKinectAzure::ModelName)			return std::make_shared<TKinectAzure>();
 #endif
 
 #if defined(TARGET_OSX)

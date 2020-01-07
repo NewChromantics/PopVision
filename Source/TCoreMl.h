@@ -41,6 +41,8 @@ namespace CoreMl
 	
 	//	WindowsMl Windows Skills
 	class TWinSkillSkeleton;
+
+	class TKinectAzure;
 	
 #if defined(__OBJC__)
 	void		RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject);

@@ -54,6 +54,12 @@
     <ClCompile Include="..\Source\PopCoreMl.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\KinectAzure.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SoyLib\src\SoyRuntimeLibrary.cpp">
+      <Filter>SoyLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\CameraHelper_cppwinrt.h">
@@ -78,6 +84,15 @@
       <Filter>SoyLib</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\SoyLib\src\SoyTypes.h">
+      <Filter>SoyLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\KinectAzure.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SoyLib\src\SoyDebug.h">
+      <Filter>SoyLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\SoyLib\src\SoyRuntimeLibrary.h">
       <Filter>SoyLib</Filter>
     </ClInclude>
   </ItemGroup>

@@ -140,28 +140,6 @@ void CoreMl::TWinSkillSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 		//	gr: find a way to cache this and return already allocated strings (enum callback!)
 		Labels.PushBack( std::string(Label) );
 	}
-	constexpr auto EnumNames = magic_enum::enum_names<JointLabel>();
-/*
-	{ JointLabel::Nose, "Nose" },
-	{ JointLabel::Neck, "Neck" },
-	{ JointLabel::RightShoulder, "RightShoulder" },
-	{ JointLabel::RightElbow, "RightElbow" },
-	{ JointLabel::RightWrist, "RightWrist" },
-	{ JointLabel::LeftShoulder, "LeftShoulder" },
-	{ JointLabel::LeftElbow, "LeftElbow" },
-	{ JointLabel::LeftWrist, "LeftWrist" },
-	{ JointLabel::RightHip, "RightHip" },
-	{ JointLabel::RightKnee, "RightKnee" },
-	{ JointLabel::RightAnkle, "RightAnkle" },
-	{ JointLabel::LeftHip, "LeftHip" },
-	{ JointLabel::LeftKnee, "LeftKnee" },
-	{ JointLabel::LeftAnkle, "LeftAnkle" },
-	{ JointLabel::RightEye, "RightEye" },
-	{ JointLabel::LeftEye, "LeftEye" },
-	{ JointLabel::RightEar, "RightEar" },
-	{ JointLabel::LeftEar, "LeftEar" },
-	{ JointLabel::NumJoints, "NumJoints" }
-	*/
 }
 
 
