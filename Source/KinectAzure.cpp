@@ -321,6 +321,9 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 
 	k4a_capture_t Capture = nullptr;
 
+	//	gr: if we wait(eg breaked) for a long time, this just keeps timing out
+	//		like the device has gone to sleep? need to startvideo again?
+	//		or abort if it keeps happening and let high level restart?
 	//	get capture of one frame (if we don't refresh this, the skeleton doesn't move)
 	auto WaitError = k4a_device_get_capture(Device, &Capture, TimeoutMs);
 	Kinect::IsOkay(WaitError, "k4a_device_get_capture");
