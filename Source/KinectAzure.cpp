@@ -103,7 +103,7 @@ class CoreMl::TKinectAzureSkeletonReader : public SoyThread
 public:
 	TKinectAzureSkeletonReader(size_t DeviceIndex);
 
-	TWorldObjectList	PopFrame();
+	TWorldObjectList	PopFrame(bool Blocking);
 
 private:
 	void				Iteration(int32_t TimeoutMs);
@@ -112,6 +112,7 @@ private:
 	void				PushFrame(const k4abt_frame_t Frame);
 
 public:
+	Soy::TSemaphore		mOnNewFrameSemaphore;
 	TKinectAzureDevice	mDevice;
 
 	std::mutex			mLastFrameLock;
@@ -239,7 +240,8 @@ float Kinect::GetScore(k4abt_joint_confidence_level_t Confidence)
 
 void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
 {
-	auto Frame = mNative->PopFrame();
+	auto Blocking = true;
+	auto Frame = mNative->PopFrame(Blocking);
 
 	for (auto i = 0; i < Frame.mObjects.GetSize(); i++)
 	{
@@ -351,6 +353,7 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 	}
 	catch (...)
 	{
+		//	todo: mOnNewFrameSemaphore with error?
 		FreeCapture();
 		throw;
 	}
@@ -358,8 +361,13 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 
 void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objects)
 {
-	std::lock_guard<std::mutex> Lock(mLastFrameLock);
-	mLastFrame = Objects;
+	{
+		std::lock_guard<std::mutex> Lock(mLastFrameLock);
+		mLastFrame = Objects;
+	}
+
+	//	notify new frame
+	mOnNewFrameSemaphore.OnCompleted();
 }
 
 
@@ -401,8 +409,14 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 	PushFrame(Objects);
 }
 
-CoreMl::TWorldObjectList CoreMl::TKinectAzureSkeletonReader::PopFrame()
+CoreMl::TWorldObjectList CoreMl::TKinectAzureSkeletonReader::PopFrame(bool Blocking)
 {
+	//	if we're blocking, wait for the reader to say there's a frame waiting
+	if (Blocking)
+	{
+		mOnNewFrameSemaphore.WaitAndReset("TKinectAzureSkeletonReader::PopFrame");
+	}
+
 	std::lock_guard<std::mutex> Lock(mLastFrameLock);
 	auto Copy = mLastFrame;
 	mLastFrame.mObjects.Clear(false);
