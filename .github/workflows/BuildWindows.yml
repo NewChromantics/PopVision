@@ -60,5 +60,9 @@ jobs:
         path: ${{env.BuildDirectory}}\PopCoreml.lib
     - uses: actions/upload-artifact@v1
       with:
-        name: Headers
-        path: ${{env.BuildDirectory}}\*.h
+        name: PopCoreml.h
+        path: ${{env.BuildDirectory}}\PopCoreml.h
+    - uses: actions/upload-artifact@v1
+      with:
+        name: TCoreMl.h
+        path: ${{env.BuildDirectory}}\TCoreMl.h
