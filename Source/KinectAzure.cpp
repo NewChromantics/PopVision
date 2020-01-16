@@ -419,7 +419,8 @@ CoreMl::TWorldObjectList CoreMl::TKinectAzureSkeletonReader::PopFrame(bool Block
 	//	if we're blocking, wait for the reader to say there's a frame waiting
 	if (Blocking)
 	{
-		mOnNewFrameSemaphore.WaitAndReset("TKinectAzureSkeletonReader::PopFrame");
+		//mOnNewFrameSemaphore.WaitAndReset("TKinectAzureSkeletonReader::PopFrame");
+		mOnNewFrameSemaphore.WaitAndReset(nullptr);
 	}
 
 	std::lock_guard<std::mutex> Lock(mLastFrameLock);
