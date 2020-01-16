@@ -378,8 +378,12 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objec
 
 void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 {
-	Array<std::string> JointLabels;
-	Kinect::GetLabels(GetArrayBridge(JointLabels));
+	//	hacky optimisation before we switch to string_view everywhere
+	static BufferArray<std::string, K4ABT_JOINT_COUNT> JointLabels;
+	if (JointLabels.IsEmpty())
+	{
+		Kinect::GetLabels(GetArrayBridge(JointLabels));
+	}
 
 	TWorldObjectList Objects;
 
@@ -394,6 +398,16 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 		auto Error = k4abt_frame_get_body_skeleton(Frame, s, &Skeleton);
 		Kinect::IsOkay(Error, "k4abt_frame_get_body_skeleton");
 
+		//	gr: for now, if we have multiple skeletons, we're gonna output the default Head,Arm etc 
+			//		to match other models, but they are heatmaps and not (yet) outputting proper skeletons
+			//		openpose needs to move this way, and output objects
+			//		just need a generally nicer way.
+			//		In this case, we'll have Head (default) then Head1, Head2 etc as extra skeletons and high 
+			//		level can check for the additioanls
+		std::string LabelSuffix;
+		if (s != 0)
+			LabelSuffix += std::to_string(s);
+
 		//	enum the joints
 		for (auto j = 0; j < K4ABT_JOINT_COUNT; j++)
 		{
@@ -401,7 +415,8 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 			TWorldObject Object;
 			Object.mScore = Kinect::GetScore(Joint.confidence_level);
 			Object.mLabel = JointLabels[j];
-
+			Object.mLabel += LabelSuffix;
+			
 			const auto MilliToMeters = 0.001f;
 			Object.mWorldPosition.x = Joint.position.xyz.x * MilliToMeters;
 			Object.mWorldPosition.y = Joint.position.xyz.y * MilliToMeters;
