@@ -184,6 +184,8 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
 		Error = k4abt_tracker_create(&Calibration, TrackerConfig, &mTracker);
 		Kinect::IsOkay(Error, "k4abt_tracker_create");
+
+		k4abt_tracker_set_temporal_smoothing(mTracker, 0.f);
 	}
 	catch (std::exception& e)
 	{
