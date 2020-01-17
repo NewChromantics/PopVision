@@ -311,6 +311,7 @@ void CoreMl::TKinectAzureSkeletonReader::Thread()
 	}
 	catch (std::exception& e)
 	{
+		//	gr: if we get this, we should restart the capture/acquire device
 		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << std::endl;
 	}
 }
@@ -327,7 +328,19 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 	//		like the device has gone to sleep? need to startvideo again?
 	//		or abort if it keeps happening and let high level restart?
 	//	get capture of one frame (if we don't refresh this, the skeleton doesn't move)
+
+	//	docs:
+	/*	* This function returns an error when an internal problem is encountered; such as loss of the USB connection, inability
+		* to allocate enough memory, and other unexpected issues.Any error returned by this function signals the end of
+		* streaming data, and caller should stop the stream using k4a_device_stop_cameras().
+		*/
 	auto WaitError = k4a_device_get_capture(Device, &Capture, TimeoutMs);
+	//	gr: if this is a timeout, silently bail, throw if we get an error, which suggests we want to restart
+	if (WaitError == K4A_WAIT_RESULT_TIMEOUT)
+	{
+		std::Debug << "Kinect get-capture timeout (" << TimeoutMs << "ms)" << std::endl;
+		return;
+	}
 	Kinect::IsOkay(WaitError, "k4a_device_get_capture");
 
 	auto FreeCapture = [&]()
