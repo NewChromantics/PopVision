@@ -101,7 +101,9 @@ public:
 class CoreMl::TKinectAzureSkeletonReader : public SoyThread
 {
 public:
-	TKinectAzureSkeletonReader(size_t DeviceIndex);
+	//	gr: because of the current use of the API, we have an option to keep alive here
+	//		todo: pure RAII, but need to fix PopEngine first
+	TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive);
 
 	TWorldObjectList	PopFrame(bool Blocking);
 
@@ -111,12 +113,16 @@ private:
 	void				PushFrame(const TWorldObjectList& Objects);
 	void				PushFrame(const k4abt_frame_t Frame);
 
+	void				Open();
+
 public:
 	Soy::TSemaphore		mOnNewFrameSemaphore;
-	TKinectAzureDevice	mDevice;
+	std::shared_ptr<TKinectAzureDevice>	mDevice;
 
 	std::mutex			mLastFrameLock;
 	TWorldObjectList	mLastFrame;
+	bool				mKeepAlive = false;
+	size_t				mDeviceIndex = 0;
 };
 
 
@@ -224,7 +230,9 @@ CoreMl::TKinectAzure::TKinectAzure()
 	std::Debug << "KinectDevice count: " << DeviceCount << std::endl;
 
 	auto DeviceIndex = 0;
-	mNative.reset( new TKinectAzureSkeletonReader(DeviceIndex) );
+	//	todo: remove keep alive when PopEngine/CAPI is fixed
+	auto KeepAlive = true;	//	keep reopening the device in the reader
+	mNative.reset( new TKinectAzureSkeletonReader(DeviceIndex, KeepAlive) );
 }
 
 
@@ -292,35 +300,63 @@ void Kinect::IsOkay(k4a_wait_result_t Error, const char* Context)
 }
 
 
-CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceIndex) :
-	SoyThread	("TKinectAzureSkeletonReader"),
-	mDevice		(DeviceIndex)
+CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive) :
+	SoyThread		("TKinectAzureSkeletonReader"),
+	mDeviceIndex	( DeviceIndex ),
+	mKeepAlive		( KeepAlive )
 {
+	//	try to open once to try and throw at construction (needed for non-keepalive anyway)
+	Open();
 	Start();
 }
 
 
+void CoreMl::TKinectAzureSkeletonReader::Open()
+{
+	if (mDevice)
+		return;
+
+	mDevice.reset();
+	mDevice.reset(new TKinectAzureDevice(mDeviceIndex));
+}
 
 void CoreMl::TKinectAzureSkeletonReader::Thread()
 {
 	//	gr: have a timeout, so we can abort if the thread is stopped
+	//		5 secs is a good indication something has gone wrong I think...
 	try
 	{
-		int32_t Timeout = 1000;
+		Open();
+
+		int32_t Timeout = 5000;
 		Iteration(Timeout);
 	}
 	catch (std::exception& e)
 	{
 		//	gr: if we get this, we should restart the capture/acquire device
 		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << std::endl;
+		
+		if (mKeepAlive)
+		{
+			//	close device and let next iteration reopen
+			mDevice.reset();
+		}
+		else
+		{
+			this->mOnNewFrameSemaphore.OnFailed(e.what());
+			throw;
+		}
 	}
 }
 
 
 void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 {
-	auto& mTracker = mDevice.mTracker;
-	auto& Device = mDevice.mDevice;
+	if (!mDevice)
+		throw Soy::AssertException("TKinectAzureSkeletonReader::Iteration null device");
+
+	auto& mTracker = mDevice->mTracker;
+	auto& Device = mDevice->mDevice;
 
 	k4a_capture_t Capture = nullptr;
 
@@ -335,12 +371,14 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 		* streaming data, and caller should stop the stream using k4a_device_stop_cameras().
 		*/
 	auto WaitError = k4a_device_get_capture(Device, &Capture, TimeoutMs);
-	//	gr: if this is a timeout, silently bail, throw if we get an error, which suggests we want to restart
+	/*	gr: if we disconnect the device, we just get timeout, so we can't tell the difference
+	//		if timeout is high then we can assume its dead. so throw and let the system try and reconnect
 	if (WaitError == K4A_WAIT_RESULT_TIMEOUT)
 	{
 		std::Debug << "Kinect get-capture timeout (" << TimeoutMs << "ms)" << std::endl;
 		return;
 	}
+	*/
 	Kinect::IsOkay(WaitError, "k4a_device_get_capture");
 
 	auto FreeCapture = [&]()
@@ -371,7 +409,6 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 	}
 	catch (...)
 	{
-		//	todo: mOnNewFrameSemaphore with error?
 		FreeCapture();
 		throw;
 	}
