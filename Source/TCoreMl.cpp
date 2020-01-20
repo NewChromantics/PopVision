@@ -115,4 +115,9 @@ void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(
 	throw Soy::AssertException("Get[world]Objects Not Implemented");
 }
 
+void CoreMl::TModel::SetKinectSmoothing(float Smoothing)
+{
+	throw Soy::AssertException("SetKinectSmoothing Not Implemented");
+}
+
 

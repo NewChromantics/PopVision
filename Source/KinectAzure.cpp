@@ -105,6 +105,7 @@ public:
 	//		todo: pure RAII, but need to fix PopEngine first
 	TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive);
 
+	void				SetSmoothing(float Smoothing);
 	TWorldObjectList	PopFrame(bool Blocking);
 
 private:
@@ -123,6 +124,7 @@ public:
 	TWorldObjectList	mLastFrame;
 	bool				mKeepAlive = false;
 	size_t				mDeviceIndex = 0;
+	float				mSmoothing = 0.5f;
 };
 
 
@@ -190,8 +192,6 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
 		Error = k4abt_tracker_create(&Calibration, TrackerConfig, &mTracker);
 		Kinect::IsOkay(Error, "k4abt_tracker_create");
-
-		k4abt_tracker_set_temporal_smoothing(mTracker, 0.f);
 	}
 	catch (std::exception& e)
 	{
@@ -246,6 +246,14 @@ float Kinect::GetScore(k4abt_joint_confidence_level_t Confidence)
 	case K4ABT_JOINT_CONFIDENCE_HIGH:	return 1;
 	default:	return -1;
 	}
+}
+
+void CoreMl::TKinectAzure::SetKinectSmoothing(float Smoothing)
+{
+	if ( !mNative )
+		throw Soy::AssertException("CoreMl::TKinectAzure::SetKinectSmoothing missing native implementation");
+
+	mNative->SetSmoothing(Smoothing);
 }
 
 void CoreMl::TKinectAzure::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
@@ -388,6 +396,9 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 
 	try
 	{
+		//	update smoothing setting
+		k4abt_tracker_set_temporal_smoothing(mTracker, mSmoothing);
+
 		//	gr: apparently this enqueue should never timeout?
 		//	https://github.com/microsoft/Azure-Kinect-Samples/blob/master/body-tracking-samples/simple_cpp_sample/main.cpp#L69
 		//	request skeleton
@@ -477,6 +488,18 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 	}
 
 	PushFrame(Objects);
+}
+
+void CoreMl::TKinectAzureSkeletonReader::SetSmoothing(float Smoothing)
+{
+	if (Smoothing < 0.f || Smoothing > 1.0f)
+	{
+		std::stringstream Error;
+		Error << "Smoothing (" << Smoothing << ") must be 0...1";
+		throw Soy::AssertException(Error);
+	}
+
+	mSmoothing = Smoothing;
 }
 
 CoreMl::TWorldObjectList CoreMl::TKinectAzureSkeletonReader::PopFrame(bool Blocking)
