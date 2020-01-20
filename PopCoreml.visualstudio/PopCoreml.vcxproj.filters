@@ -5,30 +5,6 @@
     <None Include="..\Source\TCoreMl.mm">
       <Filter>Source</Filter>
     </None>
-    <None Include="..\Source\KinectAzure\cublas64_100.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\cudart64_100.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\cudnn64_7.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\dnn_model_2_0.onnx">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\k4a.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\k4abt.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\onnxruntime.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
-    <None Include="..\Source\KinectAzure\depthengine_2_0.dll">
-      <Filter>KinectAzure</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -93,6 +69,9 @@
     <ClCompile Include="..\Source\SoyLib\src\SoyThread.cpp">
       <Filter>SoyLib</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\KinectAzure_FloorDetector.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\CameraHelper_cppwinrt.h">
@@ -102,12 +81,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\TWinSkillSkeleton.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\PopCoreml.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\TCoreMl.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\SoyLib\src\HeapArray.hpp">
@@ -137,5 +110,17 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="PopCoreml.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\Source\KinectAzure\cublas64_100.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\cudart64_100.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\cudnn64_7.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\dnn_model_2_0.onnx" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\k4a.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\k4abt.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\onnxruntime.dll" />
+    <CopyFileToFolders Include="..\Source\KinectAzure\depthengine_2_0.dll" />
+    <CopyFileToFolders Include="..\Source\PopCoreml.h" />
+    <CopyFileToFolders Include="..\Source\TCoreMl.h" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 #include "SoyRuntimeLibrary.h"
 #include "SoyThread.h"
 
+
 #if !defined(ENABLE_KINECTAZURE)
 #error Expected ENABLE_KINECTAZURE to be defined
 #endif
@@ -15,11 +16,17 @@ namespace Kinect
 {
 	void		IsOkay(k4a_result_t Error, const char* Context);
 	void		IsOkay(k4a_wait_result_t Error, const char* Context);
+	void		IsOkay(k4a_buffer_result_t Error, const char* Context);
 	void		InitDebugHandler();
 	void		LoadDll();
+	void		EnumDevices();
 
 	float		GetScore(k4abt_joint_confidence_level_t Confidence);
 	void		GetLabels(ArrayBridge<std::string>& Labels);
+
+	const auto	AccellerometerForwardJointName = "CameraFoward";
+	const auto	FloorCenter = "FloorCenter";
+	const auto	FloorUp = "FloorUp";
 
 	//	remap enum to allow constexpr for magic_enum
 	namespace JointLabel
@@ -67,6 +74,8 @@ namespace Kinect
 	}
 }
 
+#include "KinectAzure_FloorDetector.cpp"
+
 namespace CoreMl
 {
 	class TWorldObjectList;
@@ -88,12 +97,15 @@ public:
 	TKinectAzureDevice(size_t DeviceIndex);
 	~TKinectAzureDevice();
 
+	std::string			GetSerial();
+
 private:
 	void				Shutdown();
 
 public:
 	k4a_device_t		mDevice = nullptr;
 	k4abt_tracker_t		mTracker = nullptr;
+	k4a_calibration_t	mCalibration;
 };
 
 
@@ -111,11 +123,14 @@ public:
 private:
 	void				Iteration(int32_t TimeoutMs);
 	virtual void		Thread() override;
+	bool				HasImuMoved(k4a_imu_sample_t Imu);	//	check if the device has been moved
 	void				PushFrame(const TWorldObjectList& Objects);
-	void				PushFrame(const k4abt_frame_t Frame);
+	void				PushFrame(const k4abt_frame_t Frame, k4a_imu_sample_t Imu);
 
 	void				Open();
 
+	void				FindFloor(k4a_capture_t Frame, k4a_imu_sample_t ImuSample);
+	
 public:
 	Soy::TSemaphore		mOnNewFrameSemaphore;
 	std::shared_ptr<TKinectAzureDevice>	mDevice;
@@ -125,6 +140,10 @@ public:
 	bool				mKeepAlive = false;
 	size_t				mDeviceIndex = 0;
 	float				mSmoothing = 0.5f;
+	vec3f				mLastAccell;			//	store accelleromter to detect movement & re-find floor plane
+	vec3f				mFloorCenter;
+	vec3f				mFloorUp;
+	float				mFloorScore = 0.f;
 };
 
 
@@ -166,6 +185,30 @@ void Kinect::InitDebugHandler()
 	//Platform::SetEnvVar("K4ABT_LOG_LEVEL", "i");	//	or W
 }
 
+void Kinect::EnumDevices()
+{
+	auto EnumDevice = [](const std::string& Serial)
+	{
+		std::Debug << "Kinect Serial: " << Serial << std::endl;
+	};
+	auto DeviceCount = k4a_device_get_installed_count();
+	std::Debug << "KinectDevice count: " << DeviceCount << std::endl;
+
+	for (auto i = 0; i < DeviceCount; i++)
+	{
+		try
+		{
+			CoreMl::TKinectAzureDevice Device(i);
+			auto Serial = Device.GetSerial();
+			EnumDevice(Serial);
+		}
+		catch (std::exception& e)
+		{
+			std::Debug << "Error getting kinect device serial: " << e.what() << std::endl;
+		}
+	}
+}
+
 
 CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 {
@@ -182,15 +225,18 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 		Error = k4a_device_start_cameras(mDevice, &DeviceConfig);
 		Kinect::IsOkay(Error, "k4a_device_start_cameras");
 		
-		k4a_calibration_t Calibration;
-		Error = k4a_device_get_calibration(mDevice, DeviceConfig.depth_mode, DeviceConfig.color_resolution, &Calibration);
+		//	start IMU so we can read gyro as a joint
+		Error = k4a_device_start_imu(mDevice);
+		Kinect::IsOkay(Error, "k4a_device_start_imu");
+
+		Error = k4a_device_get_calibration(mDevice, DeviceConfig.depth_mode, DeviceConfig.color_resolution, &mCalibration);
 		Kinect::IsOkay(Error, "k4a_device_get_calibration");
 
 		//	gr: as this takes a while to load, stop the cameras, then restart when needed
 		//k4a_device_stop_cameras(mDevice);
 		
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
-		Error = k4abt_tracker_create(&Calibration, TrackerConfig, &mTracker);
+		Error = k4abt_tracker_create(&mCalibration, TrackerConfig, &mTracker);
 		Kinect::IsOkay(Error, "k4abt_tracker_create");
 	}
 	catch (std::exception& e)
@@ -214,6 +260,7 @@ CoreMl::TKinectAzureDevice::~TKinectAzureDevice()
 
 void CoreMl::TKinectAzureDevice::Shutdown()
 {
+	k4a_device_stop_imu(mDevice);
 	k4a_device_stop_cameras(mDevice);
 	k4abt_tracker_shutdown(mTracker);
 	k4abt_tracker_destroy(mTracker);
@@ -221,13 +268,30 @@ void CoreMl::TKinectAzureDevice::Shutdown()
 }
 
 
+std::string CoreMl::TKinectAzureDevice::GetSerial()
+{
+	size_t SerialNumberLength = 0;
+
+	//	get size first
+	auto Error = k4a_device_get_serialnum(mDevice, nullptr, &SerialNumberLength);
+	if ( Error != K4A_BUFFER_RESULT_TOO_SMALL )
+		Kinect::IsOkay(Error, "k4a_device_get_serialnum(get length)");
+
+	Array<char> SerialBuffer;
+	SerialBuffer.SetSize(SerialNumberLength);
+	SerialBuffer.PushBack('\0');
+	Error = k4a_device_get_serialnum(mDevice, SerialBuffer.GetArray(), &SerialNumberLength);
+	Kinect::IsOkay(Error, "k4a_device_get_serialnum(get buffer)");
+
+	std::string Serial(SerialBuffer.GetArray());
+	return Serial;
+}
+
 CoreMl::TKinectAzure::TKinectAzure()
 {
 	Kinect::LoadDll();
 	Kinect::InitDebugHandler();
-
-	auto DeviceCount = k4a_device_get_installed_count();
-	std::Debug << "KinectDevice count: " << DeviceCount << std::endl;
+	Kinect::EnumDevices();
 
 	auto DeviceIndex = 0;
 	//	todo: remove keep alive when PopEngine/CAPI is fixed
@@ -283,6 +347,9 @@ void Kinect::GetLabels(ArrayBridge<std::string>& Labels)
 	{
 		Labels.PushBack(std::string(Name));
 	}
+	Labels.PushBack(AccellerometerForwardJointName);
+	Labels.PushBack(FloorCenter);
+	Labels.PushBack(FloorUp);
 }
 
 
@@ -307,6 +374,16 @@ void Kinect::IsOkay(k4a_wait_result_t Error, const char* Context)
 	throw Soy::AssertException(ErrorString);
 }
 
+
+void Kinect::IsOkay(k4a_buffer_result_t Error, const char* Context)
+{
+	if (Error == K4A_BUFFER_RESULT_SUCCEEDED)
+		return;
+
+	std::stringstream ErrorString;
+	ErrorString << "K4A wait error " << magic_enum::enum_name(Error) << " in " << Context;
+	throw Soy::AssertException(ErrorString);
+}
 
 CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive) :
 	SoyThread		("TKinectAzureSkeletonReader"),
@@ -357,6 +434,26 @@ void CoreMl::TKinectAzureSkeletonReader::Thread()
 	}
 }
 
+bool CoreMl::TKinectAzureSkeletonReader::HasImuMoved(k4a_imu_sample_t Imu)
+{
+	//	is this in G's?
+	auto mAccellerationTolerance = 0.5f;
+
+	auto x = fabsf(Imu.acc_sample.xyz.x - mLastAccell.x);
+	auto y = fabsf(Imu.acc_sample.xyz.y - mLastAccell.y);
+	auto z = fabsf(Imu.acc_sample.xyz.z - mLastAccell.z);
+	auto BiggestMove = std::max(x, std::max(z, y));
+	if (BiggestMove < mAccellerationTolerance)
+		return false;
+
+	//	save this as last move
+	std::Debug << "Accellerometer moved (>" << mAccellerationTolerance << "); delta=" << x << "," << y << "," << z << std::endl;
+	mLastAccell.x = Imu.acc_sample.xyz.x;
+	mLastAccell.y = Imu.acc_sample.xyz.y;
+	mLastAccell.z = Imu.acc_sample.xyz.z;
+	return true;
+}
+
 
 void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 {
@@ -405,6 +502,32 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 		auto WaitError = k4abt_tracker_enqueue_capture(mTracker, Capture, TimeoutMs);
 		Kinect::IsOkay(WaitError, "k4abt_tracker_enqueue_capture");
 
+		//	now sample IMU as close as to the capture time, but after we've queued the tracker 
+		//	call as we want to do that ASAP
+		k4a_imu_sample_t ImuSample;
+		ImuSample.gyro_timestamp_usec = 0;
+		{
+			int LoopSafety = 1000;
+			while (LoopSafety--)
+			{
+				//	get every queued sample until we get a timeout error as they sample at a higher frequency than frames
+				//	and we just want latest
+				auto ImuError = k4a_device_get_imu_sample(Device, &ImuSample, 0);
+				//	no more samples
+				if (ImuError == K4A_WAIT_RESULT_TIMEOUT)
+					break;
+				Kinect::IsOkay(ImuError, "k4a_device_get_imu_sample");
+			}
+		}
+		//	contents haven't changed, didn't get a result
+		if (ImuSample.gyro_timestamp_usec == 0)
+			throw Soy::AssertException("IMU had no samples");
+
+		if (HasImuMoved(ImuSample))
+		{
+			FindFloor(Capture,ImuSample);
+		}
+
 		//	pop [skeleton] frame
 		//	gr: should this be infinite?
 		k4abt_frame_t Frame = nullptr;
@@ -412,7 +535,7 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 		Kinect::IsOkay(WaitResult, "k4abt_tracker_pop_result");
 
 		//	extract skeletons
-		PushFrame(Frame);
+		PushFrame(Frame, ImuSample);
 
 		//	cleanup
 		k4abt_frame_release(Frame);
@@ -423,6 +546,40 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 		FreeCapture();
 		throw;
 	}
+}
+
+void CoreMl::TKinectAzureSkeletonReader::FindFloor(k4a_capture_t Frame,k4a_imu_sample_t ImuSample)
+{
+	auto& mCalibration = mDevice->mCalibration;
+	// PointCloudGenerator for floor estimation.
+	Samples::PointCloudGenerator pointCloudGenerator{ mCalibration };
+	Samples::FloorDetector floorDetector;
+
+	//	get depth
+	auto DepthImage = k4a_capture_get_depth_image(Frame);
+
+	pointCloudGenerator.Update(DepthImage);
+
+	// Get down-sampled cloud points.
+	const int downsampleStep = 2;
+	const auto& cloudPoints = pointCloudGenerator.GetCloudPoints(downsampleStep);
+
+	// Detect floor plane based on latest visual and inertial observations.
+	const size_t minimumFloorPointCount = 1024 / (downsampleStep * downsampleStep);
+	const auto& maybeFloorPlane = floorDetector.TryDetectFloorPlane(cloudPoints, ImuSample, mCalibration, minimumFloorPointCount);
+
+	if (!maybeFloorPlane.has_value())
+		return;
+
+	//	For visualization purposes, make floor origin the projection of a point 1.5m in front of the camera.
+	Samples::Vector cameraOrigin = { 0, 0, 0 };
+	Samples::Vector cameraForward = { 0, 0, 1 };
+
+	auto p = maybeFloorPlane->ProjectPoint(cameraOrigin) + maybeFloorPlane->ProjectVector(cameraForward) * 1.5f;
+	auto n = maybeFloorPlane->Normal;
+	mFloorCenter = vec3f(p.X, p.Y, p.Z);
+	mFloorUp = vec3f(p.X+n.X, p.Y+n.Y, p.Z+n.Z);
+	mFloorScore = 1.0f;
 }
 
 void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objects)
@@ -437,10 +594,10 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objec
 }
 
 
-void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
+void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a_imu_sample_t Imu)
 {
 	//	hacky optimisation before we switch to string_view everywhere
-	static BufferArray<std::string, K4ABT_JOINT_COUNT> JointLabels;
+	static BufferArray<std::string, K4ABT_JOINT_COUNT+10> JointLabels;
 	if (JointLabels.IsEmpty())
 	{
 		Kinect::GetLabels(GetArrayBridge(JointLabels));
@@ -486,6 +643,51 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame)
 			Objects.mObjects.PushBack(Object);
 		}
 	}
+
+	//	add IMU data as a forward position for visualisation
+	{
+		auto x = Imu.acc_sample.xyz.x;
+		auto y = Imu.acc_sample.xyz.y;
+		auto z = Imu.acc_sample.xyz.z;
+		auto Hyp = sqrtf((y*y) + (z*z));
+		auto RollRad = atan2f(y, z);
+		auto PitchRad = atan2f(-x, Hyp);
+		auto RollDeg = Soy::RadToDeg(RollRad);
+		auto PitchDeg = Soy::RadToDeg(PitchRad);
+		auto Score = fabsf(x) + fabsf(y) + fabsf(z);
+		std::Debug << "IMU accellerometer; xyz=" << x << "," << y << "," << z << " pitch=" << PitchDeg << " roll=" << RollDeg << std::endl;
+
+		//	gotta look out for gimbal lock here
+		auto YawRad = 0;
+		vec3f Offset;
+		Offset.x = cosf(YawRad)*cosf(PitchRad);
+		Offset.y = sinf(YawRad)*cosf(PitchRad);
+		Offset.z = sinf(PitchRad);
+
+		//	alter score based on accell size? (ie, lower if being moved)
+		TWorldObject Object;
+		Object.mScore = Score;
+		Object.mLabel = Kinect::AccellerometerForwardJointName;
+		Object.mWorldPosition = Offset;
+		Objects.mObjects.PushBack(Object);
+	}
+
+	{
+		TWorldObject Object;
+		Object.mScore = mFloorScore;
+		Object.mLabel = Kinect::FloorCenter;
+		Object.mWorldPosition = mFloorCenter;
+		Objects.mObjects.PushBack(Object);
+	}
+
+	{
+		TWorldObject Object;
+		Object.mScore = mFloorScore;
+		Object.mLabel = Kinect::FloorUp;
+		Object.mWorldPosition = mFloorUp;
+		Objects.mObjects.PushBack(Object);
+	}
+
 
 	PushFrame(Objects);
 }
