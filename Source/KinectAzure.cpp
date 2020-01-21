@@ -527,6 +527,7 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 
 		if (HasImuMoved(ImuSample))
 		{
+			std::Debug << "IMU moved, calculating new floor..." << std::endl;
 			FindFloor(Capture,ImuSample);
 		}
 
@@ -571,7 +572,10 @@ void CoreMl::TKinectAzureSkeletonReader::FindFloor(k4a_capture_t Frame,k4a_imu_s
 	const auto& maybeFloorPlane = floorDetector.TryDetectFloorPlane(cloudPoints, ImuSample, mCalibration, minimumFloorPointCount);
 
 	if (!maybeFloorPlane.has_value())
+	{
+		std::Debug << "Kinect Failed to find floor plane" << std::endl;
 		return;
+	}
 
 	//	For visualization purposes, make floor origin the projection of a point 1.5m in front of the camera.
 	Samples::Vector cameraOrigin = { 0, 0, 0 };
@@ -659,7 +663,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 		auto YawDeg = Soy::RadToDeg(YawRad);
 		auto PitchDeg = Soy::RadToDeg(PitchRad);
 		auto Score = fabsf(x) + fabsf(y) + fabsf(z);
-		std::Debug << "IMU accellerometer; xyz=" << x << "," << y << "," << z << " pitch=" << PitchDeg << " roll=" << RollDeg << std::endl;
+		//std::Debug << "IMU accellerometer; xyz=" << x << "," << y << "," << z << " pitch=" << PitchDeg << " roll=" << RollDeg << std::endl;
 
 		//	gotta look out for gimbal lock here
 		vec3f Offset;
