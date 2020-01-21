@@ -25,6 +25,7 @@ namespace Kinect
 	void		GetLabels(ArrayBridge<std::string>& Labels);
 
 	const auto	AccellerometerForwardJointName = "CameraFoward";
+	const auto	AccellerometerRotationJointName = "CameraRotation";
 	const auto	FloorCenter = "FloorCenter";
 	const auto	FloorUp = "FloorUp";
 
@@ -348,6 +349,7 @@ void Kinect::GetLabels(ArrayBridge<std::string>& Labels)
 		Labels.PushBack(std::string(Name));
 	}
 	Labels.PushBack(AccellerometerForwardJointName);
+	Labels.PushBack(AccellerometerRotationJointName);
 	Labels.PushBack(FloorCenter);
 	Labels.PushBack(FloorUp);
 }
@@ -650,26 +652,36 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 		auto y = Imu.acc_sample.xyz.y;
 		auto z = Imu.acc_sample.xyz.z;
 		auto Hyp = sqrtf((y*y) + (z*z));
+		auto YawRad = 0;
 		auto RollRad = atan2f(y, z);
 		auto PitchRad = atan2f(-x, Hyp);
 		auto RollDeg = Soy::RadToDeg(RollRad);
+		auto YawDeg = Soy::RadToDeg(YawRad);
 		auto PitchDeg = Soy::RadToDeg(PitchRad);
 		auto Score = fabsf(x) + fabsf(y) + fabsf(z);
 		std::Debug << "IMU accellerometer; xyz=" << x << "," << y << "," << z << " pitch=" << PitchDeg << " roll=" << RollDeg << std::endl;
 
 		//	gotta look out for gimbal lock here
-		auto YawRad = 0;
 		vec3f Offset;
 		Offset.x = cosf(YawRad)*cosf(PitchRad);
 		Offset.y = sinf(YawRad)*cosf(PitchRad);
 		Offset.z = sinf(PitchRad);
 
 		//	alter score based on accell size? (ie, lower if being moved)
-		TWorldObject Object;
-		Object.mScore = Score;
-		Object.mLabel = Kinect::AccellerometerForwardJointName;
-		Object.mWorldPosition = Offset;
-		Objects.mObjects.PushBack(Object);
+		TWorldObject OffsetObject;
+		OffsetObject.mScore = Score;
+		OffsetObject.mLabel = Kinect::AccellerometerForwardJointName;
+		OffsetObject.mWorldPosition = Offset;
+		Objects.mObjects.PushBack(OffsetObject);
+		
+		//	hack: secretly a rotation
+		TWorldObject RotationObject;
+		RotationObject.mScore = Score;
+		RotationObject.mLabel = Kinect::AccellerometerRotationJointName;
+		RotationObject.mWorldPosition.x = PitchDeg;
+		RotationObject.mWorldPosition.y = YawDeg;
+		RotationObject.mWorldPosition.z = RollDeg;
+		Objects.mObjects.PushBack(RotationObject);
 	}
 
 	{
