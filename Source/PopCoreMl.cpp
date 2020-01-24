@@ -3,7 +3,7 @@
 
 namespace CoreMl
 {
-	const Soy::TVersion	Version(1, 1, 0);
+	const Soy::TVersion	Version(1, 1, 1);
 }
 
 __export int32_t PopCoreml_GetVersion()

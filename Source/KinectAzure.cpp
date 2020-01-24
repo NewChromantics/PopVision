@@ -126,7 +126,7 @@ private:
 	virtual void		Thread() override;
 	bool				HasImuMoved(k4a_imu_sample_t Imu);	//	check if the device has been moved
 	void				PushFrame(const TWorldObjectList& Objects);
-	void				PushFrame(const k4abt_frame_t Frame, k4a_imu_sample_t Imu);
+	void				PushFrame(const k4abt_frame_t Frame, k4a_imu_sample_t Imu,SoyTime CaptureTime);
 
 	void				Open();
 
@@ -145,6 +145,7 @@ public:
 	vec3f				mFloorCenter;
 	vec3f				mFloorUp;
 	float				mFloorScore = 0.f;
+	SoyTime				mFloorTime;
 };
 
 
@@ -488,6 +489,12 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 	*/
 	Kinect::IsOkay(WaitError, "k4a_device_get_capture");
 
+	//	kinect provides a device timestamp (relative only to itself)
+	//	and a system timestamp, but as our purposes are measurements inside our own system, lets stick to our own timestamps
+	//	k4a_image_get_device_timestamp_usec
+	//	k4a_image_get_system_timestamp_nsec
+	SoyTime FrameCaptureTime(true);
+
 	auto FreeCapture = [&]()
 	{
 		k4a_capture_release(Capture);
@@ -537,8 +544,14 @@ void CoreMl::TKinectAzureSkeletonReader::Iteration(int32_t TimeoutMs)
 		auto WaitResult = k4abt_tracker_pop_result(mTracker, &Frame, TimeoutMs);
 		Kinect::IsOkay(WaitResult, "k4abt_tracker_pop_result");
 
+		/*
+		SoyTime TrackerCaptureTime(true);
+		auto Delay = TrackerCaptureTime.GetDiff(FrameCaptureTime);
+		std::Debug << "Time between capture time & skeleton time: " << Delay << "ms" << std::endl;
+		*/
+		
 		//	extract skeletons
-		PushFrame(Frame, ImuSample);
+		PushFrame(Frame, ImuSample, FrameCaptureTime);
 
 		//	cleanup
 		k4abt_frame_release(Frame);
@@ -586,6 +599,7 @@ void CoreMl::TKinectAzureSkeletonReader::FindFloor(k4a_capture_t Frame,k4a_imu_s
 	mFloorCenter = vec3f(p.X, p.Y, p.Z);
 	mFloorUp = vec3f(p.X+n.X, p.Y+n.Y, p.Z+n.Z);
 	mFloorScore = 1.0f;
+	mFloorTime = SoyTime(true);
 }
 
 void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objects)
@@ -600,7 +614,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const TWorldObjectList& Objec
 }
 
 
-void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a_imu_sample_t Imu)
+void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a_imu_sample_t Imu, SoyTime CaptureTime)
 {
 	//	hacky optimisation before we switch to string_view everywhere
 	static BufferArray<std::string, K4ABT_JOINT_COUNT+10> JointLabels;
@@ -610,7 +624,8 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 	}
 
 	TWorldObjectList Objects;
-
+	auto TimeMs = CaptureTime.GetTime();
+	
 	//	extract skeletons
 	auto SkeletonCount = k4abt_frame_get_num_bodies(Frame);
 	//std::Debug << "Found " << SkeletonCount << " skeletons" << std::endl;
@@ -637,6 +652,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 		{
 			auto& Joint = Skeleton.joints[j];
 			TWorldObject Object;
+			Object.mTimeMs = TimeMs;
 			Object.mScore = Kinect::GetScore(Joint.confidence_level);
 			Object.mLabel = JointLabels[j];
 			Object.mLabel += LabelSuffix;
@@ -673,6 +689,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 
 		//	alter score based on accell size? (ie, lower if being moved)
 		TWorldObject OffsetObject;
+		OffsetObject.mTimeMs = TimeMs;
 		OffsetObject.mScore = Score;
 		OffsetObject.mLabel = Kinect::AccellerometerForwardJointName;
 		OffsetObject.mWorldPosition = Offset;
@@ -680,6 +697,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 		
 		//	hack: secretly a rotation
 		TWorldObject RotationObject;
+		RotationObject.mTimeMs = TimeMs;
 		RotationObject.mScore = Score;
 		RotationObject.mLabel = Kinect::AccellerometerRotationJointName;
 		RotationObject.mWorldPosition.x = PitchDeg;
@@ -690,6 +708,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 
 	{
 		TWorldObject Object;
+		Object.mTimeMs = mFloorTime.GetTime();
 		Object.mScore = mFloorScore;
 		Object.mLabel = Kinect::FloorCenter;
 		Object.mWorldPosition = mFloorCenter;
@@ -698,6 +717,7 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 
 	{
 		TWorldObject Object;
+		Object.mTimeMs = mFloorTime.GetTime();
 		Object.mScore = mFloorScore;
 		Object.mLabel = Kinect::FloorUp;
 		Object.mWorldPosition = mFloorUp;

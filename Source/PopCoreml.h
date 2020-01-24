@@ -23,3 +23,8 @@
 #endif
 
 __export int32_t			PopCoreml_GetVersion();
+
+//	1.1.1
+//		added uint64_t timestamp (ms) CoreMl::TWorldObject (possibly non-breaking as signatures haven't changed)
+
+
