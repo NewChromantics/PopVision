@@ -421,9 +421,13 @@ void CoreMl::TKinectAzureSkeletonReader::Thread()
 	}
 	catch (std::exception& e)
 	{
+		auto SleepMs = 1000;
 		//	gr: if we get this, we should restart the capture/acquire device
-		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << std::endl;
+		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << " (Pausing for "<< SleepMs << "ms)" << std::endl;
 		
+		//	pause
+		std::this_thread::sleep_for(std::chrono::milliseconds(SleepMs));
+
 		if (mKeepAlive)
 		{
 			//	close device and let next iteration reopen
