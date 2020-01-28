@@ -29,6 +29,28 @@ namespace Kinect
 	const auto	FloorCenter = "FloorCenter";
 	const auto	FloorUp = "FloorUp";
 
+	namespace TrackMode
+	{
+		enum TYPE
+		{
+			WideDepth = POPML_KINECT_TRACKMODE_WIDEDEPTH,
+			WideCamera = POPML_KINECT_TRACKMODE_WIDECAMERA,
+			NarrowDepth = POPML_KINECT_TRACKMODE_NARROWDEPTH,
+			NarrowCamera = POPML_KINECT_TRACKMODE_NARROWCAMERA,
+			NarrowSmallDepth = POPML_KINECT_TRACKMODE_NARROWSMALLDEPTH,
+			NarrowSmallCamera = POPML_KINECT_TRACKMODE_NARROWSMALLCAMERA,
+		};
+	}
+
+	namespace GpuId
+	{
+		enum TYPE
+		{
+			Default = POPML_KINECT_GPUID_DEFAULT,
+			Cpu = POPML_KINECT_GPUID_CPU
+		};
+	}
+
 	//	remap enum to allow constexpr for magic_enum
 	namespace JointLabel
 	{
@@ -95,11 +117,12 @@ public:
 class CoreMl::TKinectAzureDevice
 {
 public:
-	TKinectAzureDevice(size_t DeviceIndex, int32_t GpuId);
+	TKinectAzureDevice(size_t DeviceIndex, int32_t GpuId, Kinect::TrackMode::TYPE TrackMode);
 	~TKinectAzureDevice();
 
-	std::string			GetSerial();
-	int32_t				GetGpuId()	{ return mGpuId; }
+	std::string				GetSerial();
+	int32_t					GetGpuId()	{ return mGpuId; }
+	Kinect::TrackMode::TYPE	GetTrackMode() { return mTrackMode; }
 
 private:
 	void				Shutdown();
@@ -110,7 +133,8 @@ public:
 	k4a_calibration_t	mCalibration;
 
 private:
-	int32_t				mGpuId;
+	int32_t					mGpuId;
+	Kinect::TrackMode::TYPE	mTrackMode;
 };
 
 
@@ -123,7 +147,8 @@ public:
 	TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive);
 
 	void				SetSmoothing(float Smoothing);
-	void				SetKinectGpu(int32_t GpuId);
+	void				SetGpu(int32_t GpuId);
+	void				SetTrackMode(Kinect::TrackMode::TYPE Mode);
 	TWorldObjectList	PopFrame(bool Blocking);
 
 private:
@@ -146,7 +171,8 @@ public:
 	bool				mKeepAlive = false;
 	size_t				mDeviceIndex = 0;
 	float				mSmoothing = 0.5f;
-	int32_t				mUseGpu = CoreMl::TKinectAzure::GpuId_Default;
+	int32_t				mUseGpu = Kinect::GpuId::Default;
+	Kinect::TrackMode::TYPE	mTrackMode = Kinect::TrackMode::NarrowDepth;
 	vec3f				mLastAccell;			//	store accelleromter to detect movement & re-find floor plane
 	vec3f				mFloorCenter;
 	vec3f				mFloorUp;
@@ -206,7 +232,7 @@ void Kinect::EnumDevices()
 	{
 		try
 		{
-			CoreMl::TKinectAzureDevice Device(i,CoreMl::TKinectAzure::GpuId_Default);
+			CoreMl::TKinectAzureDevice Device(i,Kinect::GpuId::Default,Kinect::TrackMode::NarrowDepth);
 			auto Serial = Device.GetSerial();
 			EnumDevice(Serial);
 		}
@@ -217,9 +243,34 @@ void Kinect::EnumDevices()
 	}
 }
 
+k4a_depth_mode_t GetDepthMode(Kinect::TrackMode::TYPE TrackMode)
+{
+	switch (TrackMode)
+	{
+	case Kinect::TrackMode::NarrowCamera:
+	case Kinect::TrackMode::NarrowDepth:
+		return K4A_DEPTH_MODE_NFOV_UNBINNED;
 
-CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId) :
-	mGpuId	( GpuId )
+	case Kinect::TrackMode::NarrowSmallCamera:
+	case Kinect::TrackMode::NarrowSmallDepth:
+		return K4A_DEPTH_MODE_NFOV_2X2BINNED;
+
+	case Kinect::TrackMode::WideCamera:
+	case Kinect::TrackMode::WideDepth:
+		//	https://docs.microsoft.com/en-us/azure/Kinect-dk/hardware-specification#depth-camera-supported-operating-modes
+		//	unbinned can only run at 15fps
+		//return K4A_DEPTH_MODE_WFOV_UNBINNED;
+		return K4A_DEPTH_MODE_WFOV_2X2BINNED;
+	}
+
+	std::stringstream Error;
+	Error << "GetDepthMode(" << magic_enum::enum_name(TrackMode) << ") unhandled";
+	throw Soy::AssertException(Error);
+}
+
+CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId, Kinect::TrackMode::TYPE TrackMode) :
+	mGpuId		( GpuId ),
+	mTrackMode	( TrackMode )
 {
 	//	this fails the second time if we didn't close properly (app still has exclusive access)
 	//	so make sure we shutdown if we fail
@@ -229,7 +280,7 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId)
 	try
 	{
 		k4a_device_configuration_t DeviceConfig = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
-		DeviceConfig.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
+		DeviceConfig.depth_mode = GetDepthMode(mTrackMode);
 		DeviceConfig.color_resolution = K4A_COLOR_RESOLUTION_OFF;
 		Error = k4a_device_start_cameras(mDevice, &DeviceConfig);
 		Kinect::IsOkay(Error, "k4a_device_start_cameras");
@@ -246,7 +297,7 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId)
 		
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
 
-		if (mGpuId == CoreMl::TKinectAzure::GpuId_Cpu)
+		if (mGpuId == Kinect::GpuId::Cpu)
 		{
 			TrackerConfig.processing_mode = K4ABT_TRACKER_PROCESSING_MODE_CPU;
 		}
@@ -338,8 +389,25 @@ void CoreMl::TKinectAzure::SetKinectGpu(int32_t GpuId)
 	if (!mNative)
 		throw Soy::AssertException("CoreMl::TKinectAzure::SetKinectGpu missing native implementation");
 
-	mNative->SetKinectGpu(GpuId);
+	mNative->SetGpu(GpuId);
 }
+
+
+void CoreMl::TKinectAzure::SetKinectTrackMode(uint32_t Mode)
+{
+	if (!mNative)
+		throw Soy::AssertException("CoreMl::TKinectAzure::SetKinecTrackMode missing native implementation");
+
+	auto TrackMode = magic_enum::enum_cast<Kinect::TrackMode::TYPE>(Mode);
+	if (!TrackMode)
+	{
+		std::stringstream Error;
+		Error << "Tried to set kinect track mode to " << Mode << " but is not a valid value";
+		throw Soy::AssertException(Error);
+	}
+	mNative->SetTrackMode(*TrackMode);
+}
+
 
 void CoreMl::TKinectAzure::SetKinectSmoothing(float Smoothing)
 {
@@ -420,8 +488,11 @@ CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceInde
 	mDeviceIndex	( DeviceIndex ),
 	mKeepAlive		( KeepAlive )
 {
-	//	try to open once to try and throw at construction (needed for non-keepalive anyway)
-	Open();
+	//	gr: problem here for non-keep alive as we may have params that have not yet been set, but stop it from booting
+		//	try to open once to try and throw at construction (needed for non-keepalive anyway)
+	if ( !mKeepAlive )
+		Open();
+
 	Start();
 }
 
@@ -439,11 +510,22 @@ void CoreMl::TKinectAzureSkeletonReader::Open()
 		}
 	}
 
+	//	close device if we want to change track mode
+	if (mDevice)
+	{
+		auto CurrentTrackMode = mDevice->GetTrackMode();
+		if (CurrentTrackMode != mTrackMode)
+		{
+			std::Debug << "Closing kinect; switching TrackMode from " << magic_enum::enum_name(CurrentTrackMode) << " to " << magic_enum::enum_name(mTrackMode) << std::endl;
+			mDevice.reset();
+		}
+	}
+
 	//	already ready
 	if (mDevice)
 		return;
 
-	mDevice.reset(new TKinectAzureDevice(mDeviceIndex,mUseGpu));
+	mDevice.reset(new TKinectAzureDevice(mDeviceIndex,mUseGpu,mTrackMode));
 }
 
 void CoreMl::TKinectAzureSkeletonReader::Thread()
@@ -462,7 +544,12 @@ void CoreMl::TKinectAzureSkeletonReader::Thread()
 		auto SleepMs = 1000;
 		//	gr: if we get this, we should restart the capture/acquire device
 		std::Debug << "Exception in TKinectAzureSkeletonReader loop: " << e.what() << " (Pausing for "<< SleepMs << "ms)" << std::endl;
-		
+
+		//	gr: for now at least send this in KeepAlive mode, 
+		//		as the caller might send different params in the API (eg. GPU index)
+		//		which may be the reason we're failing to iterate, this lets params change
+		this->mOnNewFrameSemaphore.OnFailed(e.what());
+
 		//	pause
 		std::this_thread::sleep_for(std::chrono::milliseconds(SleepMs));
 
@@ -473,7 +560,6 @@ void CoreMl::TKinectAzureSkeletonReader::Thread()
 		}
 		else
 		{
-			this->mOnNewFrameSemaphore.OnFailed(e.what());
 			throw;
 		}
 	}
@@ -770,10 +856,17 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 	PushFrame(Objects);
 }
 
-void CoreMl::TKinectAzureSkeletonReader::SetKinectGpu(int32_t GpuId)
+void CoreMl::TKinectAzureSkeletonReader::SetGpu(int32_t GpuId)
 {
 	mUseGpu = GpuId;
 }
+
+void CoreMl::TKinectAzureSkeletonReader::SetTrackMode(Kinect::TrackMode::TYPE Mode)
+{
+	mTrackMode = Mode;
+}
+
+
 
 
 void CoreMl::TKinectAzureSkeletonReader::SetSmoothing(float Smoothing)

@@ -9,12 +9,12 @@ namespace CoreMl
 	class TKinectAzure;
 }
 
+
 class CoreMl::TKinectAzure : public CoreMl::TModel
 {
 public:
 	constexpr static auto	ModelName = "KinectAzureSkeleton";
-	const static int32_t	GpuId_Cpu = -1;
-	const static int32_t	GpuId_Default = 0;
+
 public:
 	TKinectAzure();
 	
@@ -23,6 +23,7 @@ public:
 	virtual void	GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject) override;
 	virtual void	SetKinectSmoothing(float Smoothing) override;
 	virtual void	SetKinectGpu(int32_t GpuId) override;	//	-1 for cpu
+	virtual void	SetKinectTrackMode(uint32_t Mode) override;	//	-1 for cpu
 
 	std::shared_ptr<TKinectAzureSkeletonReader>	mNative;
 };

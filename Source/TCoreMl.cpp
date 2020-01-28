@@ -125,4 +125,9 @@ void CoreMl::TModel::SetKinectGpu(int32_t GpuId)
 	throw Soy::AssertException("SetKinectGpu Not Implemented");
 }
 
+void CoreMl::TModel::SetKinectTrackMode(uint32_t Mode)
+{
+	throw Soy::AssertException("SetKinectTrackMode Not Implemented");
+}
+
 
