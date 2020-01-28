@@ -120,4 +120,9 @@ void CoreMl::TModel::SetKinectSmoothing(float Smoothing)
 	throw Soy::AssertException("SetKinectSmoothing Not Implemented");
 }
 
+void CoreMl::TModel::SetKinectGpu(int32_t GpuId)
+{
+	throw Soy::AssertException("SetKinectGpu Not Implemented");
+}
+
 

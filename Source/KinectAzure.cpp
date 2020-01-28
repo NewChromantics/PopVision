@@ -95,10 +95,11 @@ public:
 class CoreMl::TKinectAzureDevice
 {
 public:
-	TKinectAzureDevice(size_t DeviceIndex);
+	TKinectAzureDevice(size_t DeviceIndex, int32_t GpuId);
 	~TKinectAzureDevice();
 
 	std::string			GetSerial();
+	int32_t				GetGpuId()	{ return mGpuId; }
 
 private:
 	void				Shutdown();
@@ -107,6 +108,9 @@ public:
 	k4a_device_t		mDevice = nullptr;
 	k4abt_tracker_t		mTracker = nullptr;
 	k4a_calibration_t	mCalibration;
+
+private:
+	int32_t				mGpuId;
 };
 
 
@@ -119,6 +123,7 @@ public:
 	TKinectAzureSkeletonReader(size_t DeviceIndex,bool KeepAlive);
 
 	void				SetSmoothing(float Smoothing);
+	void				SetKinectGpu(int32_t GpuId);
 	TWorldObjectList	PopFrame(bool Blocking);
 
 private:
@@ -141,6 +146,7 @@ public:
 	bool				mKeepAlive = false;
 	size_t				mDeviceIndex = 0;
 	float				mSmoothing = 0.5f;
+	int32_t				mUseGpu = CoreMl::TKinectAzure::GpuId_Default;
 	vec3f				mLastAccell;			//	store accelleromter to detect movement & re-find floor plane
 	vec3f				mFloorCenter;
 	vec3f				mFloorUp;
@@ -200,7 +206,7 @@ void Kinect::EnumDevices()
 	{
 		try
 		{
-			CoreMl::TKinectAzureDevice Device(i);
+			CoreMl::TKinectAzureDevice Device(i,CoreMl::TKinectAzure::GpuId_Default);
 			auto Serial = Device.GetSerial();
 			EnumDevice(Serial);
 		}
@@ -212,7 +218,8 @@ void Kinect::EnumDevices()
 }
 
 
-CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
+CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId) :
+	mGpuId	( GpuId )
 {
 	//	this fails the second time if we didn't close properly (app still has exclusive access)
 	//	so make sure we shutdown if we fail
@@ -238,6 +245,17 @@ CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex)
 		//k4a_device_stop_cameras(mDevice);
 		
 		k4abt_tracker_configuration_t TrackerConfig = K4ABT_TRACKER_CONFIG_DEFAULT;
+
+		if (mGpuId == CoreMl::TKinectAzure::GpuId_Cpu)
+		{
+			TrackerConfig.processing_mode = K4ABT_TRACKER_PROCESSING_MODE_CPU;
+		}
+		else
+		{
+			TrackerConfig.processing_mode = K4ABT_TRACKER_PROCESSING_MODE_GPU;
+			TrackerConfig.gpu_device_id = mGpuId;
+		}
+
 		Error = k4abt_tracker_create(&mCalibration, TrackerConfig, &mTracker);
 		Kinect::IsOkay(Error, "k4abt_tracker_create");
 	}
@@ -312,6 +330,15 @@ float Kinect::GetScore(k4abt_joint_confidence_level_t Confidence)
 	case K4ABT_JOINT_CONFIDENCE_HIGH:	return 1;
 	default:	return -1;
 	}
+}
+
+
+void CoreMl::TKinectAzure::SetKinectGpu(int32_t GpuId)
+{
+	if (!mNative)
+		throw Soy::AssertException("CoreMl::TKinectAzure::SetKinectGpu missing native implementation");
+
+	mNative->SetKinectGpu(GpuId);
 }
 
 void CoreMl::TKinectAzure::SetKinectSmoothing(float Smoothing)
@@ -401,11 +428,22 @@ CoreMl::TKinectAzureSkeletonReader::TKinectAzureSkeletonReader(size_t DeviceInde
 
 void CoreMl::TKinectAzureSkeletonReader::Open()
 {
+	//	close device if we want to change configuration
+	if (mDevice)
+	{
+		auto CurrentGpuId = mDevice->GetGpuId();
+		if (CurrentGpuId != mUseGpu)
+		{
+			std::Debug << "Closing kinect; switching GPU from " << CurrentGpuId << " to " << mUseGpu << std::endl;
+			mDevice.reset();
+		}
+	}
+
+	//	already ready
 	if (mDevice)
 		return;
 
-	mDevice.reset();
-	mDevice.reset(new TKinectAzureDevice(mDeviceIndex));
+	mDevice.reset(new TKinectAzureDevice(mDeviceIndex,mUseGpu));
 }
 
 void CoreMl::TKinectAzureSkeletonReader::Thread()
@@ -731,6 +769,12 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 
 	PushFrame(Objects);
 }
+
+void CoreMl::TKinectAzureSkeletonReader::SetKinectGpu(int32_t GpuId)
+{
+	mUseGpu = GpuId;
+}
+
 
 void CoreMl::TKinectAzureSkeletonReader::SetSmoothing(float Smoothing)
 {
