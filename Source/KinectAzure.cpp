@@ -268,6 +268,28 @@ k4a_depth_mode_t GetDepthMode(Kinect::TrackMode::TYPE TrackMode)
 	throw Soy::AssertException(Error);
 }
 
+
+bool IsCameraSpace(Kinect::TrackMode::TYPE TrackMode)
+{
+	switch (TrackMode)
+	{
+	case Kinect::TrackMode::NarrowCamera:
+	case Kinect::TrackMode::NarrowSmallCamera:
+	case Kinect::TrackMode::WideCamera:
+		return true;
+
+	case Kinect::TrackMode::NarrowDepth:
+	case Kinect::TrackMode::NarrowSmallDepth:
+	case Kinect::TrackMode::WideDepth:
+		return false;
+	}
+
+	std::stringstream Error;
+	Error << "IsCameraSpace(" << magic_enum::enum_name(TrackMode) << ") unhandled";
+	throw Soy::AssertException(Error);
+}
+
+
 CoreMl::TKinectAzureDevice::TKinectAzureDevice(size_t DeviceIndex,int32_t GpuId, Kinect::TrackMode::TYPE TrackMode) :
 	mGpuId		( GpuId ),
 	mTrackMode	( TrackMode )
@@ -757,7 +779,23 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 	//	extract skeletons
 	auto SkeletonCount = k4abt_frame_get_num_bodies(Frame);
 	//std::Debug << "Found " << SkeletonCount << " skeletons" << std::endl;
+	auto& Calibration = mDevice->mCalibration;
 
+	std::function<vec3f(const k4a_float3_t&)> DepthPositionToCameraSpace = [this,&Calibration](const k4a_float3_t& DepthPosition)
+	{
+		k4a_float3_t ColourPosition;
+		auto Result = k4a_calibration_3d_to_3d(&Calibration, &DepthPosition, K4A_CALIBRATION_TYPE_DEPTH, K4A_CALIBRATION_TYPE_COLOR, &ColourPosition);
+		Kinect::IsOkay(Result, "k4a_calibration_3d_to_3d");
+
+		return vec3f(ColourPosition.xyz.x, ColourPosition.xyz.y, ColourPosition.xyz.z);
+	};
+	std::function<vec3f(const k4a_float3_t&)> DepthPositionToDepthSpace = [this](const k4a_float3_t& DepthPosition)
+	{
+		return vec3f(DepthPosition.xyz.x, DepthPosition.xyz.y, DepthPosition.xyz.z);
+	};
+	auto ConvertToCameraSpace = IsCameraSpace(mTrackMode);
+	auto GetPosition = ConvertToCameraSpace ? DepthPositionToCameraSpace : DepthPositionToDepthSpace;
+	
 	//	use k4abt_frame_get_body_index_map to get a label map/mask
 	for (auto s = 0; s < SkeletonCount; s++)
 	{
@@ -784,11 +822,14 @@ void CoreMl::TKinectAzureSkeletonReader::PushFrame(const k4abt_frame_t Frame,k4a
 			Object.mScore = Kinect::GetScore(Joint.confidence_level);
 			Object.mLabel = JointLabels[j];
 			Object.mLabel += LabelSuffix;
+
+			Object.mWorldPosition = GetPosition(Joint.position);
 			
+			//	convert to metres
 			const auto MilliToMeters = 0.001f;
-			Object.mWorldPosition.x = Joint.position.xyz.x * MilliToMeters;
-			Object.mWorldPosition.y = Joint.position.xyz.y * MilliToMeters;
-			Object.mWorldPosition.z = Joint.position.xyz.z * MilliToMeters;
+			Object.mWorldPosition.x *= MilliToMeters;
+			Object.mWorldPosition.y *= MilliToMeters;
+			Object.mWorldPosition.z *= MilliToMeters;
 
 			Objects.mObjects.PushBack(Object);
 		}
