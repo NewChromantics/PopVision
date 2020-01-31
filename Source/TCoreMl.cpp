@@ -4,6 +4,7 @@
 
 #include "TCoreMl.h"
 #include "HeapArray.hpp"
+#include "TTestSkeleton.h"
 
 #if defined(TARGET_WINDOWS)
 #include "TWinSkillSkeleton.h"
@@ -46,6 +47,8 @@ __export CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name)
 
 std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)
 {
+	if ( Name == TTestSkeleton::ModelName)			return std::make_shared<TTestSkeleton>();
+	
 #if defined(TARGET_WINDOWS)
 	if (Name == TWinSkillSkeleton::ModelName)		return std::make_shared<TWinSkillSkeleton>();
 #endif

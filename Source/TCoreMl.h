@@ -14,7 +14,7 @@ class TPixelBuffer;
 @class MLMultiArray;
 #endif
 
-#if defined(TARGET_WINDOWS)
+#if defined(TARGET_WINDOWS) || defined(TARGET_ANDROID)
 typedef void* CVPixelBufferRef;
 #endif
 
@@ -28,7 +28,10 @@ namespace CoreMl
 	class TWorldObject;
 	
 	class TModel;		//	generic interface
-	
+
+	//	Test Models (should be for every platform)
+	class TTestSkeleton;
+
 	//	CoreML models
 	class TYolo;
 	class THourglass;
@@ -111,6 +114,7 @@ public:
 
 //	C++ factory for dll
 //	todo: make this a proper CAPI for unity etc, and some nice dumb interface (instance ID etc)
+//	todo: EnumModels()
 __export CoreMl::TModel*	PopCoreml_AllocModel(const std::string& Name);
 __export int32_t			PopCoreml_GetVersion();
 

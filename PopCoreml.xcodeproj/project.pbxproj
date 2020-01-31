@@ -73,6 +73,10 @@
 		BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */; };
 		BF48756F23B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
 		BF48757023B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
+		BF654AFD23E4975E0099B694 /* TTestSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */; };
+		BF654AFE23E4975E0099B694 /* TTestSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */; };
+		BF654AFF23E4975E0099B694 /* TTestSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BF654AFC23E4975E0099B694 /* TTestSkeleton.h */; };
+		BF654B0023E4975E0099B694 /* TTestSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BF654AFC23E4975E0099B694 /* TTestSkeleton.h */; };
 		BFA22B6B22DE6DA300D8615C /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
 		BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
 		BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
@@ -157,6 +161,9 @@
 		BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopCoreMl.cpp; path = Source/PopCoreMl.cpp; sourceTree = "<group>"; };
 		BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TCoreMl.cpp; path = Source/TCoreMl.cpp; sourceTree = "<group>"; };
 		BF48757123B973FA00EB30B5 /* HeapArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HeapArray.hpp; path = Source/SoyLib/src/HeapArray.hpp; sourceTree = "<group>"; };
+		BF654AFA23E4968D0099B694 /* PopMl.Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PopMl.Android; sourceTree = "<group>"; };
+		BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTestSkeleton.cpp; path = Source/TTestSkeleton.cpp; sourceTree = "<group>"; };
+		BF654AFC23E4975E0099B694 /* TTestSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTestSkeleton.h; path = Source/TTestSkeleton.h; sourceTree = "<group>"; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -286,6 +293,7 @@
 		BFA22B4322DE6CFC00D8615C = {
 			isa = PBXGroup;
 			children = (
+				BF654AFA23E4968D0099B694 /* PopMl.Android */,
 				BFA22B7B22DE72DC00D8615C /* SoyLib */,
 				BFA22B5A22DE6D8200D8615C /* PopCoreml */,
 				BFA22B5922DE6D7E00D8615C /* Models */,
@@ -323,6 +331,8 @@
 				BFA22BF322DF14FB00D8615C /* THourglass.mm */,
 				BFA22BFD22DF17BB00D8615C /* TMaskRcnn.h */,
 				BFA22BFE22DF17BB00D8615C /* TMaskRcnn.mm */,
+				BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */,
+				BF654AFC23E4975E0099B694 /* TTestSkeleton.h */,
 				BFA22BF222DF14FB00D8615C /* TOpenPose.h */,
 				BFA22BED22DF14FB00D8615C /* TOpenPose.mm */,
 				BF151F202384046500A70EBF /* TPosenet.h */,
@@ -452,6 +462,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF654B0023E4975E0099B694 /* TTestSkeleton.h in Headers */,
 				BF151F3123845BE600A70EBF /* PopCoreml_Ios.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +471,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF654AFF23E4975E0099B694 /* TTestSkeleton.h in Headers */,
 				BFA22BFC22DF14FB00D8615C /* THourglass.h in Headers */,
 				BFA22C0422DF17F400D8615C /* TDeepLab.h in Headers */,
 				BFA22BFF22DF17BB00D8615C /* TMaskRcnn.h in Headers */,
@@ -474,6 +486,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
+
+/* Begin PBXLegacyTarget section */
+		BF654AF623E4964A0099B694 /* PopMl_Android */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = BF654AF923E4964A0099B694 /* Build configuration list for PBXLegacyTarget "PopMl_Android" */;
+			buildPhases = (
+			);
+			buildToolPath = PopMl.Android/build.sh;
+			dependencies = (
+			);
+			name = PopMl_Android;
+			passBuildSettingsInEnvironment = 1;
+			productName = PopMl_Android;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		BF151F2C23845BE600A70EBF /* PopCoreml_Ios */ = {
@@ -524,6 +552,9 @@
 					BF151F2C23845BE600A70EBF = {
 						CreatedOnToolsVersion = 10.1;
 					};
+					BF654AF623E4964A0099B694 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					BFA22B4C22DE6CFC00D8615C = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -543,6 +574,7 @@
 			targets = (
 				BFA22B4C22DE6CFC00D8615C /* PopCoreml_Osx */,
 				BF151F2C23845BE600A70EBF /* PopCoreml_Ios */,
+				BF654AF623E4964A0099B694 /* PopMl_Android */,
 			);
 		};
 /* End PBXProject section */
@@ -587,6 +619,7 @@
 				BF151F3723845C0D00A70EBF /* posenet513_v1_075.mlmodel in Sources */,
 				BF151F4A23845C2600A70EBF /* SoyDebug.mm in Sources */,
 				BF151F3A23845C0D00A70EBF /* DeepLabV3.mlmodel in Sources */,
+				BF654AFE23E4975E0099B694 /* TTestSkeleton.cpp in Sources */,
 				BF151F4C23845C2600A70EBF /* SoyFilesystem.mm in Sources */,
 				BF151F4423845C0D00A70EBF /* TinyYOLO.mlmodel in Sources */,
 				BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
@@ -644,6 +677,7 @@
 				BFA22BBD22DE7A0600D8615C /* SoyMedia.cpp in Sources */,
 				BFA22BA722DE79E300D8615C /* SoyH264.cpp in Sources */,
 				BFA22BD522DE7AA300D8615C /* memheap.cpp in Sources */,
+				BF654AFD23E4975E0099B694 /* TTestSkeleton.cpp in Sources */,
 				BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */,
 				BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */,
 				BF48756C23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
@@ -739,6 +773,33 @@
 			};
 			name = Release;
 		};
+		BF654AF723E4964A0099B694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				UNITY_ASSET_PLUGIN_PATH = "$(UNITY_OUTPUT_PATH)/Android";
+			};
+			name = Debug;
+		};
+		BF654AF823E4964A0099B694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				UNITY_ASSET_PLUGIN_PATH = "$(UNITY_OUTPUT_PATH)/Android";
+			};
+			name = Release;
+		};
 		BFA22B5322DE6CFC00D8615C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -796,6 +857,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopMl/Assets/PopMl/";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -851,6 +913,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopMl/Assets/PopMl/";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -918,6 +981,15 @@
 			buildConfigurations = (
 				BF151F3323845BE600A70EBF /* Debug */,
 				BF151F3423845BE600A70EBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF654AF923E4964A0099B694 /* Build configuration list for PBXLegacyTarget "PopMl_Android" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF654AF723E4964A0099B694 /* Debug */,
+				BF654AF823E4964A0099B694 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

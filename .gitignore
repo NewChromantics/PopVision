@@ -25,3 +25,5 @@ Unity/**/holobuild/
 PopCoreml.visualstudio/packages/
 
 PopCoreml.visualstudio/inc/
+
+PopMl.Android/obj/
