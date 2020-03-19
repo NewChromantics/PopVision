@@ -16,6 +16,8 @@ class TPixelBuffer;
 
 #if defined(TARGET_WINDOWS) || defined(TARGET_ANDROID)
 typedef void* CVPixelBufferRef;
+#else
+#include <CoreVideo/CoreVideo.h>
 #endif
 
 namespace CoreMl
