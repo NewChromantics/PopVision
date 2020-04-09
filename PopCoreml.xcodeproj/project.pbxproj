@@ -78,6 +78,7 @@
 		BF654AFE23E4975E0099B694 /* TTestSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */; };
 		BF654AFF23E4975E0099B694 /* TTestSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BF654AFC23E4975E0099B694 /* TTestSkeleton.h */; };
 		BF654B0023E4975E0099B694 /* TTestSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BF654AFC23E4975E0099B694 /* TTestSkeleton.h */; };
+		BF71CA6D243E4AE800AEF50F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF71CA6C243E4AE800AEF50F /* UIKit.framework */; };
 		BFA22B6B22DE6DA300D8615C /* MaskRCNN_anchors.bin in Resources */ = {isa = PBXBuildFile; fileRef = BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */; };
 		BFA22B6C22DE6DA300D8615C /* cpm.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6122DE6DA200D8615C /* cpm.mlmodel */; };
 		BFA22B6D22DE6DA300D8615C /* TinyYOLO.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B6222DE6DA200D8615C /* TinyYOLO.mlmodel */; };
@@ -166,6 +167,7 @@
 		BF654AFA23E4968D0099B694 /* PopMl.Android */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PopMl.Android; sourceTree = "<group>"; };
 		BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTestSkeleton.cpp; path = Source/TTestSkeleton.cpp; sourceTree = "<group>"; };
 		BF654AFC23E4975E0099B694 /* TTestSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTestSkeleton.h; path = Source/TTestSkeleton.h; sourceTree = "<group>"; };
+		BF71CA6C243E4AE800AEF50F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		BFA22B4D22DE6CFC00D8615C /* PopCoreml_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopCoreml_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
 		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF71CA6D243E4AE800AEF50F /* UIKit.framework in Frameworks */,
 				BF151F7023845EBB00A70EBF /* VideoToolbox.framework in Frameworks */,
 				BF151F6E23845E9400A70EBF /* CoreMedia.framework in Frameworks */,
 				BF151F6A23845E5100A70EBF /* CoreML.framework in Frameworks */,
@@ -443,6 +446,7 @@
 		BFA22B9622DE796900D8615C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF71CA6C243E4AE800AEF50F /* UIKit.framework */,
 				BF1826B82423CA53006FEB93 /* CoreVideo.framework */,
 				BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */,
 				BF151F6D23845E9400A70EBF /* CoreMedia.framework */,
