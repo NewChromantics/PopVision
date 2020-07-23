@@ -1,0 +1,23 @@
+{
+  "name": "@newchromantics/popvision",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "version": "0.0.1",
+  "description": "Library for machine learning models, computer vision and OpenVX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NewChromantics/PopVision.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NewChromantics/PopVision/issues"
+  },
+  "homepage": "https://github.com/NewChromantics/PopVision#readme"
+}
