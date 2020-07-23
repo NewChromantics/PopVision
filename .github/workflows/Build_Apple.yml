@@ -1,7 +1,7 @@
 name: Build Apple
 
 env:
-  project: PopCoreml
+  project: PopVision
 
 on:
   push:
