@@ -151,7 +151,7 @@
 		BF151F1A2384039700A70EBF /* posenet257.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = posenet257.mlmodel; path = Models/posenet257.mlmodel; sourceTree = "<group>"; };
 		BF151F1F2384046400A70EBF /* TPosenet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TPosenet.mm; path = Source/TPosenet.mm; sourceTree = "<group>"; };
 		BF151F202384046500A70EBF /* TPosenet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPosenet.h; path = Source/TPosenet.h; sourceTree = "<group>"; };
-		BF151F2D23845BE600A70EBF /* PopVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF151F2D23845BE600A70EBF /* PopVision_Ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopVision_Ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF151F6623845C7000A70EBF /* SoyLib_Ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SoyLib_Ios.xcconfig; path = Source/SoyLib/SoyLib_Ios.xcconfig; sourceTree = "<group>"; };
 		BF151F6723845E4700A70EBF /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Vision.framework; sourceTree = DEVELOPER_DIR; };
 		BF151F6923845E5100A70EBF /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/CoreML.framework; sourceTree = DEVELOPER_DIR; };
@@ -324,7 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				BFA22B4D22DE6CFC00D8615C /* PopVision_Osx.framework */,
-				BF151F2D23845BE600A70EBF /* PopVision.framework */,
+				BF151F2D23845BE600A70EBF /* PopVision_Ios.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -531,7 +531,7 @@
 			);
 			name = PopVision_Ios;
 			productName = PopCoreml_Ios;
-			productReference = BF151F2D23845BE600A70EBF /* PopVision.framework */;
+			productReference = BF151F2D23845BE600A70EBF /* PopVision_Ios.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BFA22B4C22DE6CFC00D8615C /* PopVision_Osx */ = {
@@ -748,7 +748,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_NAME = PopVision;
+				PRODUCT_NAME = PopVision_Ios;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -774,7 +774,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_NAME = PopVision;
+				PRODUCT_NAME = PopVision_Ios;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
