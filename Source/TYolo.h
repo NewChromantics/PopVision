@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TYoloNative;
 }
 
-class CoreMl::TYolo : public CoreMl::TModel
+class PopVision::TYolo : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "Yolo";

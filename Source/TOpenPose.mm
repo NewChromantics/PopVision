@@ -7,18 +7,18 @@
 #import "MobileOpenPose.h"
 
 
-class CoreMl::TOpenPoseNative
+class PopVision::TOpenPoseNative
 {
 public:
 	MobileOpenPose*	mOpenPose = [[MobileOpenPose alloc] init];
 };
 
-CoreMl::TOpenPose::TOpenPose()
+PopVision::TOpenPose::TOpenPose()
 {
 	mNative.reset( new TOpenPoseNative );
 }
 
-void CoreMl::TOpenPose::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TOpenPose::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -38,7 +38,7 @@ void CoreMl::TOpenPose::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TOpenPose::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TOpenPose::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;
@@ -227,7 +227,7 @@ void CoreMl::TOpenPose::GetObjects(CVPixelBufferRef Pixels,std::function<void(co
 
 
 //	todo: reuse other func but reformat output (then we can make a generic func)
-void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
+void PopVision::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
 {
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;
@@ -347,7 +347,7 @@ void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::shared_ptr<SoyP
 
 
 //	gr: this is now the cleanest way to get ALL data, and client can filter
-void CoreMl::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::TOpenPose::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	auto* mOpenPose = mNative->mOpenPose;
 	NSError* Error = nullptr;

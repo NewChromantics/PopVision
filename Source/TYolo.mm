@@ -5,18 +5,18 @@
 
 
 
-class CoreMl::TYoloNative
+class PopVision::TYoloNative
 {
 public:
 	TinyYOLO*	mTinyYolo = [[TinyYOLO alloc] init];
 };
 
-CoreMl::TYolo::TYolo()
+PopVision::TYolo::TYolo()
 {
 	mNative.reset( new TYoloNative );
 }
 
-void CoreMl::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -29,7 +29,7 @@ void CoreMl::TYolo::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TYolo::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TYolo::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mTinyYolo = mNative->mTinyYolo;
 	NSError* Error = nullptr;

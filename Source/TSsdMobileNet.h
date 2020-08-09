@@ -1,15 +1,15 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TSsdMobileNetNative;
 }
 
 
-class CoreMl::TSsdMobileNet : public CoreMl::TModel
+class PopVision::TSsdMobileNet : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "SsdMobileNet";

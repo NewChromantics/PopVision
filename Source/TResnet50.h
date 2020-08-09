@@ -1,15 +1,15 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TResnet50Native;
 }
 
 
-class CoreMl::TResnet50 : public CoreMl::TModel
+class PopVision::TResnet50 : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "Resnet50";

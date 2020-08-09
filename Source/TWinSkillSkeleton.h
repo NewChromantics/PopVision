@@ -1,21 +1,21 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TWinSkillSkeletonNative;
 	class TWinSkill;
 }
 
-class CoreMl::TWinSkill : public CoreMl::TModel
+class PopVision::TWinSkill : public PopVision::TModel
 {
 public:
 	TWinSkill();
 };
 
-class CoreMl::TWinSkillSkeleton : public CoreMl::TWinSkill
+class PopVision::TWinSkillSkeleton : public PopVision::TWinSkill
 {
 public:
 	constexpr static auto ModelName = "WinSkillSkeleton";

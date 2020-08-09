@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TMaskRcnnNative;
 }
 
-class CoreMl::TMaskRcnn : public CoreMl::TModel
+class PopVision::TMaskRcnn : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "MaskRcnn";

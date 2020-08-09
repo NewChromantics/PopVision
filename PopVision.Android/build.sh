@@ -7,8 +7,8 @@
 
 # require param
 ACTION="$1"
-PROJECT_NAME="PopMl"
-LIB_FILENAME="libPopMl.so"
+PROJECT_NAME="PopVision"
+LIB_FILENAME="libPopVision.so"
 
 DEFAULT_ACTION="release"
 

@@ -2,11 +2,11 @@
 #include <thread>
 #include "SoyTime.h"
 
-CoreMl::TTestSkeleton::TTestSkeleton()
+PopVision::TTestSkeleton::TTestSkeleton()
 {
 }
 
-void CoreMl::TTestSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TTestSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -26,7 +26,7 @@ void CoreMl::TTestSkeleton::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TTestSkeleton::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TTestSkeleton::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	std::this_thread::sleep_for( std::chrono::milliseconds(1000/60) );
 	

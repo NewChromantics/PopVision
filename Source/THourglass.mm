@@ -4,18 +4,18 @@
 #import "Hourglass.h"
 
 
-class CoreMl::THourglassNative
+class PopVision::THourglassNative
 {
 public:
 	hourglass*	mHourglass = [[hourglass alloc] init];
 };
 
-CoreMl::THourglass::THourglass()
+PopVision::THourglass::THourglass()
 {
 	mNative.reset( new THourglassNative );
 }
 
-void CoreMl::THourglass::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::THourglass::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -30,7 +30,7 @@ void CoreMl::THourglass::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::THourglass::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::THourglass::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mHourglass = mNative->mHourglass;
 	NSError* Error = nullptr;
@@ -65,7 +65,7 @@ void CoreMl::THourglass::GetObjects(CVPixelBufferRef Pixels,std::function<void(c
 
 
 
-void CoreMl::THourglass::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::THourglass::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	auto* mHourglass = mNative->mHourglass;
 	NSError* Error = nullptr;

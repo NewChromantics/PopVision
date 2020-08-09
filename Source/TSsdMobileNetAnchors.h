@@ -1,6 +1,6 @@
 #pragma once
 
-namespace CoreMl
+namespace PopVision
 {
 	extern float	SsdMobileNet_AnchorBounds4[1917][4];
 }
@@ -14,7 +14,7 @@ namespace CoreMl
 
 //	pre-calculated/extracted anchor values
 //	https://gist.github.com/vincentchu/cf507ed013da0e323d689bd89119c015#file-anchors-swift
-float CoreMl::SsdMobileNet_AnchorBounds4[1917][4] =
+float PopVision::SsdMobileNet_AnchorBounds4[1917][4] =
 {
 	{-0.02368421, -0.02368421,  0.07631579,  0.07631579 },
 	{-0.04439489, -0.11510557,  0.09702647,  0.16773716 },

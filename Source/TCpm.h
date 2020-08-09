@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TCpmNative;
 }
 
-class CoreMl::TCpm : public CoreMl::TModel
+class PopVision::TCpm : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "Cpm";

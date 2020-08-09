@@ -6,13 +6,13 @@
 
 
 
-class CoreMl::TMaskRcnnNative
+class PopVision::TMaskRcnnNative
 {
 public:
 	MaskRCNN_MaskRCNN*	mMaskRcnn = [[MaskRCNN_MaskRCNN alloc] init];
 };
 
-CoreMl::TMaskRcnn::TMaskRcnn()
+PopVision::TMaskRcnn::TMaskRcnn()
 {
 	auto OsVersion = Platform::GetOsVersion();
 	auto MinVersion = Soy::TVersion(10,13,2);
@@ -26,7 +26,7 @@ CoreMl::TMaskRcnn::TMaskRcnn()
 	mNative.reset( new TMaskRcnnNative );
 }
 
-void CoreMl::TMaskRcnn::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TMaskRcnn::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -39,7 +39,7 @@ void CoreMl::TMaskRcnn::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TMaskRcnn::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TMaskRcnn::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mMaskRcnn = mNative->mMaskRcnn;
 	NSError* Error = nullptr;

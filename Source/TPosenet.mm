@@ -3,18 +3,18 @@
 
 #import "posenet513_v1_075.h"
 
-class CoreMl::TPosenetNative
+class PopVision::TPosenetNative
 {
 public:
 	posenet513_v1_075*	mPosenet = [[posenet513_v1_075 alloc] init];
 };
 
-CoreMl::TPosenet::TPosenet()
+PopVision::TPosenet::TPosenet()
 {
 	mNative.reset( new TPosenetNative );
 }
 
-void CoreMl::TPosenet::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TPosenet::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	//	list from posenet.js
 	//	https://storage.googleapis.com/tfjs-models/demos/posenet/camera.html
@@ -41,7 +41,7 @@ void CoreMl::TPosenet::GetLabels(ArrayBridge<std::string>&& Labels)
 
 	
 
-void CoreMl::TPosenet::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::TPosenet::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	auto* mPosenet = mNative->mPosenet;
 	NSError* Error = nullptr;

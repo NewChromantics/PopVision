@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TDeepLabNative;
 }
 
-class CoreMl::TDeepLab : public CoreMl::TModel
+class PopVision::TDeepLab : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "DeepLab";

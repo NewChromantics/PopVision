@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TPosenetNative;
 }
 
-class CoreMl::TPosenet : public CoreMl::TModel
+class PopVision::TPosenet : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "Posenet";

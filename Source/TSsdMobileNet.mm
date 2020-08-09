@@ -8,18 +8,18 @@
 
 
 
-class CoreMl::TSsdMobileNetNative
+class PopVision::TSsdMobileNetNative
 {
 public:
 	SsdMobilenet*	mSsdMobileNet = [[SsdMobilenet alloc] init];
 };
 
-CoreMl::TSsdMobileNet::TSsdMobileNet()
+PopVision::TSsdMobileNet::TSsdMobileNet()
 {
 	mNative.reset( new TSsdMobileNetNative );
 }
 
-void CoreMl::TSsdMobileNet::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TSsdMobileNet::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -40,7 +40,7 @@ void CoreMl::TSsdMobileNet::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TSsdMobileNet::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TSsdMobileNet::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mSsdMobileNet = mNative->mSsdMobileNet;
 	NSError* Error = nullptr;
@@ -138,7 +138,7 @@ void CoreMl::TSsdMobileNet::GetObjects(CVPixelBufferRef Pixels,std::function<voi
 		//std::Debug << " ]" << std::endl;
 	}
 	
-	auto& Anchors = CoreMl::SsdMobileNet_AnchorBounds4;
+	auto& Anchors = PopVision::SsdMobileNet_AnchorBounds4;
 	auto GetAnchorRect = [&](size_t AnchorIndex)
 	{
 		//	from here	https://gist.github.com/vincentchu/cf507ed013da0e323d689bd89119c015#file-ssdpostprocessor-swift-L123

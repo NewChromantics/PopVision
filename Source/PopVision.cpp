@@ -2,7 +2,8 @@
 #include "SoyAvf.h"
 #endif
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
+#include "SoyTypes.h"
 #include "HeapArray.hpp"
 #include "TTestSkeleton.h"
 
@@ -27,25 +28,32 @@
 #include "TAppleVisionFace.h"
 #endif
 
-namespace CoreMl
+
+namespace PopVision
 {
-	std::shared_ptr<CoreMl::TModel> AllocModel(const std::string& Name);
+	const Soy::TVersion	Version(1, 2, 0);
+	std::shared_ptr<PopVision::TModel> AllocModel(const std::string& Name);
 	Array<std::shared_ptr<TModel>> gInstances;
 }
 
-
-__export CoreMl::TModel* PopCoreml_AllocModel(const std::string& Name)
+__export int32_t PopVision_GetVersion()
 {
-	auto Instance = CoreMl::AllocModel(Name);
+	return PopVision::Version.GetMillion();
+}
+
+
+__export PopVision::TModel* PopVision_AllocModel(const std::string& Name)
+{
+	auto Instance = PopVision::AllocModel(Name);
 	if (!Instance)
 		return nullptr;
 
-	CoreMl::gInstances.PushBack(Instance);
-	CoreMl::TModel* pModel = Instance.get();
+	PopVision::gInstances.PushBack(Instance);
+	PopVision::TModel* pModel = Instance.get();
 	return pModel;
 }
 
-std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)
+std::shared_ptr<PopVision::TModel> PopVision::AllocModel(const std::string& Name)
 {
 	if ( Name == TTestSkeleton::ModelName)			return std::make_shared<TTestSkeleton>();
 	
@@ -77,58 +85,58 @@ std::shared_ptr<CoreMl::TModel> CoreMl::AllocModel(const std::string& Name)
 
 
 #if defined(TARGET_WINDOWS)
-void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
+void PopVision::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TObject&)>& EnumObject)
 {
 	throw Soy::AssertException("Not Implemented");
 }
 #endif
 
-void CoreMl::TModel::GetObjects(CVPixelBufferRef Pixels, std::function<void(const TObject&)>& EnumObject)
+void PopVision::TModel::GetObjects(CVPixelBufferRef Pixels, std::function<void(const TObject&)>& EnumObject)
 {
 	throw Soy::AssertException("CVPixelBufferRef version should not be being called on this platform");
 }
 
 #if defined(TARGET_WINDOWS)
-void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels, std::shared_ptr<SoyPixelsImpl>& MapOutput, std::function<bool(const std::string&)>& FilterLabel)
+void PopVision::TModel::GetLabelMap(const SoyPixelsImpl& Pixels, std::shared_ptr<SoyPixelsImpl>& MapOutput, std::function<bool(const std::string&)>& FilterLabel)
 {
 	throw Soy::AssertException("Not Implemented");
 }
 #endif
 
-void CoreMl::TModel::GetLabelMap(CVPixelBufferRef Pixels, std::shared_ptr<SoyPixelsImpl>& MapOutput, std::function<bool(const std::string&)>& FilterLabel)
+void PopVision::TModel::GetLabelMap(CVPixelBufferRef Pixels, std::shared_ptr<SoyPixelsImpl>& MapOutput, std::function<bool(const std::string&)>& FilterLabel)
 {
 	throw Soy::AssertException("CVPixelBufferRef version should not be being called on this platform");
 
 }
 
 #if defined(TARGET_WINDOWS)
-void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels, std::function<void(vec2x<size_t>, const std::string&, ArrayBridge<float>&&)> EnumLabelMap)
+void PopVision::TModel::GetLabelMap(const SoyPixelsImpl& Pixels, std::function<void(vec2x<size_t>, const std::string&, ArrayBridge<float>&&)> EnumLabelMap)
 {
 	throw Soy::AssertException("Not Implemented");
 }
 #endif
 
-void CoreMl::TModel::GetLabelMap(CVPixelBufferRef Pixels, std::function<void(vec2x<size_t>, const std::string&, ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::TModel::GetLabelMap(CVPixelBufferRef Pixels, std::function<void(vec2x<size_t>, const std::string&, ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	throw Soy::AssertException("CVPixelBufferRef version should not be being called on this platform");
 }
 
-void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
+void PopVision::TModel::GetObjects(const SoyPixelsImpl& Pixels, std::function<void(const TWorldObject&)>& EnumObject)
 {
 	throw Soy::AssertException("Get[world]Objects Not Implemented");
 }
 
-void CoreMl::TModel::SetKinectSmoothing(float Smoothing)
+void PopVision::TModel::SetKinectSmoothing(float Smoothing)
 {
 	throw Soy::AssertException("SetKinectSmoothing Not Implemented");
 }
 
-void CoreMl::TModel::SetKinectGpu(int32_t GpuId)
+void PopVision::TModel::SetKinectGpu(int32_t GpuId)
 {
 	throw Soy::AssertException("SetKinectGpu Not Implemented");
 }
 
-void CoreMl::TModel::SetKinectTrackMode(uint32_t Mode)
+void PopVision::TModel::SetKinectTrackMode(uint32_t Mode)
 {
 	throw Soy::AssertException("SetKinectTrackMode Not Implemented");
 }

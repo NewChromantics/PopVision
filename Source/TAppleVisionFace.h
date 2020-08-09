@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class TAppleVisionFaceNative;
 }
 
-class CoreMl::TAppleVisionFace : public CoreMl::TModel
+class PopVision::TAppleVisionFace : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "AppleVisionFace";

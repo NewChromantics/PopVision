@@ -6,18 +6,18 @@
 
 
 
-class CoreMl::TResnet50Native
+class PopVision::TResnet50Native
 {
 public:
 	Resnet50*	mResnet50 = [[Resnet50 alloc] init];
 };
 
-CoreMl::TResnet50::TResnet50()
+PopVision::TResnet50::TResnet50()
 {
 	mNative.reset( new TResnet50Native );
 }
 
-void CoreMl::TResnet50::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TResnet50::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -38,7 +38,7 @@ void CoreMl::TResnet50::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TResnet50::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TResnet50::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mResnet = mNative->mResnet50;
 	NSError* Error = nullptr;
@@ -134,7 +134,7 @@ void CoreMl::TResnet50::GetObjects(CVPixelBufferRef Pixels,std::function<void(co
 		//std::Debug << " ]" << std::endl;
 	}
 	
-	auto& Anchors = CoreMl::SsdMobileNet_AnchorBounds4;
+	auto& Anchors = PopVision::SsdMobileNet_AnchorBounds4;
 	auto GetAnchorRect = [&](size_t AnchorIndex)
 	{
 		//	from here	https://gist.github.com/vincentchu/cf507ed013da0e323d689bd89119c015#file-ssdpostprocessor-swift-L123

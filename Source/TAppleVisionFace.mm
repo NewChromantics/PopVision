@@ -4,7 +4,7 @@
 #import <Vision/Vision.h>
 
 
-class CoreMl::TAppleVisionFaceNative
+class PopVision::TAppleVisionFaceNative
 {
 public:
 	~TAppleVisionFaceNative()
@@ -23,11 +23,11 @@ public:
 	VNSequenceRequestHandler*		Handler = [[VNSequenceRequestHandler alloc] init];
 };
 
-CoreMl::TAppleVisionFace::TAppleVisionFace()
+PopVision::TAppleVisionFace::TAppleVisionFace()
 {
 }
 
-void CoreMl::TAppleVisionFace::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TAppleVisionFace::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	//	gr: can't find the constellation on the request, nor the observation
 	//VNRequestFaceLandmarksConstellation65Points
@@ -52,7 +52,7 @@ void CoreMl::TAppleVisionFace::GetLabels(ArrayBridge<std::string>&& Labels)
 
 //	note: this wants rgb images
 
-void CoreMl::TAppleVisionFace::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TAppleVisionFace::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	Soy::TScopeTimerPrint Timer(__PRETTY_FUNCTION__,0);
 

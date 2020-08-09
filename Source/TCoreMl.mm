@@ -1,4 +1,4 @@
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 #include "SoyAvf.h"
 #import <CoreML/CoreML.h>
 
@@ -7,7 +7,7 @@
 #endif
 
 
-void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TModel::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto PixelBuffer = Avf::PixelsToPixelBuffer(Pixels);
 	
@@ -32,7 +32,7 @@ void CoreMl::TModel::GetObjects(const SoyPixelsImpl& Pixels,std::function<void(c
 }
 
 
-void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
+void PopVision::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::shared_ptr<SoyPixelsImpl>& MapOutput,std::function<bool(const std::string&)>& FilterLabel)
 {
 	auto PixelBuffer = Avf::PixelsToPixelBuffer(Pixels);
 	
@@ -57,7 +57,7 @@ void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::shared_ptr<Soy
 }
 
 
-void CoreMl::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)> EnumLabelMap)
+void PopVision::TModel::GetLabelMap(const SoyPixelsImpl& Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)> EnumLabelMap)
 {
 	auto PixelBuffer = Avf::PixelsToPixelBuffer(Pixels);
 	
@@ -153,17 +153,17 @@ void ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>& Dime
 	
 }
 
-void CoreMl::ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<float>&& Values)
+void PopVision::ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<float>&& Values)
 {
 	::ExtractFloatsFromMultiArray( MultiArray, Dimensions, Values );
 }
 
-void CoreMl::ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<double>&& Values)
+void PopVision::ExtractFloatsFromMultiArray(MLMultiArray* MultiArray,ArrayBridge<int>&& Dimensions,ArrayBridge<double>&& Values)
 {
 	::ExtractFloatsFromMultiArray( MultiArray, Dimensions, Values );
 }
 
-void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject)
+void PopVision::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(const TObject&)>& EnumObject)
 {
 	if ( !ModelOutput )
 		throw Soy::AssertException("No output from model");
@@ -229,7 +229,7 @@ void CoreMl::RunPoseModel(MLMultiArray* ModelOutput,std::function<const std::str
 }
 
 
-void CoreMl::RunPoseModel_GetLabelMap(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::RunPoseModel_GetLabelMap(MLMultiArray* ModelOutput,std::function<const std::string&(size_t)> GetKeypointName,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	Soy::TScopeTimerPrint Timer(__func__,5);
 

@@ -69,10 +69,8 @@
 		BF151F6E23845E9400A70EBF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6D23845E9400A70EBF /* CoreMedia.framework */; };
 		BF151F7023845EBB00A70EBF /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF151F6F23845EBB00A70EBF /* VideoToolbox.framework */; };
 		BF1826B92423CA53006FEB93 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1826B82423CA53006FEB93 /* CoreVideo.framework */; };
-		BF48756C23B9738200EB30B5 /* PopCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */; };
-		BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */; };
-		BF48756F23B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
-		BF48757023B973AB00EB30B5 /* TCoreMl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */; };
+		BF48756F23B973AB00EB30B5 /* PopVision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* PopVision.cpp */; };
+		BF48757023B973AB00EB30B5 /* PopVision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF48756E23B973AB00EB30B5 /* PopVision.cpp */; };
 		BF654AFD23E4975E0099B694 /* TTestSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */; };
 		BF654AFE23E4975E0099B694 /* TTestSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF654AFB23E4975E0099B694 /* TTestSkeleton.cpp */; };
 		BF654AFF23E4975E0099B694 /* TTestSkeleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BF654AFC23E4975E0099B694 /* TTestSkeleton.h */; };
@@ -120,7 +118,7 @@
 		BFA22BE322DE7C5700D8615C /* TCoreMl.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */; };
 		BFA22BE522DE7CEB00D8615C /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22BE422DE7CEB00D8615C /* AppKit.framework */; };
 		BFA22BE622DE7D1500D8615C /* TYolo.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B7722DE6FCB00D8615C /* TYolo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFA22BE722DE7D1E00D8615C /* PopVision.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* PopVision.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFA22BF522DF14FB00D8615C /* TOpenPose.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BED22DF14FB00D8615C /* TOpenPose.mm */; };
 		BFA22BF622DF14FB00D8615C /* TSsdMobileNet.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22BEE22DF14FB00D8615C /* TSsdMobileNet.mm */; };
 		BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22BEF22DF14FB00D8615C /* TCpm.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -136,9 +134,9 @@
 		BFA22C0722DF311C00D8615C /* TAppleVisionFace.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */; };
 		BFA22C0822DF311C00D8615C /* TAppleVisionFace.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFA22C0A22DF367E00D8615C /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA22C0922DF367E00D8615C /* Vision.framework */; };
-		BFDC037724BFAAE500182E0B /* TCoreMl.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFDC037824BFAAEA00182E0B /* PopCoreml.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFDC037924BFAAEB00182E0B /* PopCoreml.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFDC037724BFAAE500182E0B /* PopVision.hpp in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5C22DE6D9B00D8615C /* PopVision.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFDC037824BFAAEA00182E0B /* PopVision.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5B22DE6D9B00D8615C /* PopVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFDC037924BFAAEB00182E0B /* PopVision.h in Headers */ = {isa = PBXBuildFile; fileRef = BFA22B5B22DE6D9B00D8615C /* PopVision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,8 +159,7 @@
 		BF1826B82423CA53006FEB93 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		BF3F2ABE23A7BE43005C2E99 /* TWinSkillSkeleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TWinSkillSkeleton.h; path = Source/TWinSkillSkeleton.h; sourceTree = "<group>"; };
 		BF3F2ABF23A7BE43005C2E99 /* TWinSkillSkeleton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TWinSkillSkeleton.cpp; path = Source/TWinSkillSkeleton.cpp; sourceTree = "<group>"; };
-		BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopCoreMl.cpp; path = Source/PopCoreMl.cpp; sourceTree = "<group>"; };
-		BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TCoreMl.cpp; path = Source/TCoreMl.cpp; sourceTree = "<group>"; };
+		BF48756E23B973AB00EB30B5 /* PopVision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopVision.cpp; path = Source/PopVision.cpp; sourceTree = "<group>"; };
 		BF48757123B973FA00EB30B5 /* HeapArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HeapArray.hpp; path = Source/SoyLib/src/HeapArray.hpp; sourceTree = "<group>"; };
 		BF559FB224CA4BC500263A89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF559FB324CA4BC500263A89 /* PopVision_Ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopVision_Ios.h; sourceTree = "<group>"; };
@@ -172,8 +169,8 @@
 		BF654AFC23E4975E0099B694 /* TTestSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTestSkeleton.h; path = Source/TTestSkeleton.h; sourceTree = "<group>"; };
 		BF71CA6C243E4AE800AEF50F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		BFA22B4D22DE6CFC00D8615C /* PopVision_Osx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PopVision_Osx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopCoreml.h; path = Source/PopCoreml.h; sourceTree = "<group>"; };
-		BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TCoreMl.h; path = Source/TCoreMl.h; sourceTree = "<group>"; };
+		BFA22B5B22DE6D9B00D8615C /* PopVision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PopVision.h; path = Source/PopVision.h; sourceTree = "<group>"; };
+		BFA22B5C22DE6D9B00D8615C /* PopVision.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = PopVision.hpp; path = Source/PopVision.hpp; sourceTree = "<group>"; };
 		BFA22B5D22DE6D9B00D8615C /* TSsdMobileNetAnchors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSsdMobileNetAnchors.h; path = Source/TSsdMobileNetAnchors.h; sourceTree = "<group>"; };
 		BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = TCoreMl.mm; path = Source/TCoreMl.mm; sourceTree = "<group>"; };
 		BFA22B6022DE6DA200D8615C /* MaskRCNN_anchors.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = MaskRCNN_anchors.bin; path = Models/MaskRCNN_anchors.bin; sourceTree = "<group>"; };
@@ -332,12 +329,11 @@
 		BFA22B5822DE6D7600D8615C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BF48756B23B9738200EB30B5 /* PopCoreMl.cpp */,
-				BFA22B5B22DE6D9B00D8615C /* PopCoreml.h */,
+				BFA22B5B22DE6D9B00D8615C /* PopVision.h */,
 				BFA22C0622DF311B00D8615C /* TAppleVisionFace.h */,
 				BFA22C0522DF311B00D8615C /* TAppleVisionFace.mm */,
-				BF48756E23B973AB00EB30B5 /* TCoreMl.cpp */,
-				BFA22B5C22DE6D9B00D8615C /* TCoreMl.h */,
+				BF48756E23B973AB00EB30B5 /* PopVision.cpp */,
+				BFA22B5C22DE6D9B00D8615C /* PopVision.hpp */,
 				BFA22B5E22DE6D9B00D8615C /* TCoreMl.mm */,
 				BFA22BEF22DF14FB00D8615C /* TCpm.h */,
 				BFA22BF022DF14FB00D8615C /* TCpm.mm */,
@@ -473,8 +469,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF654B0023E4975E0099B694 /* TTestSkeleton.h in Headers */,
-				BFDC037724BFAAE500182E0B /* TCoreMl.h in Headers */,
-				BFDC037924BFAAEB00182E0B /* PopCoreml.h in Headers */,
+				BFDC037724BFAAE500182E0B /* PopVision.hpp in Headers */,
+				BFDC037924BFAAEB00182E0B /* PopVision.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,8 +487,8 @@
 				BFA22BF722DF14FB00D8615C /* TCpm.h in Headers */,
 				BF151F222384046500A70EBF /* TPosenet.h in Headers */,
 				BFA22BF922DF14FB00D8615C /* TSsdMobileNet.h in Headers */,
-				BFA22BE722DE7D1E00D8615C /* TCoreMl.h in Headers */,
-				BFDC037824BFAAEA00182E0B /* PopCoreml.h in Headers */,
+				BFA22BE722DE7D1E00D8615C /* PopVision.hpp in Headers */,
+				BFDC037824BFAAEA00182E0B /* PopVision.h in Headers */,
 				BFA22C0822DF311C00D8615C /* TAppleVisionFace.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,13 +630,12 @@
 				BF654AFE23E4975E0099B694 /* TTestSkeleton.cpp in Sources */,
 				BF151F4C23845C2600A70EBF /* SoyFilesystem.mm in Sources */,
 				BF151F4423845C0D00A70EBF /* TinyYOLO.mlmodel in Sources */,
-				BF48756D23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
 				BF151F5E23845C3700A70EBF /* TCpm.mm in Sources */,
 				BF151F5023845C2600A70EBF /* SoyMediaFormat.cpp in Sources */,
 				BF151F4723845C2600A70EBF /* SoyAssert.cpp in Sources */,
 				BF151F4223845C0D00A70EBF /* MobileOpenPose.mlmodel in Sources */,
 				BF151F4F23845C2600A70EBF /* SoyMedia.cpp in Sources */,
-				BF48757023B973AB00EB30B5 /* TCoreMl.cpp in Sources */,
+				BF48757023B973AB00EB30B5 /* PopVision.cpp in Sources */,
 				BF151F5423845C2600A70EBF /* SoyString.mm in Sources */,
 				BF151F5123845C2600A70EBF /* SoyPixels.cpp in Sources */,
 				BF151F6323845C3700A70EBF /* TOpenPose.mm in Sources */,
@@ -692,13 +687,12 @@
 				BF654AFD23E4975E0099B694 /* TTestSkeleton.cpp in Sources */,
 				BF151F1E2384039800A70EBF /* posenet257.mlmodel in Sources */,
 				BFA22B8C22DE730700D8615C /* SoyDebug.cpp in Sources */,
-				BF48756C23B9738200EB30B5 /* PopCoreMl.cpp in Sources */,
 				BFA22B8A22DE730700D8615C /* SoyDebug.mm in Sources */,
 				BFA22B8622DE730700D8615C /* SoyAvf.mm in Sources */,
 				BFA22BB622DE7A0600D8615C /* SoyTypes.mm in Sources */,
 				BFA22BA922DE79E300D8615C /* SoyFourcc.cpp in Sources */,
 				BF151F1D2384039800A70EBF /* posenet513.mlmodel in Sources */,
-				BF48756F23B973AB00EB30B5 /* TCoreMl.cpp in Sources */,
+				BF48756F23B973AB00EB30B5 /* PopVision.cpp in Sources */,
 				BFA22B6F22DE6DA300D8615C /* hourglass.mlmodel in Sources */,
 				BFA22BCC22DE7A7700D8615C /* SoyString.cpp in Sources */,
 				BFA22BE122DE7AFF00D8615C /* SoyFilesystem.cpp in Sources */,
@@ -867,7 +861,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopMl/Assets/PopMl/";
+				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopVision/Assets/PopVision/";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -923,7 +917,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopMl/Assets/PopMl/";
+				UNITY_OUTPUT_PATH = "$(SOURCE_ROOT)/Unity/PopVision/Assets/PopVision/";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

@@ -4,13 +4,13 @@
 #import "DeepLabV3.h"
 
 
-class CoreMl::TDeepLabNative
+class PopVision::TDeepLabNative
 {
 public:
 	DeepLabV3*	mDeepLabv3 = [[DeepLabV3 alloc] init];
 };
 
-CoreMl::TDeepLab::TDeepLab()
+PopVision::TDeepLab::TDeepLab()
 {
 	auto OsVersion = Platform::GetOsVersion();
 	auto MinVersion = Soy::TVersion(10,14,2);
@@ -24,7 +24,7 @@ CoreMl::TDeepLab::TDeepLab()
 	mNative.reset( new TDeepLabNative );
 }
 
-void CoreMl::TDeepLab::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TDeepLab::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -37,7 +37,7 @@ void CoreMl::TDeepLab::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TDeepLab::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TDeepLab::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto& mDeepLabv3 = mNative->mDeepLabv3;
 	NSError* Error = nullptr;

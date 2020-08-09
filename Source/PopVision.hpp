@@ -4,7 +4,7 @@ class SoyPixels;
 class SoyPixelsImpl;
 class TPixelBuffer;
 
-#include "PopCoreml.h"
+#include "PopVision.hpp"
 #include "Array.hpp"
 #include "SoyVector.h"
 
@@ -20,7 +20,7 @@ typedef void* CVPixelBufferRef;
 #include <CoreVideo/CoreVideo.h>
 #endif
 
-namespace CoreMl
+namespace PopVision
 {
 	//	deprecate objects for more context specific;
 	//		pixelmaps (per label?)
@@ -67,7 +67,7 @@ namespace CoreMl
 //	grid is for low-res scores
 //	rects are for rects
 //	world pos for 3D sensors
-class CoreMl::TObject
+class PopVision::TObject
 {
 public:
 	float			mScore = 0;
@@ -77,7 +77,7 @@ public:
 	vec2x<size_t>	mGridPos;
 };
 
-class CoreMl::TWorldObject
+class PopVision::TWorldObject
 {
 public:
 	float			mScore = 0;
@@ -87,7 +87,7 @@ public:
 };
 
 
-class __exportclass CoreMl::TModel
+class PopVision::TModel
 {
 public:
 	//	get all the labels this model outputs
@@ -117,8 +117,7 @@ public:
 //	C++ factory for dll
 //	todo: make this a proper CAPI for unity etc, and some nice dumb interface (instance ID etc)
 //	todo: EnumModels()
-__export CoreMl::TModel*	PopCoreml_AllocModel(const std::string& Name);
-__export int32_t			PopCoreml_GetVersion();
+__export PopVision::TModel*	PopVision_AllocModel(const std::string& Name);
 
 
 

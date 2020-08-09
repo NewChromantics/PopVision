@@ -1,9 +1,9 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-class CoreMl::TTestSkeleton : public CoreMl::TModel
+class PopVision::TTestSkeleton : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "TestSkeleton";

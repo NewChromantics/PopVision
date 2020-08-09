@@ -1,14 +1,14 @@
 #pragma once
 
-#include "TCoreMl.h"
+#include "PopVision.hpp"
 
 
-namespace CoreMl
+namespace PopVision
 {
 	class THourglassNative;
 }
 
-class CoreMl::THourglass : public CoreMl::TModel
+class PopVision::THourglass : public PopVision::TModel
 {
 public:
 	constexpr static auto ModelName = "Hourglass";

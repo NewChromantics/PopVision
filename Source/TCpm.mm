@@ -4,24 +4,24 @@
 #import "Cpm.h"
 
 
-namespace Coreml
+namespace PopVision
 {
-	void		RunPoseModel(MLMultiArray* ModelOutput,const SoyPixelsImpl& Pixels,std::function<std::string(size_t)> GetKeypointName,std::function<void(const CoreMl::TObject&)>& EnumObject);
+	void		RunPoseModel(MLMultiArray* ModelOutput,const SoyPixelsImpl& Pixels,std::function<std::string(size_t)> GetKeypointName,std::function<void(const PopVision::TObject&)>& EnumObject);
 }
 
 
-class CoreMl::TCpmNative
+class PopVision::TCpmNative
 {
 public:
 	cpm*	mCpm = [[cpm alloc] init];
 };
 
-CoreMl::TCpm::TCpm()
+PopVision::TCpm::TCpm()
 {
 	mNative.reset( new TCpmNative );
 }
 
-void CoreMl::TCpm::GetLabels(ArrayBridge<std::string>&& Labels)
+void PopVision::TCpm::GetLabels(ArrayBridge<std::string>&& Labels)
 {
 	const std::string ClassLabels[] =
 	{
@@ -36,7 +36,7 @@ void CoreMl::TCpm::GetLabels(ArrayBridge<std::string>&& Labels)
 
 
 
-void CoreMl::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
+void PopVision::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const TObject&)>& EnumObject)
 {
 	auto* mCpm = mNative->mCpm;
 	NSError* Error = nullptr;
@@ -73,7 +73,7 @@ void CoreMl::TCpm::GetObjects(CVPixelBufferRef Pixels,std::function<void(const T
 
 
 
-void CoreMl::TCpm::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
+void PopVision::TCpm::GetLabelMap(CVPixelBufferRef Pixels,std::function<void(vec2x<size_t>,const std::string&,ArrayBridge<float>&&)>& EnumLabelMap)
 {
 	auto* mCpm = mNative->mCpm;
 	NSError* Error = nullptr;
