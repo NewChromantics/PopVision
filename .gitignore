@@ -22,8 +22,6 @@ Unity/**/holobuild/
 *.visualstudio/Debug/
 *.user
 
-PopCoreml.visualstudio/packages/
-
-PopCoreml.visualstudio/inc/
-
-PopMl.Android/obj/
+*.visualstudio/packages/
+*.visualstudio/inc/
+*.Android/obj/
