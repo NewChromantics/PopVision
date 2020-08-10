@@ -106,15 +106,13 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v') != true
         run: echo "::set-env name=NPM_PACKAGE_DRY_RUN::--dry-run"
 
-      # copy files we want to
-      # download github-publish dependencies (ci), then publish from package dir
+      # publish from package dir
       - name: Publish
         working-directory: ${{ env.project }}.Package/
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           ls
-          npm ci
           npm publish $NPM_PACKAGE_DRY_RUN
 
       # make a release
